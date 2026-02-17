@@ -1,0 +1,97 @@
+[
+{
+  "directory": "/home/cat/expansion/build",
+  "command": "/usr/bin/aarch64-linux-gnu-gcc  -I/home/cat/expansion/include -I/home/cat/expansion/include/hal -I/home/cat/expansion/include/pages -g -std=gnu11 -o CMakeFiles/expansion_ui.dir/src/main.c.o -c /home/cat/expansion/src/main.c",
+  "file": "/home/cat/expansion/src/main.c"
+},
+{
+  "directory": "/home/cat/expansion/build",
+  "command": "/usr/bin/aarch64-linux-gnu-gcc  -I/home/cat/expansion/include -I/home/cat/expansion/include/hal -I/home/cat/expansion/include/pages -g -std=gnu11 -o CMakeFiles/expansion_ui.dir/src/menu.c.o -c /home/cat/expansion/src/menu.c",
+  "file": "/home/cat/expansion/src/menu.c"
+},
+{
+  "directory": "/home/cat/expansion/build",
+  "command": "/usr/bin/aarch64-linux-gnu-gcc  -I/home/cat/expansion/include -I/home/cat/expansion/include/hal -I/home/cat/expansion/include/pages -g -std=gnu11 -o CMakeFiles/expansion_ui.dir/src/hal/hal_dht11.c.o -c /home/cat/expansion/src/hal/hal_dht11.c",
+  "file": "/home/cat/expansion/src/hal/hal_dht11.c"
+},
+{
+  "directory": "/home/cat/expansion/build",
+  "command": "/usr/bin/aarch64-linux-gnu-gcc  -I/home/cat/expansion/include -I/home/cat/expansion/include/hal -I/home/cat/expansion/include/pages -g -std=gnu11 -o CMakeFiles/expansion_ui.dir/src/thread.c.o -c /home/cat/expansion/src/thread.c",
+  "file": "/home/cat/expansion/src/thread.c"
+},
+{
+  "directory": "/home/cat/expansion/build",
+  "command": "/usr/bin/aarch64-linux-gnu-gcc  -I/home/cat/expansion/include -I/home/cat/expansion/include/hal -I/home/cat/expansion/include/pages -g -std=gnu11 -o CMakeFiles/expansion_ui.dir/src/mqtt_client.c.o -c /home/cat/expansion/src/mqtt_client.c",
+  "file": "/home/cat/expansion/src/mqtt_client.c"
+},
+{
+  "directory": "/home/cat/expansion/build",
+  "command": "/usr/bin/aarch64-linux-gnu-gcc  -I/home/cat/expansion/include -I/home/cat/expansion/include/hal -I/home/cat/expansion/include/pages -g -std=gnu11 -o CMakeFiles/expansion_ui.dir/src/hal/hal_gpio.c.o -c /home/cat/expansion/src/hal/hal_gpio.c",
+  "file": "/home/cat/expansion/src/hal/hal_gpio.c"
+},
+{
+  "directory": "/home/cat/expansion/build",
+  "command": "/usr/bin/aarch64-linux-gnu-gcc  -I/home/cat/expansion/include -I/home/cat/expansion/include/hal -I/home/cat/expansion/include/pages -g -std=gnu11 -o CMakeFiles/expansion_ui.dir/src/hal/hal_oled.c.o -c /home/cat/expansion/src/hal/hal_oled.c",
+  "file": "/home/cat/expansion/src/hal/hal_oled.c"
+},
+{
+  "directory": "/home/cat/expansion/build",
+  "command": "/usr/bin/aarch64-linux-gnu-gcc  -I/home/cat/expansion/include -I/home/cat/expansion/include/hal -I/home/cat/expansion/include/pages -g -std=gnu11 -o CMakeFiles/expansion_ui.dir/src/hal/hal_system.c.o -c /home/cat/expansion/src/hal/hal_system.c",
+  "file": "/home/cat/expansion/src/hal/hal_system.c"
+},
+{
+  "directory": "/home/cat/expansion/build",
+  "command": "/usr/bin/aarch64-linux-gnu-gcc  -I/home/cat/expansion/include -I/home/cat/expansion/include/hal -I/home/cat/expansion/include/pages -g -std=gnu11 -o CMakeFiles/expansion_ui.dir/src/pages/page_dashboard.c.o -c /home/cat/expansion/src/pages/page_dashboard.c",
+  "file": "/home/cat/expansion/src/pages/page_dashboard.c"
+},
+{
+  "directory": "/home/cat/expansion/build",
+  "command": "/usr/bin/aarch64-linux-gnu-gcc  -I/home/cat/expansion/include -I/home/cat/expansion/include/hal -I/home/cat/expansion/include/pages -g -std=gnu11 -o CMakeFiles/expansion_ui.dir/src/pages/page_tools.c.o -c /home/cat/expansion/src/pages/page_tools.c",
+  "file": "/home/cat/expansion/src/pages/page_tools.c"
+},
+{
+  "directory": "/home/cat/expansion/build",
+  "command": "/usr/bin/aarch64-linux-gnu-gcc  -I/home/cat/expansion/include -I/home/cat/expansion/include/hal -I/home/cat/expansion/include/pages -g -std=gnu11 -o CMakeFiles/expansion_ui.dir/src/pages/page_system.c.o -c /home/cat/expansion/src/pages/page_system.c",
+  "file": "/home/cat/expansion/src/pages/page_system.c"
+},
+{
+  "directory": "/home/cat/expansion/build",
+  "command": "/usr/bin/aarch64-linux-gnu-gcc  -I/home/cat/expansion/include -I/home/cat/expansion/include/hal -I/home/cat/expansion/include/pages -g -std=gnu11 -o CMakeFiles/expansion_ui.dir/src/pages/page_interface.c.o -c /home/cat/expansion/src/pages/page_interface.c",
+  "file": "/home/cat/expansion/src/pages/page_interface.c"
+},
+{
+  "directory": "/home/cat/expansion/build",
+  "command": "/usr/bin/aarch64-linux-gnu-gcc  -I/home/cat/expansion/include -I/home/cat/expansion/include/hal -I/home/cat/expansion/include/pages -g -std=gnu11 -o CMakeFiles/expansion_ui.dir/src/pages/page_env.c.o -c /home/cat/expansion/src/pages/page_env.c",
+  "file": "/home/cat/expansion/src/pages/page_env.c"
+},
+{
+  "directory": "/home/cat/expansion/build",
+  "command": "/usr/bin/aarch64-linux-gnu-gcc  -I/home/cat/expansion/include -I/home/cat/expansion/include/hal -I/home/cat/expansion/include/pages -g -std=gnu11 -o CMakeFiles/expansion_ui.dir/src/pages/page_docker.c.o -c /home/cat/expansion/src/pages/page_docker.c",
+  "file": "/home/cat/expansion/src/pages/page_docker.c"
+},
+{
+  "directory": "/home/cat/expansion/build",
+  "command": "/usr/bin/aarch64-linux-gnu-gcc  -I/home/cat/expansion/include -I/home/cat/expansion/include/hal -I/home/cat/expansion/include/pages -g -std=gnu11 -o CMakeFiles/expansion_ui.dir/src/pages/page_network.c.o -c /home/cat/expansion/src/pages/page_network.c",
+  "file": "/home/cat/expansion/src/pages/page_network.c"
+},
+{
+  "directory": "/home/cat/expansion/build",
+  "command": "/usr/bin/aarch64-linux-gnu-gcc  -I/home/cat/expansion/include -I/home/cat/expansion/include/hal -I/home/cat/expansion/include/pages -g -std=gnu11 -o CMakeFiles/expansion_ui.dir/src/pages/page_terminal.c.o -c /home/cat/expansion/src/pages/page_terminal.c",
+  "file": "/home/cat/expansion/src/pages/page_terminal.c"
+},
+{
+  "directory": "/home/cat/expansion/build",
+  "command": "/usr/bin/aarch64-linux-gnu-gcc  -I/home/cat/expansion/include -I/home/cat/expansion/include/hal -I/home/cat/expansion/include/pages -g -std=gnu11 -o CMakeFiles/expansion_ui.dir/src/pages/popup.c.o -c /home/cat/expansion/src/pages/popup.c",
+  "file": "/home/cat/expansion/src/pages/popup.c"
+},
+{
+  "directory": "/home/cat/expansion/build",
+  "command": "/usr/bin/aarch64-linux-gnu-gcc  -I/home/cat/expansion/include -I/home/cat/expansion/include/hal -I/home/cat/expansion/include/pages -g -std=gnu11 -o CMakeFiles/expansion_ui.dir/src/network_monitor.c.o -c /home/cat/expansion/src/network_monitor.c",
+  "file": "/home/cat/expansion/src/network_monitor.c"
+},
+{
+  "directory": "/home/cat/expansion/build",
+  "command": "/usr/bin/aarch64-linux-gnu-gcc  -I/home/cat/expansion/include -I/home/cat/expansion/include/hal -I/home/cat/expansion/include/pages -g -std=gnu11 -o CMakeFiles/expansion_ui.dir/src/system_monitor.c.o -c /home/cat/expansion/src/system_monitor.c",
+  "file": "/home/cat/expansion/src/system_monitor.c"
+}
+]

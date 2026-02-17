@@ -1,0 +1,3 @@
+/home/cat/expansion/build/CMakeFiles/expansion_ui.dir
+/home/cat/expansion/build/CMakeFiles/edit_cache.dir
+/home/cat/expansion/build/CMakeFiles/rebuild_cache.dir
