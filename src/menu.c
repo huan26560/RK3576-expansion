@@ -15,8 +15,8 @@
 
 #define OLED_WIDTH 128
 #define OLED_HEIGHT 64
-#define ICON_SIZE 28    // **可调整：24/28/32**
-#define ICON_START_Y 18 // 图标Y坐标
+#define ICON_SIZE 28    
+#define ICON_START_Y 18 
 
 #define ANIM_FRAMES 0
 #define ANIM_SPEED 2
@@ -60,8 +60,6 @@ void menu_init(void)
     menu_add_child(menu_root, page_network_create_menu());
     menu_add_child(menu_root, page_tools_create_menu());
     // menu_add_child(menu_root, page_terminal_create_menu());
-
-    // menu_add_child(menu_root, menu_create(" Disk", page_disk_draw, icon_disk_28x28));
     // menu_add_child(menu_root, menu_create(" Home", page_home_draw, icon_home_28x28));
 
     menu_current = menu_root;
