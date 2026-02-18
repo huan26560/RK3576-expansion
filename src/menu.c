@@ -50,6 +50,7 @@ void menu_exit_list(void)
     printf("返回 Dashboard\n");
 }
 
+
 void menu_init(void)
 {
     menu_root = page_dashboard_create_menu();
