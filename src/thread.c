@@ -156,6 +156,7 @@ static void create_thread(pthread_t *t, void *(*f)(void *), const char *name)
     }
 }
 
+
 void threads_init(void)
 {
     static int initialized = 0;
