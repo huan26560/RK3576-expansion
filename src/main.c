@@ -19,8 +19,6 @@ void signal_handler(int sig)
 {
     if (shutdown_mode != 0)
         return;
-
-    // SIGTERM 可能是 systemctl stop，也可能是系统关机
     // 统一视为程序退出（清屏+清理）
     printf("【Signal】捕获终止信号: %d\n", sig);
     shutdown_mode = 1; // 标记为需要退出动画+清理
