@@ -11,12 +11,12 @@
 #include "page_interface.h"
 #include "hal_gpio.h"
 #include "font.h"
-#include "popup.h" 
+#include "popup.h"
 
 #define OLED_WIDTH 128
 #define OLED_HEIGHT 64
-#define ICON_SIZE 28    
-#define ICON_START_Y 18 
+#define ICON_SIZE 28
+#define ICON_START_Y 18
 
 #define ANIM_FRAMES 0
 #define ANIM_SPEED 2
@@ -60,8 +60,7 @@ void menu_init(void)
     menu_add_child(menu_root, page_network_create_menu());
     menu_add_child(menu_root, page_tools_create_menu());
     // menu_add_child(menu_root, page_terminal_create_menu());
-    // menu_add_child(menu_root, menu_create(" Home", page_home_draw, icon_home_28x28));
-
+    menu_add_child(menu_root, menu_create(" Home", page_home_draw, icon_home_28x28));
     menu_current = menu_root;
     menu_cursor = 0;
     dashboard_last_cursor = 0;
