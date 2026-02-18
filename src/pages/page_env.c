@@ -216,8 +216,6 @@ static void page_env_main_draw(void)
 /************************** 事件处理 **************************/
 void page_env_handle_event(event_t ev)
 {
-    printf("[ENV] Received event: %d, current menu: '%s'\n", ev, menu_current ? menu_current->name : "NULL");
-
     if (menu_current != NULL && strcmp(menu_current->name, "weather") == 0)
     {
         switch (ev)
@@ -261,9 +259,7 @@ void page_env_init(void)
 
     // 仅注册页面，线程初始化交给threads.c
     page_register("weather", page_env_main_draw, page_env_handle_event);
-
     initialized = 1;
-    printf("[INIT] Environment page init (UI only)\n");
 }
 
 menu_item_t *page_env_create_menu(void)
@@ -272,7 +268,6 @@ menu_item_t *page_env_create_menu(void)
     if (env_root == NULL)
     {
         env_root = menu_create("weather", page_env_main_draw, icon_environment_28x28);
-        printf("[UI] Environment menu created, name: 'weather'\n");
     }
     return env_root;
 }
