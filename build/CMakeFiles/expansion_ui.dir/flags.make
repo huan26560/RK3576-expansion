@@ -4,7 +4,7 @@
 # compile C with /usr/bin/aarch64-linux-gnu-gcc
 C_DEFINES = 
 
-C_INCLUDES = -I/home/cat/expansion/include -I/home/cat/expansion/include/hal -I/home/cat/expansion/include/pages
+C_INCLUDES = -I/home/cat/expansion/include -I/home/cat/expansion/include/hal -I/home/cat/expansion/include/pages -I/usr/include/cjson
 
 C_FLAGS = -g -std=gnu11
 

@@ -380,6 +380,7 @@ expansion_ui: CMakeFiles/expansion_ui.dir/src/pages/page_screensaver.c.o
 expansion_ui: CMakeFiles/expansion_ui.dir/src/network_monitor.c.o
 expansion_ui: CMakeFiles/expansion_ui.dir/src/system_monitor.c.o
 expansion_ui: CMakeFiles/expansion_ui.dir/build.make
+expansion_ui: /usr/lib/aarch64-linux-gnu/libcurl.so
 expansion_ui: CMakeFiles/expansion_ui.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/cat/expansion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Linking C executable expansion_ui"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/expansion_ui.dir/link.txt --verbose=$(VERBOSE)

@@ -26,31 +26,37 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 39,
+				"line" : 54,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 40,
+				"line" : 57,
 				"parent" : 0
 			},
 			{
 				"command" : 2,
 				"file" : 0,
-				"line" : 7,
+				"line" : 24,
 				"parent" : 0
 			},
 			{
 				"command" : 2,
 				"file" : 0,
-				"line" : 8,
+				"line" : 25,
 				"parent" : 0
 			},
 			{
 				"command" : 2,
 				"file" : 0,
-				"line" : 9,
+				"line" : 26,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 29,
 				"parent" : 0
 			}
 		]
@@ -80,6 +86,10 @@
 				{
 					"backtrace" : 5,
 					"path" : "/home/cat/expansion/include/pages"
+				},
+				{
+					"backtrace" : 6,
+					"path" : "/usr/include/cjson"
 				}
 			],
 			"language" : "C",
@@ -141,6 +151,16 @@
 			{
 				"backtrace" : 2,
 				"fragment" : "-lgpiod",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "/usr/lib/aarch64-linux-gnu/libcurl.so",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "-lcjson",
 				"role" : "libraries"
 			}
 		],

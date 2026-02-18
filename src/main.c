@@ -86,7 +86,6 @@ int main(void)
         mqtt_client_cleanup();
         hal_gpio_cleanup();
         hal_system_cleanup();
-
         printf("系统已安全退出\n");
     }
 

@@ -1015,6 +1015,34 @@ CMakeFiles/expansion_ui.dir/src/pages/page_env.c.o: ../src/pages/page_env.c \
   /usr/include/aarch64-linux-gnu/bits/stdio_lim.h \
   /usr/include/aarch64-linux-gnu/bits/floatn.h \
   /usr/include/aarch64-linux-gnu/bits/floatn-common.h \
+  /usr/include/stdlib.h \
+  /usr/include/aarch64-linux-gnu/bits/waitflags.h \
+  /usr/include/aarch64-linux-gnu/bits/waitstatus.h \
+  /usr/include/aarch64-linux-gnu/sys/types.h \
+  /usr/include/aarch64-linux-gnu/bits/types/clock_t.h \
+  /usr/include/aarch64-linux-gnu/bits/types/clockid_t.h \
+  /usr/include/aarch64-linux-gnu/bits/types/time_t.h \
+  /usr/include/aarch64-linux-gnu/bits/types/timer_t.h \
+  /usr/include/aarch64-linux-gnu/bits/stdint-intn.h \
+  /usr/include/endian.h \
+  /usr/include/aarch64-linux-gnu/bits/endian.h \
+  /usr/include/aarch64-linux-gnu/bits/endianness.h \
+  /usr/include/aarch64-linux-gnu/bits/byteswap.h \
+  /usr/include/aarch64-linux-gnu/bits/uintn-identity.h \
+  /usr/include/aarch64-linux-gnu/sys/select.h \
+  /usr/include/aarch64-linux-gnu/bits/select.h \
+  /usr/include/aarch64-linux-gnu/bits/types/sigset_t.h \
+  /usr/include/aarch64-linux-gnu/bits/types/__sigset_t.h \
+  /usr/include/aarch64-linux-gnu/bits/types/struct_timeval.h \
+  /usr/include/aarch64-linux-gnu/bits/types/struct_timespec.h \
+  /usr/include/aarch64-linux-gnu/bits/pthreadtypes.h \
+  /usr/include/aarch64-linux-gnu/bits/thread-shared-types.h \
+  /usr/include/aarch64-linux-gnu/bits/pthreadtypes-arch.h \
+  /usr/include/aarch64-linux-gnu/bits/atomic_wide_counter.h \
+  /usr/include/aarch64-linux-gnu/bits/struct_mutex.h \
+  /usr/include/aarch64-linux-gnu/bits/struct_rwlock.h \
+  /usr/include/alloca.h \
+  /usr/include/aarch64-linux-gnu/bits/stdlib-float.h \
   /usr/include/string.h \
   /usr/include/aarch64-linux-gnu/bits/types/locale_t.h \
   /usr/include/aarch64-linux-gnu/bits/types/__locale_t.h \
@@ -1022,13 +1050,26 @@ CMakeFiles/expansion_ui.dir/src/pages/page_env.c.o: ../src/pages/page_env.c \
   /usr/lib/gcc/aarch64-linux-gnu/11/include/stdint.h \
   /usr/include/stdint.h \
   /usr/include/aarch64-linux-gnu/bits/wchar.h \
-  /usr/include/aarch64-linux-gnu/bits/stdint-intn.h \
   /usr/include/aarch64-linux-gnu/bits/stdint-uintn.h \
+  /usr/include/time.h \
+  /usr/include/aarch64-linux-gnu/bits/time.h \
+  /usr/include/aarch64-linux-gnu/bits/types/struct_tm.h \
+  /usr/include/aarch64-linux-gnu/bits/types/struct_itimerspec.h \
   ../include/hal/hal_oled.h \
   ../include/menu.h \
   ../include/pages/page_interface.h \
   ../include/hal/font.h \
-  ../include/hal/hal_dht11.h
+  ../include/hal/hal_dht11.h \
+  ../include/thread.h \
+  /usr/include/pthread.h \
+  /usr/include/sched.h \
+  /usr/include/aarch64-linux-gnu/bits/sched.h \
+  /usr/include/aarch64-linux-gnu/bits/types/struct_sched_param.h \
+  /usr/include/aarch64-linux-gnu/bits/cpu-set.h \
+  /usr/include/aarch64-linux-gnu/bits/setjmp.h \
+  /usr/include/aarch64-linux-gnu/bits/types/struct___jmp_buf_tag.h \
+  /usr/include/aarch64-linux-gnu/bits/pthread_stack_min-dynamic.h \
+  /usr/include/aarch64-linux-gnu/bits/pthread_stack_min.h
 
 CMakeFiles/expansion_ui.dir/src/pages/page_interface.c.o: ../src/pages/page_interface.c \
   /usr/include/stdc-predef.h \
@@ -1670,11 +1711,44 @@ CMakeFiles/expansion_ui.dir/src/thread.c.o: ../src/thread.c \
   /usr/include/aarch64-linux-gnu/bits/pthread_stack_min.h \
   /usr/include/string.h \
   /usr/include/strings.h \
+  /usr/include/aarch64-linux-gnu/curl/curl.h \
+  /usr/include/aarch64-linux-gnu/curl/curlver.h \
+  /usr/include/aarch64-linux-gnu/curl/system.h \
+  /usr/include/aarch64-linux-gnu/sys/socket.h \
+  /usr/include/aarch64-linux-gnu/bits/types/struct_iovec.h \
+  /usr/include/aarch64-linux-gnu/bits/socket.h \
+  /usr/include/aarch64-linux-gnu/bits/socket_type.h \
+  /usr/include/aarch64-linux-gnu/bits/sockaddr.h \
+  /usr/include/aarch64-linux-gnu/asm/socket.h \
+  /usr/include/asm-generic/socket.h \
+  /usr/include/linux/posix_types.h \
+  /usr/include/linux/stddef.h \
+  /usr/include/aarch64-linux-gnu/asm/posix_types.h \
+  /usr/include/asm-generic/posix_types.h \
+  /usr/include/aarch64-linux-gnu/asm/bitsperlong.h \
+  /usr/include/asm-generic/bitsperlong.h \
+  /usr/include/aarch64-linux-gnu/asm/sockios.h \
+  /usr/include/asm-generic/sockios.h \
+  /usr/include/aarch64-linux-gnu/bits/types/struct_osockaddr.h \
+  /usr/lib/gcc/aarch64-linux-gnu/11/include/limits.h \
+  /usr/lib/gcc/aarch64-linux-gnu/11/include/syslimits.h \
+  /usr/include/limits.h \
+  /usr/include/aarch64-linux-gnu/bits/posix1_lim.h \
+  /usr/include/aarch64-linux-gnu/bits/local_lim.h \
+  /usr/include/linux/limits.h \
+  /usr/include/aarch64-linux-gnu/bits/posix2_lim.h \
+  /usr/include/aarch64-linux-gnu/sys/time.h \
+  /usr/include/aarch64-linux-gnu/curl/easy.h \
+  /usr/include/aarch64-linux-gnu/curl/multi.h \
+  /usr/include/aarch64-linux-gnu/curl/curl.h \
+  /usr/include/aarch64-linux-gnu/curl/urlapi.h \
+  /usr/include/aarch64-linux-gnu/curl/options.h \
+  /usr/include/aarch64-linux-gnu/curl/typecheck-gcc.h \
+  /usr/include/cjson/cJSON.h \
   /usr/include/threads.h \
   ../include/mqtt_client.h \
   ../include/hal/hal_gpio.h \
   /usr/include/linux/input.h \
-  /usr/include/aarch64-linux-gnu/sys/time.h \
   /usr/include/aarch64-linux-gnu/sys/ioctl.h \
   /usr/include/aarch64-linux-gnu/bits/ioctls.h \
   /usr/include/aarch64-linux-gnu/asm/ioctls.h \
@@ -1688,26 +1762,33 @@ CMakeFiles/expansion_ui.dir/src/thread.c.o: ../src/thread.c \
   /usr/include/aarch64-linux-gnu/asm/types.h \
   /usr/include/asm-generic/types.h \
   /usr/include/asm-generic/int-ll64.h \
-  /usr/include/aarch64-linux-gnu/asm/bitsperlong.h \
-  /usr/include/asm-generic/bitsperlong.h \
-  /usr/include/linux/posix_types.h \
-  /usr/include/linux/stddef.h \
-  /usr/include/aarch64-linux-gnu/asm/posix_types.h \
-  /usr/include/asm-generic/posix_types.h \
   /usr/include/linux/input-event-codes.h \
   ../include/hal/hal_system.h \
   ../include/system_monitor.h \
   ../include/hal/hal_dht11.h \
   ../include/network_monitor.h \
   ../include/menu.h \
-  ../include/pages/page_interface.h
+  ../include/pages/page_interface.h \
+  ../include/hal/hal_oled.h
 
 
 /usr/include/threads.h:
 
+/usr/include/aarch64-linux-gnu/curl/options.h:
+
+/usr/include/aarch64-linux-gnu/curl/urlapi.h:
+
+/usr/include/aarch64-linux-gnu/curl/multi.h:
+
+/usr/include/aarch64-linux-gnu/bits/posix2_lim.h:
+
+/usr/include/limits.h:
+
 ../src/thread.c:
 
 /usr/include/aarch64-linux-gnu/bits/dirent.h:
+
+/usr/include/aarch64-linux-gnu/curl/curlver.h:
 
 /usr/include/dirent.h:
 
@@ -1795,6 +1876,8 @@ CMakeFiles/expansion_ui.dir/src/thread.c.o: ../src/thread.c \
 
 /usr/include/aarch64-linux-gnu/sys/ttydefaults.h:
 
+/usr/include/aarch64-linux-gnu/curl/easy.h:
+
 /usr/include/aarch64-linux-gnu/bits/waitflags.h:
 
 /usr/include/aarch64-linux-gnu/bits/wchar.h:
@@ -1868,6 +1951,8 @@ CMakeFiles/expansion_ui.dir/src/thread.c.o: ../src/thread.c \
 /usr/include/features.h:
 
 /usr/include/aarch64-linux-gnu/asm/bitsperlong.h:
+
+/usr/include/cjson/cJSON.h:
 
 ../include/system_monitor.h:
 
@@ -1989,6 +2074,8 @@ CMakeFiles/expansion_ui.dir/src/thread.c.o: ../src/thread.c \
 
 /usr/include/aarch64-linux-gnu/bits/types/struct_timeval.h:
 
+/usr/lib/gcc/aarch64-linux-gnu/11/include/syslimits.h:
+
 /usr/include/linux/types.h:
 
 /usr/include/linux/ioctl.h:
@@ -2018,6 +2105,8 @@ CMakeFiles/expansion_ui.dir/src/thread.c.o: ../src/thread.c \
 /usr/include/aarch64-linux-gnu/bits/setjmp.h:
 
 /usr/include/aarch64-linux-gnu/bits/struct_mutex.h:
+
+/usr/include/aarch64-linux-gnu/curl/system.h:
 
 /usr/include/aarch64-linux-gnu/bits/time64.h:
 
@@ -2054,6 +2143,8 @@ CMakeFiles/expansion_ui.dir/src/thread.c.o: ../src/thread.c \
 /usr/include/aarch64-linux-gnu/sys/time.h:
 
 /usr/include/aarch64-linux-gnu/sys/ioctl.h:
+
+/usr/lib/gcc/aarch64-linux-gnu/11/include/limits.h:
 
 /usr/include/aarch64-linux-gnu/bits/pthreadtypes.h:
 
@@ -2103,6 +2194,8 @@ CMakeFiles/expansion_ui.dir/src/thread.c.o: ../src/thread.c \
 
 /usr/include/linux/i2c-dev.h:
 
+/usr/include/aarch64-linux-gnu/curl/typecheck-gcc.h:
+
 /usr/include/sched.h:
 
 /usr/include/aarch64-linux-gnu/bits/sched.h:
@@ -2112,6 +2205,8 @@ CMakeFiles/expansion_ui.dir/src/thread.c.o: ../src/thread.c \
 /usr/include/aarch64-linux-gnu/bits/pthread_stack_min-dynamic.h:
 
 /usr/include/aarch64-linux-gnu/bits/types/struct_sched_param.h:
+
+/usr/include/aarch64-linux-gnu/curl/curl.h:
 
 ../src/pages/page_network.c:
 
