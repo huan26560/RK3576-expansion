@@ -81,8 +81,8 @@
 },
 {
   "directory": "/home/cat/expansion/build",
-  "command": "/usr/bin/aarch64-linux-gnu-gcc  -I/home/cat/expansion/include -I/home/cat/expansion/include/hal -I/home/cat/expansion/include/pages -g -std=gnu11 -o CMakeFiles/expansion_ui.dir/src/pages/popup.c.o -c /home/cat/expansion/src/pages/popup.c",
-  "file": "/home/cat/expansion/src/pages/popup.c"
+  "command": "/usr/bin/aarch64-linux-gnu-gcc  -I/home/cat/expansion/include -I/home/cat/expansion/include/hal -I/home/cat/expansion/include/pages -g -std=gnu11 -o CMakeFiles/expansion_ui.dir/src/pages/page_screensaver.c.o -c /home/cat/expansion/src/pages/page_screensaver.c",
+  "file": "/home/cat/expansion/src/pages/page_screensaver.c"
 },
 {
   "directory": "/home/cat/expansion/build",

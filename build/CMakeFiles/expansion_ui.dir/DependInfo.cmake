@@ -21,10 +21,10 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/cat/expansion/src/pages/page_env.c" "CMakeFiles/expansion_ui.dir/src/pages/page_env.c.o" "gcc" "CMakeFiles/expansion_ui.dir/src/pages/page_env.c.o.d"
   "/home/cat/expansion/src/pages/page_interface.c" "CMakeFiles/expansion_ui.dir/src/pages/page_interface.c.o" "gcc" "CMakeFiles/expansion_ui.dir/src/pages/page_interface.c.o.d"
   "/home/cat/expansion/src/pages/page_network.c" "CMakeFiles/expansion_ui.dir/src/pages/page_network.c.o" "gcc" "CMakeFiles/expansion_ui.dir/src/pages/page_network.c.o.d"
+  "/home/cat/expansion/src/pages/page_screensaver.c" "CMakeFiles/expansion_ui.dir/src/pages/page_screensaver.c.o" "gcc" "CMakeFiles/expansion_ui.dir/src/pages/page_screensaver.c.o.d"
   "/home/cat/expansion/src/pages/page_system.c" "CMakeFiles/expansion_ui.dir/src/pages/page_system.c.o" "gcc" "CMakeFiles/expansion_ui.dir/src/pages/page_system.c.o.d"
   "/home/cat/expansion/src/pages/page_terminal.c" "CMakeFiles/expansion_ui.dir/src/pages/page_terminal.c.o" "gcc" "CMakeFiles/expansion_ui.dir/src/pages/page_terminal.c.o.d"
   "/home/cat/expansion/src/pages/page_tools.c" "CMakeFiles/expansion_ui.dir/src/pages/page_tools.c.o" "gcc" "CMakeFiles/expansion_ui.dir/src/pages/page_tools.c.o.d"
-  "/home/cat/expansion/src/pages/popup.c" "CMakeFiles/expansion_ui.dir/src/pages/popup.c.o" "gcc" "CMakeFiles/expansion_ui.dir/src/pages/popup.c.o.d"
   "/home/cat/expansion/src/system_monitor.c" "CMakeFiles/expansion_ui.dir/src/system_monitor.c.o" "gcc" "CMakeFiles/expansion_ui.dir/src/system_monitor.c.o.d"
   "/home/cat/expansion/src/thread.c" "CMakeFiles/expansion_ui.dir/src/thread.c.o" "gcc" "CMakeFiles/expansion_ui.dir/src/thread.c.o.d"
   )

@@ -441,6 +441,30 @@ src/pages/page_network.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/pages/page_network.c.s
 .PHONY : src/pages/page_network.c.s
 
+src/pages/page_screensaver.o: src/pages/page_screensaver.c.o
+.PHONY : src/pages/page_screensaver.o
+
+# target to build an object file
+src/pages/page_screensaver.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/pages/page_screensaver.c.o
+.PHONY : src/pages/page_screensaver.c.o
+
+src/pages/page_screensaver.i: src/pages/page_screensaver.c.i
+.PHONY : src/pages/page_screensaver.i
+
+# target to preprocess a source file
+src/pages/page_screensaver.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/pages/page_screensaver.c.i
+.PHONY : src/pages/page_screensaver.c.i
+
+src/pages/page_screensaver.s: src/pages/page_screensaver.c.s
+.PHONY : src/pages/page_screensaver.s
+
+# target to generate assembly for a file
+src/pages/page_screensaver.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/pages/page_screensaver.c.s
+.PHONY : src/pages/page_screensaver.c.s
+
 src/pages/page_system.o: src/pages/page_system.c.o
 .PHONY : src/pages/page_system.o
 
@@ -512,30 +536,6 @@ src/pages/page_tools.s: src/pages/page_tools.c.s
 src/pages/page_tools.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/pages/page_tools.c.s
 .PHONY : src/pages/page_tools.c.s
-
-src/pages/popup.o: src/pages/popup.c.o
-.PHONY : src/pages/popup.o
-
-# target to build an object file
-src/pages/popup.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/pages/popup.c.o
-.PHONY : src/pages/popup.c.o
-
-src/pages/popup.i: src/pages/popup.c.i
-.PHONY : src/pages/popup.i
-
-# target to preprocess a source file
-src/pages/popup.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/pages/popup.c.i
-.PHONY : src/pages/popup.c.i
-
-src/pages/popup.s: src/pages/popup.c.s
-.PHONY : src/pages/popup.s
-
-# target to generate assembly for a file
-src/pages/popup.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/pages/popup.c.s
-.PHONY : src/pages/popup.c.s
 
 src/system_monitor.o: src/system_monitor.c.o
 .PHONY : src/system_monitor.o
@@ -633,6 +633,9 @@ help:
 	@echo "... src/pages/page_network.o"
 	@echo "... src/pages/page_network.i"
 	@echo "... src/pages/page_network.s"
+	@echo "... src/pages/page_screensaver.o"
+	@echo "... src/pages/page_screensaver.i"
+	@echo "... src/pages/page_screensaver.s"
 	@echo "... src/pages/page_system.o"
 	@echo "... src/pages/page_system.i"
 	@echo "... src/pages/page_system.s"
@@ -642,9 +645,6 @@ help:
 	@echo "... src/pages/page_tools.o"
 	@echo "... src/pages/page_tools.i"
 	@echo "... src/pages/page_tools.s"
-	@echo "... src/pages/popup.o"
-	@echo "... src/pages/popup.i"
-	@echo "... src/pages/popup.s"
 	@echo "... src/system_monitor.o"
 	@echo "... src/system_monitor.i"
 	@echo "... src/system_monitor.s"

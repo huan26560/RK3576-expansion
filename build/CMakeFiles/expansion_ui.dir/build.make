@@ -293,19 +293,19 @@ CMakeFiles/expansion_ui.dir/src/pages/page_terminal.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/expansion_ui.dir/src/pages/page_terminal.c.s"
 	/usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/cat/expansion/src/pages/page_terminal.c -o CMakeFiles/expansion_ui.dir/src/pages/page_terminal.c.s
 
-CMakeFiles/expansion_ui.dir/src/pages/popup.c.o: CMakeFiles/expansion_ui.dir/flags.make
-CMakeFiles/expansion_ui.dir/src/pages/popup.c.o: ../src/pages/popup.c
-CMakeFiles/expansion_ui.dir/src/pages/popup.c.o: CMakeFiles/expansion_ui.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cat/expansion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building C object CMakeFiles/expansion_ui.dir/src/pages/popup.c.o"
-	/usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/expansion_ui.dir/src/pages/popup.c.o -MF CMakeFiles/expansion_ui.dir/src/pages/popup.c.o.d -o CMakeFiles/expansion_ui.dir/src/pages/popup.c.o -c /home/cat/expansion/src/pages/popup.c
+CMakeFiles/expansion_ui.dir/src/pages/page_screensaver.c.o: CMakeFiles/expansion_ui.dir/flags.make
+CMakeFiles/expansion_ui.dir/src/pages/page_screensaver.c.o: ../src/pages/page_screensaver.c
+CMakeFiles/expansion_ui.dir/src/pages/page_screensaver.c.o: CMakeFiles/expansion_ui.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cat/expansion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building C object CMakeFiles/expansion_ui.dir/src/pages/page_screensaver.c.o"
+	/usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/expansion_ui.dir/src/pages/page_screensaver.c.o -MF CMakeFiles/expansion_ui.dir/src/pages/page_screensaver.c.o.d -o CMakeFiles/expansion_ui.dir/src/pages/page_screensaver.c.o -c /home/cat/expansion/src/pages/page_screensaver.c
 
-CMakeFiles/expansion_ui.dir/src/pages/popup.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/expansion_ui.dir/src/pages/popup.c.i"
-	/usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/cat/expansion/src/pages/popup.c > CMakeFiles/expansion_ui.dir/src/pages/popup.c.i
+CMakeFiles/expansion_ui.dir/src/pages/page_screensaver.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/expansion_ui.dir/src/pages/page_screensaver.c.i"
+	/usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/cat/expansion/src/pages/page_screensaver.c > CMakeFiles/expansion_ui.dir/src/pages/page_screensaver.c.i
 
-CMakeFiles/expansion_ui.dir/src/pages/popup.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/expansion_ui.dir/src/pages/popup.c.s"
-	/usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/cat/expansion/src/pages/popup.c -o CMakeFiles/expansion_ui.dir/src/pages/popup.c.s
+CMakeFiles/expansion_ui.dir/src/pages/page_screensaver.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/expansion_ui.dir/src/pages/page_screensaver.c.s"
+	/usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/cat/expansion/src/pages/page_screensaver.c -o CMakeFiles/expansion_ui.dir/src/pages/page_screensaver.c.s
 
 CMakeFiles/expansion_ui.dir/src/network_monitor.c.o: CMakeFiles/expansion_ui.dir/flags.make
 CMakeFiles/expansion_ui.dir/src/network_monitor.c.o: ../src/network_monitor.c
@@ -353,7 +353,7 @@ expansion_ui_OBJECTS = \
 "CMakeFiles/expansion_ui.dir/src/pages/page_docker.c.o" \
 "CMakeFiles/expansion_ui.dir/src/pages/page_network.c.o" \
 "CMakeFiles/expansion_ui.dir/src/pages/page_terminal.c.o" \
-"CMakeFiles/expansion_ui.dir/src/pages/popup.c.o" \
+"CMakeFiles/expansion_ui.dir/src/pages/page_screensaver.c.o" \
 "CMakeFiles/expansion_ui.dir/src/network_monitor.c.o" \
 "CMakeFiles/expansion_ui.dir/src/system_monitor.c.o"
 
@@ -376,7 +376,7 @@ expansion_ui: CMakeFiles/expansion_ui.dir/src/pages/page_env.c.o
 expansion_ui: CMakeFiles/expansion_ui.dir/src/pages/page_docker.c.o
 expansion_ui: CMakeFiles/expansion_ui.dir/src/pages/page_network.c.o
 expansion_ui: CMakeFiles/expansion_ui.dir/src/pages/page_terminal.c.o
-expansion_ui: CMakeFiles/expansion_ui.dir/src/pages/popup.c.o
+expansion_ui: CMakeFiles/expansion_ui.dir/src/pages/page_screensaver.c.o
 expansion_ui: CMakeFiles/expansion_ui.dir/src/network_monitor.c.o
 expansion_ui: CMakeFiles/expansion_ui.dir/src/system_monitor.c.o
 expansion_ui: CMakeFiles/expansion_ui.dir/build.make

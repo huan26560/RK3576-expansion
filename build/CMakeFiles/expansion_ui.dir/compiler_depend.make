@@ -591,7 +591,8 @@ CMakeFiles/expansion_ui.dir/src/menu.c.o: ../src/menu.c \
   /usr/include/asm-generic/posix_types.h \
   /usr/include/linux/input-event-codes.h \
   ../include/hal/font.h \
-  ../include/pages/popup.h
+  ../include/pages/page_screensaver.h \
+  ../include/pages/page_interface.h
 
 CMakeFiles/expansion_ui.dir/src/mqtt_client.c.o: ../src/mqtt_client.c \
   /usr/include/stdc-predef.h \
@@ -1169,6 +1170,53 @@ CMakeFiles/expansion_ui.dir/src/pages/page_network.c.o: ../src/pages/page_networ
   ../include/hal/font.h \
   ../include/network_monitor.h
 
+CMakeFiles/expansion_ui.dir/src/pages/page_screensaver.c.o: ../src/pages/page_screensaver.c \
+  /usr/include/stdc-predef.h \
+  ../include/pages/page_screensaver.h \
+  ../include/hal/hal_oled.h \
+  ../include/pages/page_interface.h \
+  /usr/include/string.h \
+  /usr/include/aarch64-linux-gnu/bits/libc-header-start.h \
+  /usr/include/features.h \
+  /usr/include/features-time64.h \
+  /usr/include/aarch64-linux-gnu/bits/wordsize.h \
+  /usr/include/aarch64-linux-gnu/bits/timesize.h \
+  /usr/include/aarch64-linux-gnu/sys/cdefs.h \
+  /usr/include/aarch64-linux-gnu/bits/long-double.h \
+  /usr/include/aarch64-linux-gnu/gnu/stubs.h \
+  /usr/include/aarch64-linux-gnu/gnu/stubs-lp64.h \
+  /usr/lib/gcc/aarch64-linux-gnu/11/include/stddef.h \
+  /usr/include/aarch64-linux-gnu/bits/types/locale_t.h \
+  /usr/include/aarch64-linux-gnu/bits/types/__locale_t.h \
+  /usr/include/strings.h \
+  ../include/pages/page_interface.h \
+  /usr/include/stdio.h \
+  /usr/lib/gcc/aarch64-linux-gnu/11/include/stdarg.h \
+  /usr/include/aarch64-linux-gnu/bits/types.h \
+  /usr/include/aarch64-linux-gnu/bits/typesizes.h \
+  /usr/include/aarch64-linux-gnu/bits/time64.h \
+  /usr/include/aarch64-linux-gnu/bits/types/__fpos_t.h \
+  /usr/include/aarch64-linux-gnu/bits/types/__mbstate_t.h \
+  /usr/include/aarch64-linux-gnu/bits/types/__fpos64_t.h \
+  /usr/include/aarch64-linux-gnu/bits/types/__FILE.h \
+  /usr/include/aarch64-linux-gnu/bits/types/FILE.h \
+  /usr/include/aarch64-linux-gnu/bits/types/struct_FILE.h \
+  /usr/include/aarch64-linux-gnu/bits/stdio_lim.h \
+  /usr/include/aarch64-linux-gnu/bits/floatn.h \
+  /usr/include/aarch64-linux-gnu/bits/floatn-common.h \
+  ../include/hal/hal_system.h \
+  /usr/include/time.h \
+  /usr/include/aarch64-linux-gnu/bits/time.h \
+  /usr/include/aarch64-linux-gnu/bits/types/clock_t.h \
+  /usr/include/aarch64-linux-gnu/bits/types/time_t.h \
+  /usr/include/aarch64-linux-gnu/bits/types/struct_tm.h \
+  /usr/include/aarch64-linux-gnu/bits/types/struct_timespec.h \
+  /usr/include/aarch64-linux-gnu/bits/endian.h \
+  /usr/include/aarch64-linux-gnu/bits/endianness.h \
+  /usr/include/aarch64-linux-gnu/bits/types/clockid_t.h \
+  /usr/include/aarch64-linux-gnu/bits/types/timer_t.h \
+  /usr/include/aarch64-linux-gnu/bits/types/struct_itimerspec.h
+
 CMakeFiles/expansion_ui.dir/src/pages/page_system.c.o: ../src/pages/page_system.c \
   /usr/include/stdc-predef.h \
   /usr/include/stdio.h \
@@ -1453,26 +1501,6 @@ CMakeFiles/expansion_ui.dir/src/pages/page_tools.c.o: ../src/pages/page_tools.c 
   /usr/include/aarch64-linux-gnu/bits/stdint-uintn.h \
   ../include/hal/font.h
 
-CMakeFiles/expansion_ui.dir/src/pages/popup.c.o: ../src/pages/popup.c \
-  /usr/include/stdc-predef.h \
-  ../include/pages/popup.h \
-  ../include/pages/page_interface.h \
-  ../include/hal/hal_oled.h \
-  /usr/include/string.h \
-  /usr/include/aarch64-linux-gnu/bits/libc-header-start.h \
-  /usr/include/features.h \
-  /usr/include/features-time64.h \
-  /usr/include/aarch64-linux-gnu/bits/wordsize.h \
-  /usr/include/aarch64-linux-gnu/bits/timesize.h \
-  /usr/include/aarch64-linux-gnu/sys/cdefs.h \
-  /usr/include/aarch64-linux-gnu/bits/long-double.h \
-  /usr/include/aarch64-linux-gnu/gnu/stubs.h \
-  /usr/include/aarch64-linux-gnu/gnu/stubs-lp64.h \
-  /usr/lib/gcc/aarch64-linux-gnu/11/include/stddef.h \
-  /usr/include/aarch64-linux-gnu/bits/types/locale_t.h \
-  /usr/include/aarch64-linux-gnu/bits/types/__locale_t.h \
-  /usr/include/strings.h
-
 CMakeFiles/expansion_ui.dir/src/system_monitor.c.o: ../src/system_monitor.c \
   /usr/include/stdc-predef.h \
   ../include/system_monitor.h \
@@ -1683,6 +1711,8 @@ CMakeFiles/expansion_ui.dir/src/thread.c.o: ../src/thread.c \
 
 /usr/include/dirent.h:
 
+../src/pages/page_screensaver.c:
+
 ../src/pages/page_env.c:
 
 /usr/include/linux/const.h:
@@ -1695,7 +1725,7 @@ CMakeFiles/expansion_ui.dir/src/thread.c.o: ../src/thread.c \
 
 ../src/network_monitor.c:
 
-../include/pages/popup.h:
+../include/pages/page_screensaver.h:
 
 ../src/menu.c:
 
@@ -1830,8 +1860,6 @@ CMakeFiles/expansion_ui.dir/src/thread.c.o: ../src/thread.c \
 /usr/include/linux/input.h:
 
 /usr/include/aarch64-linux-gnu/bits/uintn-identity.h:
-
-../src/pages/popup.c:
 
 /usr/include/pthread.h:
 

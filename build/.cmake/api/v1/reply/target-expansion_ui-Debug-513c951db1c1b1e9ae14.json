@@ -282,7 +282,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "src/pages/popup.c",
+			"path" : "src/pages/page_screensaver.c",
 			"sourceGroupIndex" : 0
 		},
 		{

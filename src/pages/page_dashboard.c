@@ -80,7 +80,7 @@ static void format_uptime(char *buf, size_t size, int seconds)
     }
 }
 
-// 本地页面（正点原子3588 Buildroot）
+// 本地页面
 static void draw_local(void)
 {
     char buf[64];

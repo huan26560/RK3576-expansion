@@ -27,7 +27,7 @@ set(SOURCES
     /home/cat/expansion/src/pages/page_docker.c
     /home/cat/expansion/src/pages/page_network.c
     /home/cat/expansion/src/pages/page_terminal.c
-    /home/cat/expansion/src/pages/popup.c
+    /home/cat/expansion/src/pages/page_screensaver.c
 
     /home/cat/expansion/src/network_monitor.c
     /home/cat/expansion/src/system_monitor.c

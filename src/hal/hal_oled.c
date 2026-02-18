@@ -287,7 +287,36 @@ void hal_oled_draw_icon(int x, int y, int width, int height, const unsigned char
         }
     }
 }
+void hal_oled_draw_large_char(int x0, int y0, char ch) {
+    int idx;
+    if (ch >= '0' && ch <= '9')
+        idx = ch - '0';
+    else if (ch == ':')
+        idx = 10;
+    else
+        return;  // 不支持的字符
 
+    // 遍历字符的每一行
+    for (int y = 0; y < 48; y++) {
+        // 遍历每一列（每行3字节，共24像素）
+        for (int x = 0; x < 24; x++) {
+            int byte_idx = x / 8;          // 当前列属于该行的第几个字节
+            int bit = 7 - (x % 8);          // 高位对应左边像素（根据您的数据格式）
+            if (font[idx][y][byte_idx] & (1 << bit)) {
+                hal_oled_pixel(x0 + x, y0 + y, 1);  // 点亮像素
+            }
+            // 若不需要清除背景，可省略else；如需清除可调用 hal_oled_pixel(...,0)
+        }
+    }
+}
+
+void hal_oled_draw_large_string(int x0, int y0, const char *str) {
+    while (*str) {
+        hal_oled_draw_large_char(x0, y0, *str);
+        x0 += CHAR_STEP;   // 使用新的步进宽度
+        str++;
+    }
+}
 void hal_oled_cleanup(void)
 {
     pthread_mutex_lock(&i2c_mutex);
