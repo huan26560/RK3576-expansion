@@ -21,10 +21,12 @@ int hal_dht11_read(float *temp, float *hum)
     static int dev_exists = 1; // 标记设备是否存在
 
     // 首次运行：检查设备文件是否存在，只检查1次
-    if (first_run) {
+    if (first_run)
+    {
         first_run = 0;
         // 检查设备文件是否存在（用access替代open，减少资源占用）
-        if (access(DEV_NAME, F_OK) != 0) {
+        if (access(DEV_NAME, F_OK) != 0)
+        {
             fprintf(stderr, "[DHT11] Device %s not exist!\n", DEV_NAME);
             dev_exists = 0;
             *temp = 25.0f; // 返回默认值，避免UI报错
@@ -32,7 +34,8 @@ int hal_dht11_read(float *temp, float *hum)
             return 0; // 返回成功，不阻塞UI
         }
         // 检查权限
-        if (access(DEV_NAME, R_OK | W_OK) != 0) {
+        if (access(DEV_NAME, R_OK | W_OK) != 0)
+        {
             fprintf(stderr, "[DHT11] No permission to access %s\n", DEV_NAME);
             dev_exists = 0;
             *temp = 25.0f;
@@ -42,7 +45,8 @@ int hal_dht11_read(float *temp, float *hum)
     }
 
     // 设备不存在：直接返回默认值，不执行open/read
-    if (!dev_exists) {
+    if (!dev_exists)
+    {
         *temp = 25.0f;
         *hum = 50.0f;
         return 0;
@@ -50,7 +54,8 @@ int hal_dht11_read(float *temp, float *hum)
 
     // 原有逻辑（保留，但只执行1次，不重试）
     int fd = open(DEV_NAME, O_RDWR);
-    if (fd < 0) {
+    if (fd < 0)
+    {
         *temp = 25.0f;
         *hum = 50.0f;
         return 0; // 返回成功，不阻塞
@@ -60,7 +65,8 @@ int hal_dht11_read(float *temp, float *hum)
     int ret = read(fd, &data, sizeof(data));
     close(fd);
 
-    if (ret > 0) {
+    if (ret > 0)
+    {
         *temp = data[2] + data[3] * 0.1;
         *hum = data[0] + data[1] * 0.1;
         return 0;

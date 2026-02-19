@@ -127,7 +127,7 @@ static void draw_network_weather(void)
         const unsigned char *icon = weather_code_to_icon(local_weather.weather_code);
         hal_oled_draw_icon(icon_x, icon_y, WEATHER_ICON_SIZE, WEATHER_ICON_SIZE, icon);
 
-        int text_y = icon_y + WEATHER_ICON_SIZE + 2;
+        int text_y = icon_y + WEATHER_ICON_SIZE + 4;
         hal_oled_string(icon_x, text_y, local_weather.weather_text);
 
         // 右侧：Temp + Humi（带前缀）

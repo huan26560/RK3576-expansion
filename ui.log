@@ -320,3 +320,326 @@ MQTT: 连接成功
 MQTT: 断开连接 (code: 0)
 GPIO: 已清理
 系统已安全退出
+*** buffer overflow detected ***: terminated
+=== 哈吉米3 扩展板 MQTT UI 系统启动 ===
+初始化硬件...
+GPIO: 初始化成功 (LED:0-2, Beep:6, Buttons:/dev/input/event10)
+正在初始化 OLED...
+OLED 初始化完成
+[THREAD] Initializing all threads...
+[THREAD] Creating MQTT...
+[THREAD] MQTT created
+[THREAD] Creating SENSOR...
+[THREAD] SENSOR created
+[THREAD] Creating SYSTEM...
+[THREAD] SYSTEM created
+[THREAD] Creating NETWORK...
+[SENSOR] Thread started
+[THREAD] NETWORK created
+[THREAD] Creating BUTTON...
+[THREAD] BUTTON created
+[THREAD] Creating WEATHER...
+[THREAD] WEATHER created
+[THREAD] All threads initialized
+初始化MQTT...
+MQTT: 初始化完成，等待网络...
+[WEATHER] Thread started
+[MQTT] Thread started
+[BUTTON] Thread started
+GPIO: 已初始化，跳过
+[SYS-PUB] Thread started
+[NET-PUB] Thread started
+[UI] System pages registered
+[UI] System menu tree created
+[UI] Network menu tree created
+[LOCATION] Async done: lat=34.62, lon=112.45, addr=Luoyang, Henan
+[WEATHER] Async done: 0.0C, 0.0%
+MQTT: 等待网络...
+MQTT: 等待网络...
+Network: IP ready
+MQTT: 网络就绪，尝试连接 192.168.31.110:1883
+MQTT: 连接失败 Network is unreachable
+Network: IP ready
+MQTT: 网络就绪，尝试连接 192.168.31.110:1883
+MQTT: 连接失败 Network is unreachable
+Network: IP ready
+MQTT: 网络就绪，尝试连接 192.168.31.110:1883
+MQTT: 连接失败 Network is unreachable
+Network: IP ready
+MQTT: 网络就绪，尝试连接 192.168.31.110:1883
+MQTT: 连接失败 Network is unreachable
+Network: IP ready
+MQTT: 网络就绪，尝试连接 192.168.31.110:1883
+MQTT: 连接失败 Network is unreachable
+Network: IP ready
+MQTT: 网络就绪，尝试连接 192.168.31.110:1883
+MQTT: 连接失败 Network is unreachable
+Network: IP ready
+MQTT: 网络就绪，尝试连接 192.168.31.110:1883
+MQTT: 连接成功
+MQTT: 连接成功
+进入图标菜单
+【Signal】捕获终止信号: 15
+清理资源...
+MQTT: 断开连接 (code: 0)
+Network: IP ready
+MQTT: 网络就绪，尝试连接 192.168.31.110:1883
+MQTT: 连接失败 Invalid function arguments provided.
+GPIO: 已清理
+系统已安全退出
+=== 哈吉米3 扩展板 MQTT UI 系统启动 ===
+初始化硬件...
+GPIO: 初始化成功 (LED:0-2, Beep:6, Buttons:/dev/input/event10)
+正在初始化 OLED...
+OLED 初始化完成
+[THREAD] Initializing all threads...
+[THREAD] Creating MQTT...
+[THREAD] MQTT created
+[THREAD] Creating SENSOR...
+[MQTT] Thread started
+[THREAD] SENSOR created
+[THREAD] Creating SYSTEM...
+[SENSOR] Thread started
+[THREAD] SYSTEM created
+[THREAD] Creating NETWORK...
+[THREAD] NETWORK created
+[THREAD] Creating BUTTON...
+[SYS-PUB] Thread started
+[NET-PUB] Thread started
+[THREAD] BUTTON created
+[THREAD] Creating WEATHER...
+[BUTTON] Thread started
+GPIO: 已初始化，跳过
+[THREAD] WEATHER created
+[THREAD] All threads initialized
+初始化MQTT...
+[WEATHER] Thread started
+MQTT: 初始化完成，等待网络...
+Network: IP ready
+MQTT: 网络就绪，尝试连接 192.168.31.110:1883
+Network: IP ready
+MQTT: 连接成功
+MQTT: 初始连接 成功
+[UI] System pages registered
+[UI] System menu tree created
+[UI] Network menu tree created
+MQTT: 连接成功
+MQTT: 断开连接 (code: 7)
+[LOCATION] Async done: lat=34.67, lon=112.44, addr=Luoyang, Henan
+Network: IP ready
+MQTT: 网络就绪，尝试连接 192.168.31.110:1883
+MQTT: 连接成功
+MQTT: 连接成功
+[WEATHER] Async done: 18.1C, 17.0%
+【Signal】捕获终止信号: 15
+清理资源...
+MQTT: 断开连接 (code: 0)
+GPIO: 已清理
+系统已安全退出
+=== 哈吉米3 扩展板 MQTT UI 系统启动 ===
+初始化硬件...
+GPIO: 初始化成功 (LED:0-2, Beep:6, Buttons:/dev/input/event10)
+正在初始化 OLED...
+OLED 初始化完成
+[THREAD] Initializing all threads...
+[THREAD] Creating MQTT...
+[THREAD] MQTT created
+[THREAD] Creating SENSOR...
+[MQTT] Thread started
+[THREAD] SENSOR created
+[THREAD] Creating SYSTEM...
+[SENSOR] Thread started
+[THREAD] SYSTEM created
+[THREAD] Creating NETWORK...
+[THREAD] NETWORK created
+[THREAD] Creating BUTTON...
+[SYS-PUB] Thread started
+[NET-PUB] Thread started
+[BUTTON] Thread started
+GPIO: 已初始化，跳过
+[THREAD] BUTTON created
+[THREAD] Creating WEATHER...
+[THREAD] WEATHER created
+[THREAD] All threads initialized
+初始化MQTT...
+[WEATHER] Thread started
+MQTT: 初始化完成，等待网络...
+Network: IP ready
+Network: IP ready
+MQTT: 网络就绪，尝试连接 192.168.31.110:1883
+MQTT: 初始连接 成功
+MQTT: 连接成功
+MQTT: 连接成功
+[UI] System pages registered
+[UI] System menu tree created
+[UI] Network menu tree created
+MQTT: 断开连接 (code: 7)
+[LOCATION] Async done: lat=34.67, lon=112.44, addr=Luoyang, Henan
+Network: IP ready
+MQTT: 网络就绪，尝试连接 192.168.31.110:1883
+MQTT: 连接成功
+MQTT: 连接成功
+[WEATHER] Async done: 18.1C, 17.0%
+【Signal】捕获终止信号: 15
+清理资源...
+MQTT: 断开连接 (code: 0)
+GPIO: 已清理
+系统已安全退出
+=== 哈吉米3 扩展板 MQTT UI 系统启动 ===
+初始化硬件...
+GPIO: 初始化成功 (LED:0-2, Beep:6, Buttons:/dev/input/event10)
+正在初始化 OLED...
+OLED 初始化完成
+[THREAD] Initializing all threads...
+[THREAD] Creating MQTT...
+[THREAD] MQTT created
+[THREAD] Creating SENSOR...
+[MQTT] Thread started
+[THREAD] SENSOR created
+[THREAD] Creating SYSTEM...
+[SENSOR] Thread started
+[THREAD] SYSTEM created
+[THREAD] Creating NETWORK...
+[THREAD] NETWORK created
+[THREAD] Creating BUTTON...
+[SYS-PUB] Thread started
+[NET-PUB] Thread started
+[THREAD] BUTTON created
+[THREAD] Creating WEATHER...
+[BUTTON] Thread started
+GPIO: 已初始化，跳过
+[THREAD] WEATHER created
+[THREAD] All threads initialized
+初始化MQTT...
+[WEATHER] Thread started
+MQTT: 初始化完成，等待网络...
+[WEATHER] Waiting for network ready...
+[WEATHER] Network is ready!
+Network: IP ready
+MQTT: 网络就绪，尝试连接 192.168.31.110:1883
+Network: IP ready
+MQTT: 连接成功
+MQTT: 初始连接 成功
+[UI] System pages registered
+[UI] System menu tree created
+[UI] Network menu tree created
+MQTT: 连接成功
+MQTT: 断开连接 (code: 7)
+[LOCATION] Async done: lat=34.67, lon=112.44, addr=Luoyang, Henan
+Network: IP ready
+MQTT: 网络就绪，尝试连接 192.168.31.110:1883
+MQTT: 连接成功
+MQTT: 连接成功
+进入图标菜单
+[WEATHER] Async done: 18.1C, 16.0%, valid=1
+【Signal】捕获终止信号: 15
+清理资源...
+MQTT: 断开连接 (code: 0)
+GPIO: 已清理
+系统已安全退出
+=== 哈吉米3 扩展板 MQTT UI 系统启动 ===
+初始化硬件...
+GPIO: 初始化成功 (LED:0-2, Beep:6, Buttons:/dev/input/event10)
+正在初始化 OLED...
+OLED 初始化完成
+[THREAD] Initializing all threads...
+[THREAD] Creating MQTT...
+[THREAD] MQTT created
+[THREAD] Creating SENSOR...
+[MQTT] Thread started
+[THREAD] SENSOR created
+[THREAD] Creating SYSTEM...
+[THREAD] SYSTEM created
+[THREAD] Creating NETWORK...
+[SENSOR] Thread started
+[THREAD] NETWORK created
+[THREAD] Creating BUTTON...
+[NET-PUB] Thread started
+[SYS-PUB] Thread started
+[THREAD] BUTTON created
+[THREAD] Creating WEATHER...
+[BUTTON] Thread started
+GPIO: 已初始化，跳过
+[THREAD] WEATHER created
+[THREAD] All threads initialized
+初始化MQTT...
+[WEATHER] Thread started
+MQTT: 初始化完成，等待网络...
+[WEATHER] Waiting for network ready...
+[WEATHER] Network is ready!
+Network: IP ready
+MQTT: 网络就绪，尝试连接 192.168.31.110:1883
+Network: IP ready
+MQTT: 连接成功
+MQTT: 初始连接 成功
+[UI] System pages registered
+[UI] System menu tree created
+[UI] Network menu tree created
+MQTT: 连接成功
+MQTT: 断开连接 (code: 7)
+[LOCATION] Async done: lat=34.67, lon=112.44, addr=Luoyang, Henan
+Network: IP ready
+MQTT: 网络就绪，尝试连接 192.168.31.110:1883
+MQTT: 连接成功
+MQTT: 连接成功
+进入图标菜单
+[WEATHER] Async done: 18.1C, 16.0%, valid=1
+【Signal】捕获终止信号: 15
+清理资源...
+MQTT: 断开连接 (code: 0)
+Network: IP ready
+MQTT: 网络就绪，尝试连接 192.168.31.110:1883
+GPIO: 已清理
+系统已安全退出
+=== 哈吉米3 扩展板 MQTT UI 系统启动 ===
+初始化硬件...
+GPIO: 初始化成功 (LED:0-2, Beep:6, Buttons:/dev/input/event10)
+正在初始化 OLED...
+OLED 初始化完成
+[THREAD] Initializing all threads...
+[THREAD] Creating MQTT...
+[THREAD] MQTT created
+[THREAD] Creating SENSOR...
+[THREAD] SENSOR created
+[THREAD] Creating SYSTEM...
+[SENSOR] Thread started
+[THREAD] SYSTEM created
+[THREAD] Creating NETWORK...
+[MQTT] Thread started
+[THREAD] NETWORK created
+[THREAD] Creating BUTTON...
+[SYS-PUB] Thread started
+[NET-PUB] Thread started
+[THREAD] BUTTON created
+[THREAD] Creating WEATHER...
+[THREAD] WEATHER created
+[THREAD] All threads initialized
+初始化MQTT...
+[BUTTON] Thread started
+GPIO: 已初始化，跳过
+[WEATHER] Thread started
+MQTT: 初始化完成，等待网络...
+[WEATHER] Waiting for network ready...
+[WEATHER] Network is ready!
+Network: IP ready
+MQTT: 网络就绪，尝试连接 192.168.31.110:1883
+Network: IP ready
+MQTT: 初始连接 成功
+MQTT: 连接成功
+[UI] System pages registered
+[UI] System menu tree created
+[UI] Network menu tree created
+MQTT: 连接成功
+MQTT: 断开连接 (code: 7)
+[LOCATION] Async done: lat=34.67, lon=112.44, addr=Luoyang, Henan
+Network: IP ready
+MQTT: 网络就绪，尝试连接 192.168.31.110:1883
+MQTT: 连接成功
+MQTT: 连接成功
+进入图标菜单
+[WEATHER] Async done: 18.1C, 16.0%, valid=1
+【Signal】捕获终止信号: 15
+清理资源...
+MQTT: 断开连接 (code: 0)
+GPIO: 已清理
+系统已安全退出

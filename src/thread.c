@@ -58,6 +58,40 @@ typedef struct {
 } network_weather_t;
 network_weather_t net_weather = {0}; // 全局暴露，供UI访问
 
+/* ==================== 新增：网络就绪检测（核心解决开机问题） ==================== */
+// 检测网络是否就绪（利用你已有的network_monitor，wifi_connected+能上网）
+static int is_network_ready(void)
+{
+    network_state_t state;
+    network_monitor_get_state(&state);
+    // state.wifi_internet=1 表示能访问外网，state.wifi_connected=1 表示已连WiFi
+    return (state.wifi_connected && state.wifi_internet);
+}
+
+// 等待网络就绪（最多等30秒，每2秒检测一次，超时用默认地址）
+static void wait_network_ready(void)
+{
+    int wait_sec = 0;
+    printf("[WEATHER] Waiting for network ready...\n");
+    while (!is_network_ready())
+    {
+        wait_sec += 2;
+        if (wait_sec > 30)
+        {
+            printf("[WEATHER] Network timeout after 30s, use default location\n");
+            // 超时后强制用默认经纬度/地址，避免UI一直Loading
+            pthread_mutex_lock(&weather_mutex);
+            strncpy(weather_latitude, DEFAULT_LATITUDE, sizeof(weather_latitude)-1);
+            strncpy(weather_longitude, DEFAULT_LONGITUDE, sizeof(weather_longitude)-1);
+            strncpy(weather_address, "Luoyang, Henan", sizeof(weather_address)-1);
+            pthread_mutex_unlock(&weather_mutex);
+            return;
+        }
+        sleep(2); // 每2秒检测一次，低占用
+    }
+    printf("[WEATHER] Network is ready!\n");
+}
+
 /* ==================== 工具函数（天气相关） ==================== */
 static size_t http_write_callback(void *contents, size_t size, size_t nmemb, void *userp)
 {
@@ -91,66 +125,91 @@ void trigger_weather_refresh(void)
     printf("[WEATHER] Trigger async refresh\n");
 }
 
-/* ==================== 天气异步请求函数 ==================== */
+/* ==================== 天气异步请求函数（加重试逻辑） ==================== */
 static void auto_get_location_async(void)
 {
-    CURL *curl = NULL;
-    CURLcode res;
-    char *http_buf = NULL;
-    cJSON *json_root = NULL;
+    int retry = 3; // 最多重试3次，避免网络抖动失败
     char lat[16] = {0};
     char lon[16] = {0};
-    char addr[64] = {0}; // 临时地址变量
+    char addr[64] = {0};
 
     // 默认先用洛阳经纬度+地址
     strncpy(lat, DEFAULT_LATITUDE, sizeof(lat)-1);
     strncpy(lon, DEFAULT_LONGITUDE, sizeof(lon)-1);
-    strncpy(addr, "Luoyang, Henan", sizeof(addr)-1); // 默认地址
+    strncpy(addr, "Luoyang, Henan", sizeof(addr)-1);
 
-    // 分配缓冲区
-    http_buf = (char *)calloc(1, HTTP_RECV_BUF_SIZE);
-    if (http_buf == NULL) goto exit;
+    while (retry--)
+    {
+        CURL *curl = NULL;
+        CURLcode res;
+        char *http_buf = NULL;
+        cJSON *json_root = NULL;
 
-    // 初始化CURL
-    curl = curl_easy_init();
-    if (curl == NULL) goto exit;
+        // 分配缓冲区
+        http_buf = (char *)calloc(1, HTTP_RECV_BUF_SIZE);
+        if (http_buf == NULL) {
+            printf("[LOCATION] Retry %d: malloc failed\n", retry);
+            sleep(1);
+            continue;
+        }
 
-    // 配置CURL（请求字段增加 city,regionName）
-    // 注意：修改 LOCATION_API_URL 为 "http://ip-api.com/json/?fields=lat,lon,city,regionName"
-    curl_easy_setopt(curl, CURLOPT_URL, "http://ip-api.com/json/?fields=lat,lon,city,regionName");
-    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, http_write_callback);
-    curl_easy_setopt(curl, CURLOPT_WRITEDATA, http_buf);
-    curl_easy_setopt(curl, CURLOPT_TIMEOUT, 3);
-    curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, 2);
+        // 初始化CURL
+        curl = curl_easy_init();
+        if (curl == NULL) {
+            free(http_buf);
+            printf("[LOCATION] Retry %d: curl init failed\n", retry);
+            sleep(1);
+            continue;
+        }
 
-    // 发送请求
-    res = curl_easy_perform(curl);
-    if (res == CURLE_OK) {
-        json_root = cJSON_Parse(http_buf);
-        if (json_root) {
-            cJSON *lat_item = cJSON_GetObjectItem(json_root, "lat");
-            cJSON *lon_item = cJSON_GetObjectItem(json_root, "lon");
-            cJSON *city_item = cJSON_GetObjectItem(json_root, "city");       // 新增：城市
-            cJSON *region_item = cJSON_GetObjectItem(json_root, "regionName");// 新增：省份
+        // 配置CURL（请求字段增加 city,regionName）
+        curl_easy_setopt(curl, CURLOPT_URL, "http://ip-api.com/json/?fields=lat,lon,city,regionName");
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, http_write_callback);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, http_buf);
+        curl_easy_setopt(curl, CURLOPT_TIMEOUT, 3);
+        curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, 2);
 
-            // 解析经纬度
-            if (cJSON_IsNumber(lat_item) && cJSON_IsNumber(lon_item)) {
-                snprintf(lat, sizeof(lat), "%.2f", lat_item->valuedouble);
-                snprintf(lon, sizeof(lon), "%.2f", lon_item->valuedouble);
-            }
+        // 发送请求
+        res = curl_easy_perform(curl);
+        if (res == CURLE_OK) {
+            json_root = cJSON_Parse(http_buf);
+            if (json_root) {
+                cJSON *lat_item = cJSON_GetObjectItem(json_root, "lat");
+                cJSON *lon_item = cJSON_GetObjectItem(json_root, "lon");
+                cJSON *city_item = cJSON_GetObjectItem(json_root, "city");       // 新增：城市
+                cJSON *region_item = cJSON_GetObjectItem(json_root, "regionName");// 新增：省份
 
-            // 新增：解析拼音地址（格式："City, Region"）
-            if (cJSON_IsString(city_item) && cJSON_IsString(region_item)) {
-                snprintf(addr, sizeof(addr), "%s, %s", city_item->valuestring, region_item->valuestring);
-            } else if (cJSON_IsString(city_item)) {
-                strncpy(addr, city_item->valuestring, sizeof(addr)-1);
-            } else if (cJSON_IsString(region_item)) {
-                strncpy(addr, region_item->valuestring, sizeof(addr)-1);
+                // 解析经纬度
+                if (cJSON_IsNumber(lat_item) && cJSON_IsNumber(lon_item)) {
+                    snprintf(lat, sizeof(lat), "%.2f", lat_item->valuedouble);
+                    snprintf(lon, sizeof(lon), "%.2f", lon_item->valuedouble);
+                }
+
+                // 新增：解析拼音地址（格式："City, Region"）
+                if (cJSON_IsString(city_item) && cJSON_IsString(region_item)) {
+                    snprintf(addr, sizeof(addr), "%s, %s", city_item->valuestring, region_item->valuestring);
+                } else if (cJSON_IsString(city_item)) {
+                    strncpy(addr, city_item->valuestring, sizeof(addr)-1);
+                } else if (cJSON_IsString(region_item)) {
+                    strncpy(addr, region_item->valuestring, sizeof(addr)-1);
+                }
+
+                cJSON_Delete(json_root);
+                curl_easy_cleanup(curl);
+                free(http_buf);
+                break; // 成功获取，跳出重试
             }
         }
+
+        // 清理资源
+        if (json_root) cJSON_Delete(json_root);
+        if (curl) curl_easy_cleanup(curl);
+        if (http_buf) free(http_buf);
+
+        printf("[LOCATION] Retry %d failed, res=%d\n", retry, res);
+        sleep(1); // 重试前等待1秒，避免频繁请求
     }
 
-exit:
     // 加锁更新全局变量
     pthread_mutex_lock(&weather_mutex);
     strncpy(weather_latitude, lat, sizeof(weather_latitude)-1);
@@ -158,12 +217,9 @@ exit:
     strncpy(weather_address, addr, sizeof(weather_address)-1); // 新增：更新地址
     pthread_mutex_unlock(&weather_mutex);
 
-    // 资源清理
-    if (json_root) cJSON_Delete(json_root);
-    if (curl) curl_easy_cleanup(curl);
-    if (http_buf) free(http_buf);
     printf("[LOCATION] Async done: lat=%s, lon=%s, addr=%s\n", weather_latitude, weather_longitude, weather_address);
 }
+
 void get_weather_address(char *addr, int buf_size)
 {
     if (addr == NULL || buf_size <= 0) return;
@@ -171,6 +227,7 @@ void get_weather_address(char *addr, int buf_size)
     strncpy(addr, weather_address, buf_size-1);
     pthread_mutex_unlock(&weather_mutex);
 }
+
 static void get_weather_async(void)
 {
     if (strlen(weather_latitude) == 0 || strlen(weather_longitude) == 0) {
@@ -178,79 +235,99 @@ static void get_weather_async(void)
         return;
     }
 
-    CURL *curl = NULL;
-    CURLcode res;
-    char *http_buf = NULL;
-    cJSON *json_root = NULL;
-    char api_url[512] = {0};
-    network_weather_t temp_weather = {0};
+    int retry = 3; // 最多重试3次
+    network_weather_t temp_weather = {0}; // 初始化全0，默认无效
 
-    // 构建API URL（加锁读取经纬度）
-    pthread_mutex_lock(&weather_mutex);
-    snprintf(api_url, sizeof(api_url), WEATHER_API_URL, weather_latitude, weather_longitude);
-    pthread_mutex_unlock(&weather_mutex);
+    while (retry--)
+    {
+        CURL *curl = NULL;
+        CURLcode res;
+        char *http_buf = NULL;
+        cJSON *json_root = NULL;
+        char api_url[512] = {0};
 
-    // 分配缓冲区
-    http_buf = (char *)calloc(1, HTTP_RECV_BUF_SIZE);
-    if (http_buf == NULL) goto exit;
+        // 构建API URL（加锁读取经纬度）
+        pthread_mutex_lock(&weather_mutex);
+        snprintf(api_url, sizeof(api_url), WEATHER_API_URL, weather_latitude, weather_longitude);
+        pthread_mutex_unlock(&weather_mutex);
 
-    // 初始化CURL
-    curl = curl_easy_init();
-    if (curl == NULL) goto exit;
+        // 分配缓冲区
+        http_buf = (char *)calloc(1, HTTP_RECV_BUF_SIZE);
+        if (http_buf == NULL) {
+            printf("[WEATHER] Retry %d: malloc failed\n", retry);
+            sleep(1);
+            continue;
+        }
 
-    // 配置CURL
-    curl_easy_setopt(curl, CURLOPT_URL, api_url);
-    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, http_write_callback);
-    curl_easy_setopt(curl, CURLOPT_WRITEDATA, http_buf);
-    curl_easy_setopt(curl, CURLOPT_TIMEOUT, 5);
-    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
-    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
+        // 初始化CURL
+        curl = curl_easy_init();
+        if (curl == NULL) {
+            free(http_buf);
+            printf("[WEATHER] Retry %d: curl init failed\n", retry);
+            sleep(1);
+            continue;
+        }
 
-    // 发送请求
-    res = curl_easy_perform(curl);
-    if (res == CURLE_OK) {
-        long http_code = 0;
-        curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
-        if (http_code == 200) {
-            json_root = cJSON_Parse(http_buf);
-            if (json_root) {
-                cJSON *current_item = cJSON_GetObjectItem(json_root, "current");
-                if (cJSON_IsObject(current_item)) {
-                    // 解析天气数据
-                    cJSON *temp_item = cJSON_GetObjectItem(current_item, "temperature_2m");
-                    cJSON *humi_item = cJSON_GetObjectItem(current_item, "relative_humidity_2m");
-                    cJSON *code_item = cJSON_GetObjectItem(current_item, "weather_code");
-                    cJSON *time_item = cJSON_GetObjectItem(current_item, "time");
+        // 配置CURL
+        curl_easy_setopt(curl, CURLOPT_URL, api_url);
+        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, http_write_callback);
+        curl_easy_setopt(curl, CURLOPT_WRITEDATA, http_buf);
+        curl_easy_setopt(curl, CURLOPT_TIMEOUT, 5);
+        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
+        curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
 
-                    if (temp_item) temp_weather.temp = temp_item->valuedouble;
-                    if (humi_item) temp_weather.humi = humi_item->valuedouble;
-                    if (code_item) {
-                        temp_weather.weather_code = (int)code_item->valuedouble;
-                        strncpy(temp_weather.weather_text, weather_code_to_text(temp_weather.weather_code), sizeof(temp_weather.weather_text)-1);
+        // 发送请求
+        res = curl_easy_perform(curl);
+        if (res == CURLE_OK) {
+            long http_code = 0;
+            curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
+            if (http_code == 200) {
+                json_root = cJSON_Parse(http_buf);
+                if (json_root) {
+                    cJSON *current_item = cJSON_GetObjectItem(json_root, "current");
+                    if (cJSON_IsObject(current_item)) {
+                        // 解析天气数据
+                        cJSON *temp_item = cJSON_GetObjectItem(current_item, "temperature_2m");
+                        cJSON *humi_item = cJSON_GetObjectItem(current_item, "relative_humidity_2m");
+                        cJSON *code_item = cJSON_GetObjectItem(current_item, "weather_code");
+                        cJSON *time_item = cJSON_GetObjectItem(current_item, "time");
+
+                        if (temp_item) temp_weather.temp = temp_item->valuedouble;
+                        if (humi_item) temp_weather.humi = humi_item->valuedouble;
+                        if (code_item) {
+                            temp_weather.weather_code = (int)code_item->valuedouble;
+                            strncpy(temp_weather.weather_text, weather_code_to_text(temp_weather.weather_code), sizeof(temp_weather.weather_text)-1);
+                        }
+                        if (time_item) {
+                            strncpy(temp_weather.update_time, time_item->valuestring + 5, 11);
+                            temp_weather.update_time[2] = '/';
+                            temp_weather.update_time[5] = ' ';
+                        }
+                        temp_weather.is_valid = 1; // 标记数据有效
                     }
-                    if (time_item) {
-                        strncpy(temp_weather.update_time, time_item->valuestring + 5, 11);
-                        temp_weather.update_time[2] = '/';
-                        temp_weather.update_time[5] = ' ';
-                    }
-                    temp_weather.is_valid = 1;
                 }
+                cJSON_Delete(json_root);
+                curl_easy_cleanup(curl);
+                free(http_buf);
+                break; // 成功获取，跳出重试
             }
         }
+
+        // 清理资源
+        if (json_root) cJSON_Delete(json_root);
+        if (curl) curl_easy_cleanup(curl);
+        if (http_buf) free(http_buf);
+
+        printf("[WEATHER] Retry %d failed, res=%d\n", retry, res);
+        sleep(1); // 重试前等待1秒
     }
 
-
-exit:
     // 加锁更新全局天气数据
     pthread_mutex_lock(&weather_mutex);
     memcpy(&net_weather, &temp_weather, sizeof(network_weather_t));
     pthread_mutex_unlock(&weather_mutex);
 
-    // 资源清理
-    if (json_root) cJSON_Delete(json_root);
-    if (curl) curl_easy_cleanup(curl);
-    if (http_buf) free(http_buf);
-    printf("[WEATHER] Async done: %.1fC, %.1f%%\n", net_weather.temp, net_weather.humi);
+    printf("[WEATHER] Async done: %.1fC, %.1f%%, valid=%d\n", net_weather.temp, net_weather.humi, net_weather.is_valid);
 }
 
 /* ==================== 原有线程实现 ==================== */
@@ -370,9 +447,10 @@ void *button_thread(void *arg)
         }
         usleep(10000);
     }
+    return NULL;
 }
 
-/* ==================== 天气线程实现 ==================== */
+/* ==================== 天气线程实现（核心修改：先等网络） ==================== */
 void *weather_worker_thread(void *arg)
 {
     (void)arg;
@@ -382,7 +460,10 @@ void *weather_worker_thread(void *arg)
     // 初始化CURL
     curl_global_init(CURL_GLOBAL_ALL);
 
-    // 首次启动：获取定位+天气
+    // 核心修改1：先等待网络就绪（最多30秒）
+    wait_network_ready();
+
+    // 首次启动：获取定位+天气（已加重试）
     auto_get_location_async();
     get_weather_async();
 
@@ -391,8 +472,17 @@ void *weather_worker_thread(void *arg)
     {
         if (weather_need_refresh)
         {
-            auto_get_location_async();
-            get_weather_async();
+            // 核心修改2：刷新时也检测网络，避免网络断开导致无效
+            if (is_network_ready()) {
+                auto_get_location_async();
+                get_weather_async();
+            } else {
+                printf("[WEATHER] Refresh skipped: network not ready\n");
+                // 标记数据无效，UI显示Loading
+                pthread_mutex_lock(&weather_mutex);
+                net_weather.is_valid = 0;
+                pthread_mutex_unlock(&weather_mutex);
+            }
             weather_need_refresh = 0;
         }
         usleep(100000); // 休眠100ms
