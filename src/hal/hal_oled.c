@@ -21,6 +21,15 @@
 #define OLED_WIDTH 128
 #define OLED_HEIGHT 64
 
+
+// ==================== 轻量级QR码生成核心（嵌入式极简版）====================
+#define QRCODEGEN_VERSION 1    // 版本1（21x21点阵，适配OLED）
+#define QRCODEGEN_SIZE (QRCODEGEN_VERSION * 4 + 17) // 21x21
+#define QRCODEGEN_PAD 2        // 二维码白边
+
+// QR码纠错级别（固定为M级，兼容手机扫码）
+typedef enum { QR_ECLEVEL_M } qrcodegen_eclevel;
+
 static int i2c_fd = -1;
 static pthread_mutex_t i2c_mutex = PTHREAD_MUTEX_INITIALIZER;
 static uint8_t oled_buffer[OLED_WIDTH * OLED_HEIGHT / 8];
@@ -317,6 +326,9 @@ void hal_oled_draw_large_string(int x0, int y0, const char *str) {
         str++;
     }
 }
+
+
+
 void hal_oled_cleanup(void)
 {
     pthread_mutex_lock(&i2c_mutex);
