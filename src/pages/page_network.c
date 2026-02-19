@@ -185,7 +185,6 @@ static void page_network_lan_draw(void)
         hal_oled_refresh();
         return;
     }
-
     hal_oled_clear();
     hal_oled_string(0, 0, "LAN Devices");
     hal_oled_line(0, 10, 127, 10);

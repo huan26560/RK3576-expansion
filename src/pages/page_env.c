@@ -158,7 +158,6 @@ static void draw_network_weather(void)
             while (*province == ' ')
                 province++;
         }
-
         // 第一行：显示城市（居中）
         if (strlen(city) > 0)
         {
