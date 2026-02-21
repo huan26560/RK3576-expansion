@@ -53,7 +53,7 @@ int main(void)
     threads_init();
     // 2. MQTT初始化
     printf("初始化MQTT...\n");
-    mqtt_client_init("192.168.31.110", 1883);
+    mqtt_client_init("localhost", 1883);
 
     // 4. 菜单初始化
     menu_init();

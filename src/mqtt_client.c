@@ -9,7 +9,7 @@
 #include <unistd.h> // 用于 usleep
 
 static struct mosquitto *mosq = NULL;
-static char broker_host[64] = "192.168.31.110";
+static char broker_host[64] = "localhost";
 static int broker_port = 1883;
 static int mqtt_initialized = 0;
 
