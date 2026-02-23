@@ -1,6 +1,7 @@
 /*
  * threads.c - 线程调度中心
  * 职责：创建线程，调用monitor接口，发布MQTT，天气异步请求
+ * 优化点：合并重复的MQTT发布线程，减少资源开销，增加优雅退出机制
  */
 
 #include <stdio.h>
@@ -12,6 +13,7 @@
 #include <time.h>
 #include <curl/curl.h>
 #include <cjson/cJSON.h>
+#include <stdarg.h>  // 新增：必须添加，用于va_start/va_end
 #include "threads.h"
 #include "mqtt_client.h"
 #include "hal_gpio.h"
@@ -20,9 +22,9 @@
 #include "hal_dht11.h"
 #include "network_monitor.h"
 #include "menu.h"
-#include "hal_oled.h" // 天气UI相关
+#include "hal_oled.h"
 
-/* ==================== 全局配置 & 天气相关定义 ==================== */
+/* ==================== 全局配置 & 常量定义 ==================== */
 // 天气API配置
 #define DEFAULT_LATITUDE  "34.62"
 #define DEFAULT_LONGITUDE "112.45"
@@ -31,7 +33,12 @@
 #define HTTP_RECV_BUF_SIZE  8192
 #define WEATHER_ICON_SIZE 28
 
-// 天气图标声明（和你的page_env.c保持一致）
+// 线程运行控制（全局标志位，支持优雅退出）
+static int g_threads_running = 0;
+// 发布频率（毫秒），统一控制所有MQTT发布间隔
+#define PUBLISH_INTERVAL_MS 1000
+
+// 天气图标声明
 extern const unsigned char icon_weather_clear[];
 extern const unsigned char icon_weather_cloudy[];
 extern const unsigned char icon_weather_rain[];
@@ -40,14 +47,14 @@ extern const unsigned char icon_weather_fog[];
 extern const unsigned char icon_weather_thunderstorm[];
 extern const unsigned char icon_weather_unknown[];
 
-// 天气线程全局变量（互斥锁保护）
+/* ==================== 天气相关全局变量（互斥锁保护） ==================== */
 static pthread_mutex_t weather_mutex = PTHREAD_MUTEX_INITIALIZER;
 static char weather_latitude[16] = {0};
 static char weather_longitude[16] = {0};
-static int weather_thread_running = 0;
 static int weather_need_refresh = 0;
-static char weather_address[64] = {0}; // 新增：拼音地址（最大64字节）
-// 天气数据结构体（供page_env.c访问）
+static char weather_address[64] = {0};
+
+// 天气数据结构体
 typedef struct {
     char weather_text[20];
     float temp;
@@ -56,30 +63,43 @@ typedef struct {
     int weather_code;
     int is_valid;
 } network_weather_t;
-network_weather_t net_weather = {0}; // 全局暴露，供UI访问
+network_weather_t net_weather = {0}; // 供UI访问
 
-/* ==================== 新增：网络就绪检测（核心解决开机问题） ==================== */
-// 检测网络是否就绪（利用你已有的network_monitor，wifi_connected+能上网）
+/* ==================== 工具函数封装 ==================== */
+// 通用MQTT发布函数（封装重复逻辑）
+static void mqtt_safe_publish(const char *topic, const char *fmt, ...)
+{
+    if (!topic || !fmt) return;
+    
+    char msg[128] = {0};
+    va_list args;
+    va_start(args, fmt);
+    vsnprintf(msg, sizeof(msg)-1, fmt, args);
+    va_end(args);
+    
+    mqtt_publish(topic, msg);
+}
+
+// 检测网络是否就绪
 static int is_network_ready(void)
 {
     network_state_t state;
     network_monitor_get_state(&state);
-    // state.wifi_internet=1 表示能访问外网，state.wifi_connected=1 表示已连WiFi
     return (state.wifi_connected && state.wifi_internet);
 }
 
-// 等待网络就绪（最多等30秒，每2秒检测一次，超时用默认地址）
+// 等待网络就绪（最多30秒，超时用默认地址）
 static void wait_network_ready(void)
 {
     int wait_sec = 0;
     printf("[WEATHER] Waiting for network ready...\n");
-    while (!is_network_ready())
+    
+    while (!is_network_ready() && g_threads_running)
     {
         wait_sec += 2;
         if (wait_sec > 30)
         {
             printf("[WEATHER] Network timeout after 30s, use default location\n");
-            // 超时后强制用默认经纬度/地址，避免UI一直Loading
             pthread_mutex_lock(&weather_mutex);
             strncpy(weather_latitude, DEFAULT_LATITUDE, sizeof(weather_latitude)-1);
             strncpy(weather_longitude, DEFAULT_LONGITUDE, sizeof(weather_longitude)-1);
@@ -87,12 +107,12 @@ static void wait_network_ready(void)
             pthread_mutex_unlock(&weather_mutex);
             return;
         }
-        sleep(2); // 每2秒检测一次，低占用
+        sleep(2);
     }
     printf("[WEATHER] Network is ready!\n");
 }
 
-/* ==================== 工具函数（天气相关） ==================== */
+/* ==================== HTTP回调 & 天气解析工具 ==================== */
 static size_t http_write_callback(void *contents, size_t size, size_t nmemb, void *userp)
 {
     size_t real_size = size * nmemb;
@@ -118,66 +138,54 @@ static const char* weather_code_to_text(int code)
     return "Unknown";
 }
 
-// 对外声明：触发天气刷新（供page_env.c调用）
+/* ==================== 天气异步请求逻辑（保持原有逻辑） ==================== */
 void trigger_weather_refresh(void)
 {
     weather_need_refresh = 1;
     printf("[WEATHER] Trigger async refresh\n");
 }
 
-/* ==================== 天气异步请求函数（加重试逻辑） ==================== */
 static void auto_get_location_async(void)
 {
-    int retry = 3; // 最多重试3次，避免网络抖动失败
+    if (!g_threads_running) return;
+    
+    int retry = 3;
     char lat[16] = {0};
     char lon[16] = {0};
     char addr[64] = {0};
 
-    // 默认先用洛阳经纬度+地址
+    // 默认值
     strncpy(lat, DEFAULT_LATITUDE, sizeof(lat)-1);
     strncpy(lon, DEFAULT_LONGITUDE, sizeof(lon)-1);
     strncpy(addr, "Luoyang, Henan", sizeof(addr)-1);
 
-    while (retry--)
+    while (retry-- && g_threads_running)
     {
-        CURL *curl = NULL;
-        CURLcode res;
-        char *http_buf = NULL;
-        cJSON *json_root = NULL;
-
-        // 分配缓冲区
-        http_buf = (char *)calloc(1, HTTP_RECV_BUF_SIZE);
-        if (http_buf == NULL) {
-            printf("[LOCATION] Retry %d: malloc failed\n", retry);
-            sleep(1);
-            continue;
-        }
-
-        // 初始化CURL
-        curl = curl_easy_init();
-        if (curl == NULL) {
+        CURL *curl = curl_easy_init();
+        char *http_buf = calloc(1, HTTP_RECV_BUF_SIZE);
+        if (!curl || !http_buf) {
+            printf("[LOCATION] Retry %d: init failed\n", retry);
+            curl_easy_cleanup(curl);
             free(http_buf);
-            printf("[LOCATION] Retry %d: curl init failed\n", retry);
             sleep(1);
             continue;
         }
 
-        // 配置CURL（请求字段增加 city,regionName）
+        // 配置CURL（请求城市+省份）
         curl_easy_setopt(curl, CURLOPT_URL, "http://ip-api.com/json/?fields=lat,lon,city,regionName");
         curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, http_write_callback);
         curl_easy_setopt(curl, CURLOPT_WRITEDATA, http_buf);
         curl_easy_setopt(curl, CURLOPT_TIMEOUT, 3);
         curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, 2);
 
-        // 发送请求
-        res = curl_easy_perform(curl);
+        CURLcode res = curl_easy_perform(curl);
         if (res == CURLE_OK) {
-            json_root = cJSON_Parse(http_buf);
+            cJSON *json_root = cJSON_Parse(http_buf);
             if (json_root) {
                 cJSON *lat_item = cJSON_GetObjectItem(json_root, "lat");
                 cJSON *lon_item = cJSON_GetObjectItem(json_root, "lon");
-                cJSON *city_item = cJSON_GetObjectItem(json_root, "city");       // 新增：城市
-                cJSON *region_item = cJSON_GetObjectItem(json_root, "regionName");// 新增：省份
+                cJSON *city_item = cJSON_GetObjectItem(json_root, "city");
+                cJSON *region_item = cJSON_GetObjectItem(json_root, "regionName");
 
                 // 解析经纬度
                 if (cJSON_IsNumber(lat_item) && cJSON_IsNumber(lon_item)) {
@@ -185,7 +193,7 @@ static void auto_get_location_async(void)
                     snprintf(lon, sizeof(lon), "%.2f", lon_item->valuedouble);
                 }
 
-                // 新增：解析拼音地址（格式："City, Region"）
+                // 解析地址
                 if (cJSON_IsString(city_item) && cJSON_IsString(region_item)) {
                     snprintf(addr, sizeof(addr), "%s, %s", city_item->valuestring, region_item->valuestring);
                 } else if (cJSON_IsString(city_item)) {
@@ -197,24 +205,21 @@ static void auto_get_location_async(void)
                 cJSON_Delete(json_root);
                 curl_easy_cleanup(curl);
                 free(http_buf);
-                break; // 成功获取，跳出重试
+                break;
             }
         }
 
-        // 清理资源
-        if (json_root) cJSON_Delete(json_root);
-        if (curl) curl_easy_cleanup(curl);
-        if (http_buf) free(http_buf);
-
+        curl_easy_cleanup(curl);
+        free(http_buf);
         printf("[LOCATION] Retry %d failed, res=%d\n", retry, res);
-        sleep(1); // 重试前等待1秒，避免频繁请求
+        sleep(1);
     }
 
-    // 加锁更新全局变量
+    // 更新全局变量
     pthread_mutex_lock(&weather_mutex);
     strncpy(weather_latitude, lat, sizeof(weather_latitude)-1);
     strncpy(weather_longitude, lon, sizeof(weather_longitude)-1);
-    strncpy(weather_address, addr, sizeof(weather_address)-1); // 新增：更新地址
+    strncpy(weather_address, addr, sizeof(weather_address)-1);
     pthread_mutex_unlock(&weather_mutex);
 
     printf("[LOCATION] Async done: lat=%s, lon=%s, addr=%s\n", weather_latitude, weather_longitude, weather_address);
@@ -222,7 +227,7 @@ static void auto_get_location_async(void)
 
 void get_weather_address(char *addr, int buf_size)
 {
-    if (addr == NULL || buf_size <= 0) return;
+    if (!addr || buf_size <= 0) return;
     pthread_mutex_lock(&weather_mutex);
     strncpy(addr, weather_address, buf_size-1);
     pthread_mutex_unlock(&weather_mutex);
@@ -230,40 +235,27 @@ void get_weather_address(char *addr, int buf_size)
 
 static void get_weather_async(void)
 {
-    if (strlen(weather_latitude) == 0 || strlen(weather_longitude) == 0) {
-        printf("[WEATHER] No location, skip\n");
+    if (!g_threads_running || strlen(weather_latitude) == 0 || strlen(weather_longitude) == 0) {
+        printf("[WEATHER] No location or thread stopped, skip\n");
         return;
     }
 
-    int retry = 3; // 最多重试3次
-    network_weather_t temp_weather = {0}; // 初始化全0，默认无效
+    int retry = 3;
+    network_weather_t temp_weather = {0};
 
-    while (retry--)
+    while (retry-- && g_threads_running)
     {
-        CURL *curl = NULL;
-        CURLcode res;
-        char *http_buf = NULL;
-        cJSON *json_root = NULL;
         char api_url[512] = {0};
-
-        // 构建API URL（加锁读取经纬度）
         pthread_mutex_lock(&weather_mutex);
         snprintf(api_url, sizeof(api_url), WEATHER_API_URL, weather_latitude, weather_longitude);
         pthread_mutex_unlock(&weather_mutex);
 
-        // 分配缓冲区
-        http_buf = (char *)calloc(1, HTTP_RECV_BUF_SIZE);
-        if (http_buf == NULL) {
-            printf("[WEATHER] Retry %d: malloc failed\n", retry);
-            sleep(1);
-            continue;
-        }
-
-        // 初始化CURL
-        curl = curl_easy_init();
-        if (curl == NULL) {
+        CURL *curl = curl_easy_init();
+        char *http_buf = calloc(1, HTTP_RECV_BUF_SIZE);
+        if (!curl || !http_buf) {
+            printf("[WEATHER] Retry %d: init failed\n", retry);
+            curl_easy_cleanup(curl);
             free(http_buf);
-            printf("[WEATHER] Retry %d: curl init failed\n", retry);
             sleep(1);
             continue;
         }
@@ -276,17 +268,15 @@ static void get_weather_async(void)
         curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 0L);
         curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 0L);
 
-        // 发送请求
-        res = curl_easy_perform(curl);
+        CURLcode res = curl_easy_perform(curl);
         if (res == CURLE_OK) {
             long http_code = 0;
             curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &http_code);
             if (http_code == 200) {
-                json_root = cJSON_Parse(http_buf);
+                cJSON *json_root = cJSON_Parse(http_buf);
                 if (json_root) {
                     cJSON *current_item = cJSON_GetObjectItem(json_root, "current");
                     if (cJSON_IsObject(current_item)) {
-                        // 解析天气数据
                         cJSON *temp_item = cJSON_GetObjectItem(current_item, "temperature_2m");
                         cJSON *humi_item = cJSON_GetObjectItem(current_item, "relative_humidity_2m");
                         cJSON *code_item = cJSON_GetObjectItem(current_item, "weather_code");
@@ -303,26 +293,22 @@ static void get_weather_async(void)
                             temp_weather.update_time[2] = '/';
                             temp_weather.update_time[5] = ' ';
                         }
-                        temp_weather.is_valid = 1; // 标记数据有效
+                        temp_weather.is_valid = 1;
                     }
+                    cJSON_Delete(json_root);
                 }
-                cJSON_Delete(json_root);
-                curl_easy_cleanup(curl);
-                free(http_buf);
-                break; // 成功获取，跳出重试
             }
         }
 
-        // 清理资源
-        if (json_root) cJSON_Delete(json_root);
-        if (curl) curl_easy_cleanup(curl);
-        if (http_buf) free(http_buf);
-
+        curl_easy_cleanup(curl);
+        free(http_buf);
+        
+        if (temp_weather.is_valid) break; // 成功获取则退出重试
         printf("[WEATHER] Retry %d failed, res=%d\n", retry, res);
-        sleep(1); // 重试前等待1秒
+        sleep(1);
     }
 
-    // 加锁更新全局天气数据
+    // 更新全局天气数据
     pthread_mutex_lock(&weather_mutex);
     memcpy(&net_weather, &temp_weather, sizeof(network_weather_t));
     pthread_mutex_unlock(&weather_mutex);
@@ -330,95 +316,73 @@ static void get_weather_async(void)
     printf("[WEATHER] Async done: %.1fC, %.1f%%, valid=%d\n", net_weather.temp, net_weather.humi, net_weather.is_valid);
 }
 
-/* ==================== 原有线程实现 ==================== */
+/* ==================== 合并后的核心线程实现 ==================== */
+// MQTT客户端线程（保留，负责MQTT核心循环）
 void *mqtt_thread(void *arg)
 {
     (void)arg;
     printf("[MQTT] Thread started\n");
-    while (1)
+    
+    while (g_threads_running)
     {
         mqtt_client_loop(10);
+        usleep(10000); // 降低循环频率，减少CPU占用
     }
+    
+    printf("[MQTT] Thread stopped\n");
     return NULL;
 }
 
-void *sensor_thread(void *arg)
+// 统一数据发布线程（合并sensor/system/network发布逻辑）
+void *data_publish_thread(void *arg)
 {
     (void)arg;
-    printf("[SENSOR] Thread started\n");
-    while (1)
+    printf("[DATA-PUB] Thread started (merged sensor/system/network)\n");
+    
+    system_monitor_start(); // 初始化系统监控
+    
+    while (g_threads_running)
     {
+        // 1. 发布传感器数据（DHT11）
         float temp, hum;
         if (hal_dht11_read(&temp, &hum) == 0)
         {
-            char msg[64];
-            snprintf(msg, sizeof(msg), "Temp:%.1f,Humi:%.1f", temp, hum);
-            mqtt_publish("sensor/dht11", msg);
+            mqtt_safe_publish("sensor/dht11", "Temp:%.1f,Humi:%.1f", temp, hum);
         }
-        sleep(1);
-    }
-    return NULL;
-}
 
-void *system_publish_thread(void *arg)
-{
-    (void)arg;
-    printf("[SYS-PUB] Thread started\n");
-    system_monitor_start();
+        // 2. 发布系统监控数据
+        system_state_t sys_state;
+        system_monitor_get_state(&sys_state);
+        mqtt_safe_publish("system/cpu", "CPU:%d%%", sys_state.cpu_total_usage);
+        mqtt_safe_publish("system/mem", "MEM:%d%%", sys_state.memory.used_percent);
+        mqtt_safe_publish("system/temp", "TEMP:%dC", sys_state.gpu.temp_c);
 
-    while (1)
-    {
-        system_state_t state;
-        system_monitor_get_state(&state);
-
-        char msg[64];
-        snprintf(msg, sizeof(msg), "CPU:%d%%", state.cpu_total_usage);
-        mqtt_publish("system/cpu", msg);
-
-        snprintf(msg, sizeof(msg), "MEM:%d%%", state.memory.used_percent);
-        mqtt_publish("system/mem", msg);
-
-        snprintf(msg, sizeof(msg), "TEMP:%dC", state.gpu.temp_c);
-        mqtt_publish("system/temp", msg);
-
-        sleep(1);
-    }
-    return NULL;
-}
-
-void *network_publish_thread(void *arg)
-{
-    (void)arg;
-    printf("[NET-PUB] Thread started\n");
-    while (1)
-    {
-        network_state_t state;
-        network_monitor_get_state(&state);
-
-        if (state.wifi_connected)
+        // 3. 发布网络监控数据
+        network_state_t net_state;
+        network_monitor_get_state(&net_state);
+        if (net_state.wifi_connected)
         {
-            char msg[128];
-            snprintf(msg, sizeof(msg), "SSID:%s,IP:%s,SIG:%ddBm,INET:%d",
-                     state.wifi_ssid, state.wifi_ip, state.wifi_signal, state.wifi_internet);
-            mqtt_publish("network/wifi", msg);
+            mqtt_safe_publish("network/wifi", "SSID:%s,IP:%s,SIG:%ddBm,INET:%d",
+                             net_state.wifi_ssid, net_state.wifi_ip, net_state.wifi_signal, net_state.wifi_internet);
         }
+        mqtt_safe_publish("network/lan", "LAN:%d", net_state.lan_device_count);
 
-        char msg[32];
-        snprintf(msg, sizeof(msg), "LAN:%d", state.lan_device_count);
-        mqtt_publish("network/lan", msg);
-
-        sleep(1);
+        // 统一休眠（替代多个线程的独立sleep）
+        usleep(PUBLISH_INTERVAL_MS * 1000);
     }
+    
+    printf("[DATA-PUB] Thread stopped\n");
     return NULL;
 }
 
+// 按键处理线程（保留，独立高频检测）
 void *button_thread(void *arg)
 {
     (void)arg;
     printf("[BUTTON] Thread started\n");
     hal_gpio_init();
 
-    while (1)
+    while (g_threads_running)
     {
         int btn = hal_button_read();
         if (btn >= 0)
@@ -429,76 +393,71 @@ void *button_thread(void *arg)
 
             switch (btn)
             {
-            case 0:
-                ev = EV_UP;
-                break;
-            case 1:
-                ev = (dur > 200) ? EV_BACK : EV_ENTER;
-                break;
-            case 2:
-                ev = EV_DOWN;
-                break;
-            default:
-                continue;
+            case 0: ev = EV_UP; break;
+            case 1: ev = (dur > 200) ? EV_BACK : EV_ENTER; break;
+            case 2: ev = EV_DOWN; break;
+            default: continue;
             }
 
             menu_handle_event(ev);
             hal_led_set(0, 0);
         }
-        usleep(10000);
+        usleep(50000); // 10ms检测一次，保证按键响应速度
     }
+    
+    printf("[BUTTON] Thread stopped\n");
     return NULL;
 }
 
-/* ==================== 天气线程实现（核心修改：先等网络） ==================== */
+// 天气工作线程（保留，优化退出逻辑）
 void *weather_worker_thread(void *arg)
 {
     (void)arg;
-    weather_thread_running = 1;
     printf("[WEATHER] Thread started\n");
 
     // 初始化CURL
     curl_global_init(CURL_GLOBAL_ALL);
 
-    // 核心修改1：先等待网络就绪（最多30秒）
+    // 等待网络就绪
     wait_network_ready();
 
-    // 首次启动：获取定位+天气（已加重试）
-    auto_get_location_async();
-    get_weather_async();
+    // 首次获取定位+天气
+    if (g_threads_running) {
+        auto_get_location_async();
+        get_weather_async();
+    }
 
-    // 线程主循环（低CPU占用）
-    while (weather_thread_running)
+    // 主循环
+    while (g_threads_running)
     {
         if (weather_need_refresh)
         {
-            // 核心修改2：刷新时也检测网络，避免网络断开导致无效
             if (is_network_ready()) {
                 auto_get_location_async();
                 get_weather_async();
             } else {
                 printf("[WEATHER] Refresh skipped: network not ready\n");
-                // 标记数据无效，UI显示Loading
                 pthread_mutex_lock(&weather_mutex);
                 net_weather.is_valid = 0;
                 pthread_mutex_unlock(&weather_mutex);
             }
             weather_need_refresh = 0;
         }
-        usleep(100000); // 休眠100ms
+        usleep(100000); // 100ms检测一次刷新请求
     }
 
     // 资源清理
     curl_global_cleanup();
     pthread_mutex_destroy(&weather_mutex);
     printf("[WEATHER] Thread stopped\n");
-    pthread_exit(NULL);
     return NULL;
 }
 
-/* ==================== 线程管理（统一初始化） ==================== */
+/* ==================== 线程管理（优化版） ==================== */
 static void create_thread(pthread_t *t, void *(*f)(void *), const char *name)
 {
+    if (!g_threads_running) return;
+    
     printf("[THREAD] Creating %s...\n", name);
     if (pthread_create(t, NULL, f, NULL) == 0)
     {
@@ -511,42 +470,48 @@ static void create_thread(pthread_t *t, void *(*f)(void *), const char *name)
     }
 }
 
+// 初始化所有线程
 void threads_init(void)
 {
     static int initialized = 0;
-    if (initialized)
-        return;
+    if (initialized) return;
 
     printf("[THREAD] Initializing all threads...\n");
-
+    g_threads_running = 1;
     network_monitor_init();
 
-    // 创建所有线程（包含新增的天气线程）
-    pthread_t mqtt_t, sensor_t, sys_t, net_t, btn_t, weather_t;
+    // 创建优化后的线程（从6个减少到4个）
+    pthread_t mqtt_t, publish_t, btn_t, weather_t;
     create_thread(&mqtt_t, mqtt_thread, "MQTT");
-    create_thread(&sensor_t, sensor_thread, "SENSOR");
-    create_thread(&sys_t, system_publish_thread, "SYSTEM");
-    create_thread(&net_t, network_publish_thread, "NETWORK");
+    create_thread(&publish_t, data_publish_thread, "DATA-PUBLISH"); // 合并后的发布线程
     create_thread(&btn_t, button_thread, "BUTTON");
-    create_thread(&weather_t, weather_worker_thread, "WEATHER"); // 新增天气线程
+    create_thread(&weather_t, weather_worker_thread, "WEATHER");
 
     initialized = 1;
-    printf("[THREAD] All threads initialized\n");
+    printf("[THREAD] All threads initialized (optimized: 4 threads total)\n");
 }
 
-// 对外声明：获取天气数据（供page_env.c调用，加锁保证线程安全）
+// 优雅停止所有线程（新增接口）
+void threads_stop(void)
+{
+    printf("[THREAD] Stopping all threads...\n");
+    g_threads_running = 0;
+    sleep(1); // 等待线程完成收尾工作
+    printf("[THREAD] All threads stopped\n");
+}
+
+/* ==================== 对外接口（保持原有兼容） ==================== */
 void get_weather_data(network_weather_t *out_weather)
 {
-    if (out_weather == NULL) return;
+    if (!out_weather) return;
     pthread_mutex_lock(&weather_mutex);
     memcpy(out_weather, &net_weather, sizeof(network_weather_t));
     pthread_mutex_unlock(&weather_mutex);
 }
 
-// 对外声明：获取经纬度（供page_env.c调用）
 void get_weather_location(char *lat, char *lon, int buf_size)
 {
-    if (lat == NULL || lon == NULL) return;
+    if (!lat || !lon) return;
     pthread_mutex_lock(&weather_mutex);
     strncpy(lat, weather_latitude, buf_size-1);
     strncpy(lon, weather_longitude, buf_size-1);

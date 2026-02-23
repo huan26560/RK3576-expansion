@@ -1,5 +1,6 @@
 /*
  * menu.c - 图标式主菜单（全屏单图标，28x28像素）
+ * 优化版本：简化动画逻辑，删除无效代码
  */
 
 #include <stdio.h>
@@ -11,47 +12,18 @@
 #include "page_interface.h"
 #include "hal_gpio.h"
 #include "font.h"
-#include "page_screensaver.h" // 引入屏保头文件
+#include "page_screensaver.h"
 
 #define OLED_WIDTH 128
 #define OLED_HEIGHT 64
 #define ICON_SIZE 28
 #define ICON_START_Y 18
 
-#define ANIM_FRAMES 0
-#define ANIM_SPEED 2
-
 static menu_item_t *menu_root = NULL;
 menu_item_t *menu_current = NULL;
 static int menu_cursor = 0;
 int menu_list_active = 0;
-
-typedef enum
-{
-    ANIM_IDLE,
-    ANIM_SLIDING_LEFT,
-    ANIM_SLIDING_RIGHT
-} anim_state_t;
-
-static anim_state_t anim_state = ANIM_IDLE;
-static int anim_frame = 0;
 static int dashboard_last_cursor = 0;
-
-void menu_enter_list(void)
-{
-    menu_list_active = 1;
-    menu_cursor = dashboard_last_cursor;
-    anim_state = ANIM_IDLE;
-    screensaver_reset_idle(); // 操作时重置屏保计时
-    printf("进入图标菜单\n");
-}
-
-void menu_exit_list(void)
-{
-    menu_list_active = 0;
-    screensaver_reset_idle(); // 操作时重置屏保计时
-    printf("返回 Dashboard\n");
-}
 
 void menu_init(void)
 {
@@ -62,14 +34,25 @@ void menu_init(void)
     menu_add_child(menu_root, page_env_create_menu());
     menu_add_child(menu_root, page_network_create_menu());
     menu_add_child(menu_root, page_tools_create_menu());
-    // menu_add_child(menu_root, page_terminal_create_menu());
-    menu_add_child(menu_root, menu_create(" Home", page_home_draw, icon_home_28x28));
+
     menu_current = menu_root;
     menu_cursor = 0;
     dashboard_last_cursor = 0;
 
-    // 可选：初始化屏保（如果屏保有init函数的话）
     screensaver_init();
+}
+
+void menu_enter_list(void)
+{
+    menu_list_active = 1;
+    menu_cursor = dashboard_last_cursor;
+    screensaver_reset_idle();
+}
+
+void menu_exit_list(void)
+{
+    menu_list_active = 0;
+    screensaver_reset_idle();
 }
 
 menu_item_t *menu_create(const char *name, page_draw_t draw_func, const unsigned char *icon)
@@ -94,13 +77,13 @@ void menu_add_child(menu_item_t *parent, menu_item_t *child)
 
 void menu_handle_event(event_t ev)
 {
-    // 1. 优先让屏保处理事件：如果屏保激活，事件由屏保处理
+    // 1. 优先让屏保处理事件
     if (screensaver_handle_event(ev))
     {
-        return; // 屏保已处理事件（退出屏保），无需处理菜单逻辑
+        return;
     }
 
-    // 2. 非屏保状态：重置屏保计时（有操作就不触发屏保）
+    // 2. 非屏保状态：重置屏保计时
     screensaver_reset_idle();
 
     // 3. 原有菜单事件逻辑
@@ -121,14 +104,10 @@ void menu_handle_event(event_t ev)
             if (ev == EV_DOWN)
             {
                 menu_cursor = (menu_cursor + 1) % menu_root->child_count;
-                anim_state = ANIM_SLIDING_LEFT;
-                anim_frame = 0;
             }
             else if (ev == EV_UP)
             {
                 menu_cursor = (menu_cursor - 1 + menu_root->child_count) % menu_root->child_count;
-                anim_state = ANIM_SLIDING_RIGHT;
-                anim_frame = 0;
             }
 
             if (ev == EV_ENTER && menu_cursor < menu_root->child_count)
@@ -187,7 +166,7 @@ void menu_handle_event(event_t ev)
     }
 }
 
-// 核心修改：只绘制当前选中的单个图标
+// 优化后的draw_single_icon：移除动画逻辑，直接绘制
 static void draw_single_icon(void)
 {
     if (menu_cursor >= menu_root->child_count || !menu_root->children[menu_cursor]->icon)
@@ -199,45 +178,27 @@ static void draw_single_icon(void)
     int base_x = (OLED_WIDTH - ICON_SIZE) / 2;
     int base_y = ICON_START_Y;
 
-    // 滑入动画偏移
-    int offset_x = 0;
-    if (anim_state == ANIM_SLIDING_LEFT && anim_frame < ANIM_FRAMES)
-    {
-        offset_x = (ANIM_FRAMES - anim_frame) * ANIM_SPEED;
-        anim_frame++;
-    }
-    else if (anim_state == ANIM_SLIDING_RIGHT && anim_frame < ANIM_FRAMES)
-    {
-        offset_x = -(ANIM_FRAMES - anim_frame) * ANIM_SPEED;
-        anim_frame++;
-    }
-    else
-    {
-        anim_state = ANIM_IDLE;
-    }
-
-    int x = base_x + offset_x;
-    int y = base_y;
-
     // 绘制图标
-    hal_oled_draw_icon(x, y, ICON_SIZE, ICON_SIZE, item->icon);
+    hal_oled_draw_icon(base_x, base_y, ICON_SIZE, ICON_SIZE, item->icon);
+    
     // 文字标签（可选，注释掉可隐藏）
-    int text_x = (OLED_WIDTH - strlen(item->name) * 6) / 2 + offset_x;
-    hal_oled_string(text_x, y + ICON_SIZE + 5, item->name);
+    int text_x = (OLED_WIDTH - strlen(item->name) * 6) / 2;
+    hal_oled_string(text_x, base_y + ICON_SIZE + 5, item->name);
 }
 
 void menu_render(void)
 {
+    // 1. 调用screensaver_draw更新屏保状态（必要步骤）
     screensaver_draw();
-    // 1. 屏保激活时，优先绘制屏保
+    
+    // 2. 如果屏保激活，直接返回（已绘制屏保内容）
     if (screensaver_is_active())
     {
-        screensaver_draw(); // 绘制屏保界面
-        hal_oled_refresh(); // 刷新OLED
-        return;             // 跳过菜单绘制
+        hal_oled_refresh();
+        return;
     }
 
-    // 2. 非屏保状态：绘制原有菜单
+    // 3. 非屏保状态：绘制菜单
     if (!menu_current)
         return;
 
@@ -298,7 +259,7 @@ int menu_is_dashboard(void)
 
 void menu_enter_first_child(void)
 {
-    screensaver_reset_idle(); // 操作时重置屏保计时
+    screensaver_reset_idle();
     if (menu_current->child_count > 0)
     {
         dashboard_last_cursor = 0;
@@ -309,14 +270,14 @@ void menu_enter_first_child(void)
 
 void menu_enter(void)
 {
-    screensaver_reset_idle(); // 操作时重置屏保计时
+    screensaver_reset_idle();
     menu_list_active = 1;
     menu_cursor = dashboard_last_cursor;
 }
 
 void menu_back(void)
 {
-    screensaver_reset_idle(); // 操作时重置屏保计时
+    screensaver_reset_idle();
     if (menu_current->parent)
     {
         menu_current = menu_current->parent;
@@ -328,6 +289,3 @@ void menu_back(void)
         menu_list_active = 1;
     }
 }
-
-void page_disk_draw(void) {}
-void page_home_draw(void) {}
