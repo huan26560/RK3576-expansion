@@ -153,7 +153,14 @@ void hal_beep(int ms)
         gpiod_line_set_value(beep_line, 0);
     }
 }
-
+// 蜂鸣器开关控制（仿照 LED 风格，1=响，0=停）
+void hal_beep_set(int on)
+{
+    if (beep_line)
+    {
+        gpiod_line_set_value(beep_line, on ? 1 : 0);
+    }
+}
 // 清理（修复：释放所有资源）
 void hal_gpio_cleanup(void)
 {

@@ -25,6 +25,7 @@ int hal_button_read(void);
 int hal_button_wait_release(int btn);
 void hal_gpio_cleanup(void);
 void hal_beep(int ms);
+void hal_beep_set(int on);
 void hal_led_set(int led_id, int on);  // led_id: 0/1/2
 void hal_led_all_off(void);            // 关闭所有LED
 

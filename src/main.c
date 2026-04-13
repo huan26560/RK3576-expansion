@@ -60,6 +60,7 @@ static void init_signals(void)
  */
 static void show_startup_screen(void)
 {
+    usleep(500000);
     hal_oled_clear();
     hal_oled_string(22, 25, "Starting up...");
     hal_oled_refresh();

@@ -387,7 +387,8 @@ void *button_thread(void *arg)
         int btn = hal_button_read();
         if (btn >= 0)
         {
-            hal_led_set(0, 1);
+            hal_led_set(1, 1);
+            hal_beep_set(1);
             event_t ev;
             uint32_t dur = hal_button_wait_release(btn);
 
@@ -400,7 +401,8 @@ void *button_thread(void *arg)
             }
 
             menu_handle_event(ev);
-            hal_led_set(0, 0);
+            hal_led_set(1, 0);
+            hal_beep_set(0);
         }
         usleep(50000); // 10ms检测一次，保证按键响应速度
     }
