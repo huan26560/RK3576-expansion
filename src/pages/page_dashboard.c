@@ -17,35 +17,16 @@ typedef struct
     int uptime;
 } remote_data_t;
 
-// 设备索引定义（0=本地, 1=Server, 2=香橙派5Plus, 3=泰山派）
+// 只保留本地设备
 #define DEVICE_LOCAL 0
-#define DEVICE_SERVER 1
-#define DEVICE_ORANGEPI 2
-#define DEVICE_TAISHAN 3
-#define DEVICE_ATK3588 4 // 新增
-#define DEVICE_COUNT 5
+#define DEVICE_COUNT 1
 
 static int current_page = 0;
 static int smoothed_temp = 0;
 
-remote_data_t g_remote_data = {0}; // Server
-static int remote_smoothed_temp = 0;
-
-remote_data_t g_remote_opi5p = {0}; // 香橙派5Plus
-static int opi5p_smoothed_temp = 0;
-
-remote_data_t g_remote_taishan = {0}; // 泰山派
-static int taishan_smoothed_temp = 0;
-
-remote_data_t g_remote_atk3588 = {0}; // 新增：正点原子3588
-static int atk3588_smoothed_temp = 0;
-
 const char *page_titles[DEVICE_COUNT] = {
-    "==== Main Status ====",
-    "=== Server Status ===",
-    "==== OrangePi 5P ====",
-    "==== TaiShan 3566 ===",
-    "====== ATK3588 ======"};
+    "==== Main Status ===="
+};
 
 // WiFi信号dBm转百分比
 static int dbm_to_percent(int dbm)
@@ -150,293 +131,17 @@ static void draw_local(void)
     }
 }
 
-// Server页面
-static void draw_server(void)
-{
-    char buf[64];
-    int y = 10;
-    int label_width = 32;
-    int spacing = 1;
-    int bar_width = 65;
-
-    hal_oled_string(5, 0, page_titles[DEVICE_SERVER]);
-
-    int online = (time(NULL) - g_remote_data.last_update) < 3;
-
-    if (!online)
-    {
-        hal_oled_string(0, y, "CPU:");
-        hal_oled_string(label_width + spacing, y, "Offline");
-        y += 10;
-        hal_oled_string(0, y, "RAM:");
-        hal_oled_string(label_width + spacing, y, "No Data");
-        y += 10;
-        hal_oled_string(0, y, "TMP:");
-        hal_oled_string(label_width + spacing, y, "--");
-        y += 10;
-        hal_oled_string(0, y, "WiFi:0%");
-        hal_oled_string(75, y, " OFF");
-        y += 10;
-        hal_oled_string(0, y, "Up:--");
-        return;
-    }
-
-    int cpu = g_remote_data.cpu;
-    cpu = (cpu > 100) ? 100 : (cpu < 0) ? 0
-                                        : cpu;
-    hal_oled_string(0, y, "CPU:");
-    hal_oled_draw_progress_bar(label_width + spacing, y, bar_width, cpu, "");
-    y += 10;
-
-    int mem = g_remote_data.mem;
-    mem = (mem > 100) ? 100 : (mem < 0) ? 0
-                                        : mem;
-    hal_oled_string(0, y, "RAM:");
-    hal_oled_draw_progress_bar(label_width + spacing, y, bar_width, mem, "");
-    y += 10;
-
-    remote_smoothed_temp = (remote_smoothed_temp * 3 + g_remote_data.temp) / 4;
-    int temp = remote_smoothed_temp;
-    temp = (temp > 100) ? 100 : (temp < 0) ? 0
-                                           : temp;
-    hal_oled_string(0, y, "TMP:");
-    hal_oled_draw_progress_bar(label_width + spacing, y, bar_width, temp, "C");
-    y += 10;
-
-    int wifi_percent = dbm_to_percent(g_remote_data.net);
-    snprintf(buf, sizeof(buf), "WiFi:%d%%", wifi_percent);
-    hal_oled_string(0, y, buf);
-    hal_oled_string(75, y, " ON");
-    y += 10;
-
-    format_uptime(buf, sizeof(buf), g_remote_data.uptime);
-    hal_oled_string(0, y, buf);
-}
-
-// 香橙派5Plus页面
-static void draw_orangepi5p(void)
-{
-    char buf[64];
-    int y = 10;
-    int label_width = 32;
-    int spacing = 1;
-    int bar_width = 65;
-
-    hal_oled_string(5, 0, page_titles[DEVICE_ORANGEPI]);
-
-    int online = (time(NULL) - g_remote_opi5p.last_update) < 3;
-
-    if (!online)
-    {
-        hal_oled_string(0, y, "CPU:");
-        hal_oled_string(label_width + spacing, y, "Offline");
-        y += 10;
-        hal_oled_string(0, y, "RAM:");
-        hal_oled_string(label_width + spacing, y, "No Data");
-        y += 10;
-        hal_oled_string(0, y, "TMP:");
-        hal_oled_string(label_width + spacing, y, "--");
-        y += 10;
-        hal_oled_string(0, y, "WiFi:0%");
-        hal_oled_string(75, y, " OFF");
-        y += 10;
-        hal_oled_string(0, y, "Up:--");
-        return;
-    }
-
-    int cpu = g_remote_opi5p.cpu;
-    cpu = (cpu > 100) ? 100 : (cpu < 0) ? 0
-                                        : cpu;
-    hal_oled_string(0, y, "CPU:");
-    hal_oled_draw_progress_bar(label_width + spacing, y, bar_width, cpu, "");
-    y += 10;
-
-    int mem = g_remote_opi5p.mem;
-    mem = (mem > 100) ? 100 : (mem < 0) ? 0
-                                        : mem;
-    hal_oled_string(0, y, "RAM:");
-    hal_oled_draw_progress_bar(label_width + spacing, y, bar_width, mem, "");
-    y += 10;
-
-    opi5p_smoothed_temp = (opi5p_smoothed_temp * 3 + g_remote_opi5p.temp) / 4;
-    int temp = opi5p_smoothed_temp;
-    temp = (temp > 100) ? 100 : (temp < 0) ? 0
-                                           : temp;
-    hal_oled_string(0, y, "TMP:");
-    hal_oled_draw_progress_bar(label_width + spacing, y, bar_width, temp, "C");
-    y += 10;
-
-    int wifi_percent = dbm_to_percent(g_remote_opi5p.net);
-    snprintf(buf, sizeof(buf), "WiFi:%d%%", wifi_percent);
-    hal_oled_string(0, y, buf);
-    hal_oled_string(75, y, " ON");
-    y += 10;
-
-    format_uptime(buf, sizeof(buf), g_remote_opi5p.uptime);
-    hal_oled_string(0, y, buf);
-}
-
-// 泰山派3566页面
-static void draw_taishan(void)
-{
-    char buf[64];
-    int y = 10;
-    int label_width = 32;
-    int spacing = 1;
-    int bar_width = 65;
-
-    hal_oled_string(5, 0, page_titles[DEVICE_TAISHAN]);
-
-    int online = (time(NULL) - g_remote_taishan.last_update) < 3;
-
-    if (!online)
-    {
-        hal_oled_string(0, y, "CPU:");
-        hal_oled_string(label_width + spacing, y, "Offline");
-        y += 10;
-        hal_oled_string(0, y, "RAM:");
-        hal_oled_string(label_width + spacing, y, "No Data");
-        y += 10;
-        hal_oled_string(0, y, "TMP:");
-        hal_oled_string(label_width + spacing, y, "--");
-        y += 10;
-        hal_oled_string(0, y, "WiFi:0%");
-        hal_oled_string(75, y, " OFF");
-        y += 10;
-        hal_oled_string(0, y, "Up:--");
-        return;
-    }
-
-    int cpu = g_remote_taishan.cpu;
-    cpu = (cpu > 100) ? 100 : (cpu < 0) ? 0
-                                        : cpu;
-    hal_oled_string(0, y, "CPU:");
-    hal_oled_draw_progress_bar(label_width + spacing, y, bar_width, cpu, "");
-    y += 10;
-
-    int mem = g_remote_taishan.mem;
-    mem = (mem > 100) ? 100 : (mem < 0) ? 0
-                                        : mem;
-    hal_oled_string(0, y, "RAM:");
-    hal_oled_draw_progress_bar(label_width + spacing, y, bar_width, mem, "");
-    y += 10;
-
-    taishan_smoothed_temp = (taishan_smoothed_temp * 3 + g_remote_taishan.temp) / 4;
-    int temp = taishan_smoothed_temp;
-    temp = (temp > 100) ? 100 : (temp < 0) ? 0
-                                           : temp;
-    hal_oled_string(0, y, "TMP:");
-    hal_oled_draw_progress_bar(label_width + spacing, y, bar_width, temp, "C");
-    y += 10;
-
-    int wifi_percent = dbm_to_percent(g_remote_taishan.net);
-    snprintf(buf, sizeof(buf), "WiFi:%d%%", wifi_percent);
-    hal_oled_string(0, y, buf);
-    hal_oled_string(75, y, " ON");
-    y += 10;
-
-    format_uptime(buf, sizeof(buf), g_remote_taishan.uptime);
-    hal_oled_string(0, y, buf);
-}
-// 新增：正点原子ATK3588页面
-static void draw_atk3588(void)
-{
-    char buf[64];
-    int y = 10;
-    int label_width = 32;
-    int spacing = 1;
-    int bar_width = 65;
-
-    hal_oled_string(5, 0, page_titles[DEVICE_ATK3588]);
-
-    int online = (time(NULL) - g_remote_atk3588.last_update) < 5;
-
-    if (!online)
-    {
-        hal_oled_string(0, y, "CPU:");
-        hal_oled_string(label_width + spacing, y, "Offline");
-        y += 10;
-        hal_oled_string(0, y, "RAM:");
-        hal_oled_string(label_width + spacing, y, "No Data");
-        y += 10;
-        hal_oled_string(0, y, "TMP:");
-        hal_oled_string(label_width + spacing, y, "--");
-        y += 10;
-        hal_oled_string(0, y, "WiFi:0%");
-        hal_oled_string(75, y, " OFF");
-        y += 10;
-        hal_oled_string(0, y, "Up:--");
-        return;
-    }
-
-    int cpu = g_remote_atk3588.cpu;
-    cpu = (cpu > 100) ? 100 : (cpu < 0) ? 0
-                                        : cpu;
-    hal_oled_string(0, y, "CPU:");
-    hal_oled_draw_progress_bar(label_width + spacing, y, bar_width, cpu, "");
-    y += 10;
-
-    int mem = g_remote_atk3588.mem;
-    mem = (mem > 100) ? 100 : (mem < 0) ? 0
-                                        : mem;
-    hal_oled_string(0, y, "RAM:");
-    hal_oled_draw_progress_bar(label_width + spacing, y, bar_width, mem, "");
-    y += 10;
-
-    atk3588_smoothed_temp = (atk3588_smoothed_temp * 3 + g_remote_atk3588.temp) / 4;
-    int temp = atk3588_smoothed_temp;
-    temp = (temp > 100) ? 100 : (temp < 0) ? 0
-                                           : temp;
-    hal_oled_string(0, y, "TMP:");
-    hal_oled_draw_progress_bar(label_width + spacing, y, bar_width, temp, "C");
-    y += 10;
-
-    int wifi_percent = dbm_to_percent(g_remote_atk3588.net);
-    snprintf(buf, sizeof(buf), "WiFi:%d%%", wifi_percent);
-    hal_oled_string(0, y, buf);
-    hal_oled_string(75, y, " ON");
-    y += 10;
-
-    format_uptime(buf, sizeof(buf), g_remote_atk3588.uptime);
-    hal_oled_string(0, y, buf);
-}
 void page_dashboard_draw(void)
 {
     hal_oled_clear();
-    if (current_page == DEVICE_LOCAL)
-    {
-        draw_local();
-    }
-    else if (current_page == DEVICE_SERVER)
-    {
-        draw_server();
-    }
-    else if (current_page == DEVICE_ORANGEPI)
-    {
-        draw_orangepi5p();
-    }
-    else if (current_page == DEVICE_TAISHAN)
-    {
-        draw_taishan();
-    }
-    else if (current_page == DEVICE_ATK3588)
-    { // 新增
-        draw_atk3588();
-    }
+    draw_local(); // 只画本地页面
     hal_oled_refresh();
 }
 
 void page_dashboard_handle_event(event_t ev)
 {
-    if (ev == EV_UP)
-    {
-        current_page = (current_page + 1) % DEVICE_COUNT; // 0-3循环
-    }
-    else if (ev == EV_DOWN)
-    {
-        current_page = (current_page - 1 + DEVICE_COUNT) % DEVICE_COUNT;
-    }
-    else if (ev == EV_BACK)
+    // 只有一页，上下键无效，只保留返回键
+    if (ev == EV_BACK)
     {
         extern void menu_back(void);
         menu_back();
@@ -461,68 +166,8 @@ menu_item_t *page_dashboard_create_menu(void)
     return menu_create("Dashboard", page_dashboard_draw, NULL);
 }
 
-// 数据更新接口（移除Android）
+// 空实现，保留接口不报错
 void dashboard_update_remote(const char *topic, const char *payload)
 {
-    int value = atoi(payload);
-    time_t now = time(NULL);
-
-    if (strncmp(topic, "server/", 7) == 0)
-    {
-        g_remote_data.last_update = now;
-        if (strstr(topic, "/cpu"))
-            g_remote_data.cpu = value;
-        else if (strstr(topic, "/mem"))
-            g_remote_data.mem = value;
-        else if (strstr(topic, "/temp"))
-            g_remote_data.temp = value;
-        else if (strstr(topic, "/net"))
-            g_remote_data.net = value;
-        else if (strstr(topic, "/uptime"))
-            g_remote_data.uptime = value;
-    }
-    else if (strncmp(topic, "device/orangepi5plus/", 21) == 0)
-    {
-        g_remote_opi5p.last_update = now;
-        if (strstr(topic, "/cpu"))
-            g_remote_opi5p.cpu = value;
-        else if (strstr(topic, "/mem"))
-            g_remote_opi5p.mem = value;
-        else if (strstr(topic, "/temp"))
-            g_remote_opi5p.temp = value;
-        else if (strstr(topic, "/net"))
-            g_remote_opi5p.net = value;
-        else if (strstr(topic, "/uptime"))
-            g_remote_opi5p.uptime = value;
-    }
-    else if (strncmp(topic, "device/taishanpai/", 18) == 0)
-    {
-        g_remote_taishan.last_update = now;
-        if (strstr(topic, "/cpu"))
-            g_remote_taishan.cpu = value;
-        else if (strstr(topic, "/mem"))
-            g_remote_taishan.mem = value;
-        else if (strstr(topic, "/temp"))
-            g_remote_taishan.temp = value;
-        else if (strstr(topic, "/net"))
-            g_remote_taishan.net = value;
-        else if (strstr(topic, "/uptime"))
-            g_remote_taishan.uptime = value;
-    }
-
-    else if (strncmp(topic, "device/atk3588/", 15) == 0)
-    {
-        g_remote_atk3588.last_update = now;  
-        if (strstr(topic, "/cpu"))
-            g_remote_atk3588.cpu = value;   
-        else if (strstr(topic, "/mem"))
-            g_remote_atk3588.mem = value;   
-        else if (strstr(topic, "/temp"))
-            g_remote_atk3588.temp = value;  
-        else if (strstr(topic, "/net"))
-            g_remote_atk3588.net = value;   
-        else if (strstr(topic, "/uptime"))
-            g_remote_atk3588.uptime = value; 
-    }
-    // Android部分已移除
+    // 已清空所有远程逻辑
 }

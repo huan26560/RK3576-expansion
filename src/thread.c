@@ -36,7 +36,7 @@
 // 线程运行控制（全局标志位，支持优雅退出）
 static int g_threads_running = 0;
 // 发布频率（毫秒），统一控制所有MQTT发布间隔
-#define PUBLISH_INTERVAL_MS 1000
+#define PUBLISH_INTERVAL_MS 100
 
 // 天气图标声明
 extern const unsigned char icon_weather_clear[];

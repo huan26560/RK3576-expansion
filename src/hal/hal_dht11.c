@@ -14,7 +14,6 @@ static float last_temp = 0.0f;
 static float last_hum = 0.0f;
 static int has_valid = 0;
 
-// 修改 hal_dht11_read 函数（hal_dht11.c）
 int hal_dht11_read(float *temp, float *hum)
 {
     static int first_run = 1;
@@ -29,17 +28,17 @@ int hal_dht11_read(float *temp, float *hum)
         {
             fprintf(stderr, "[DHT11] Device %s not exist!\n", DEV_NAME);
             dev_exists = 0;
-            *temp = 25.0f; // 返回默认值，避免UI报错
-            *hum = 50.0f;
-            return 0; // 返回成功，不阻塞UI
+            *temp = last_temp;  // 👈 改这里：返回缓存，不写死25
+            *hum = last_hum;
+            return 0;
         }
         // 检查权限
         if (access(DEV_NAME, R_OK | W_OK) != 0)
         {
             fprintf(stderr, "[DHT11] No permission to access %s\n", DEV_NAME);
             dev_exists = 0;
-            *temp = 25.0f;
-            *hum = 50.0f;
+            *temp = last_temp;  // 👈 改这里：返回缓存
+            *hum = last_hum;
             return 0;
         }
     }
@@ -47,8 +46,8 @@ int hal_dht11_read(float *temp, float *hum)
     // 设备不存在：直接返回默认值，不执行open/read
     if (!dev_exists)
     {
-        *temp = 25.0f;
-        *hum = 50.0f;
+        *temp = last_temp;    // 👈 改这里：返回缓存
+        *hum = last_hum;
         return 0;
     }
 
@@ -56,9 +55,9 @@ int hal_dht11_read(float *temp, float *hum)
     int fd = open(DEV_NAME, O_RDWR);
     if (fd < 0)
     {
-        *temp = 25.0f;
-        *hum = 50.0f;
-        return 0; // 返回成功，不阻塞
+        *temp = last_temp;    // 👈 改这里：返回缓存
+        *hum = last_hum;
+        return 0;
     }
 
     unsigned char data[4] = {0};
@@ -67,13 +66,24 @@ int hal_dht11_read(float *temp, float *hum)
 
     if (ret > 0)
     {
-        *temp = data[2] + data[3] * 0.1;
-        *hum = data[0] + data[1] * 0.1;
+        // 读取成功：更新缓存
+        float t = data[2] + data[3] * 0.1f-4.0f;
+        float h = data[0] + data[1] * 0.1f;
+
+        // 合法范围过滤
+        if(t >= 0 && t <= 50 && h >= 20 && h <= 90)
+        {
+            last_temp = t;
+            last_hum = h;
+        }
+
+        *temp = last_temp;
+        *hum = last_hum;
         return 0;
     }
 
-    // 读取失败：返回默认值，不返回-1
-    *temp = 25.0f;
-    *hum = 50.0f;
+    // 读取失败：返回上一次缓存，不再返回25
+    *temp = last_temp;    // 👈 改这里：返回缓存
+    *hum = last_hum;
     return 0;
 }

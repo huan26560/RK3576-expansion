@@ -1,6 +1,7 @@
 /*
  * page_env.c - 天气UI页面（仅负责UI绘制，无线程逻辑）
  * 新增：显示拼音地址（湿度下方、时间上方）
+ * 优化：DHT11温湿度稳定显示（滤波+缓存+限频）
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,6 +22,10 @@
 #define OLED_HEIGHT 64
 #define WEATHER_ICON_SIZE 28
 
+// DHT11 优化配置
+#define DHT11_READ_INTERVAL 2 // 读取间隔：2秒（官方推荐最小值）
+#define FILTER_SAMPLE_COUNT 3 // 滤波采样次数（3次取平均）
+
 /************************** 全局变量 **************************/
 // 天气图标定义（保持不变）
 extern const unsigned char icon_weather_clear[];
@@ -34,6 +39,11 @@ extern const unsigned char icon_weather_unknown[];
 static menu_item_t *env_root = NULL;
 static int current_tab = TAB_NET_WEATHER;
 extern menu_item_t *menu_current;
+
+// ====================== DHT11 优化：缓存全局变量 ======================
+static float valid_temp = 25.0f;   // 初始默认温度（上电默认值）
+static float valid_humi = 50.0f;   // 初始默认湿度
+static time_t last_dht11_read = 0; // 上一次成功读取时间戳
 
 /************************** 工具函数 **************************/
 static void hal_oled_fill_rect_simple(int x1, int y1, int x2, int y2)
@@ -79,29 +89,58 @@ static void draw_tab_indicator(void)
     hal_oled_line(0, 9, OLED_WIDTH - 1, 9);
 }
 
+// ====================== 优化后的 DHT11 绘制函数 ======================
 static void draw_local_dht11(void)
 {
-    float temp, hum;
     char buf[32];
     char datetime[32];
+    time_t now = time(NULL);
 
+    // 1. 显示时间（不变）
     get_current_datetime(datetime, sizeof(datetime));
     hal_oled_string(15, 56, datetime);
 
     int y = 15;
-    if (hal_dht11_read(&temp, &hum) == 0)
+    // 2. 读取频率限制：未到2秒，直接显示缓存值，不重新读取
+    if (now - last_dht11_read >= DHT11_READ_INTERVAL)
     {
-        snprintf(buf, sizeof(buf), "Temp: %.1f C", temp);
-        hal_oled_string(10, y, buf);
+        float temp_sum = 0.0f;
+        float humi_sum = 0.0f;
+        int success_cnt = 0;
 
-        y += 15;
-        snprintf(buf, sizeof(buf), "Humi: %.1f %%", hum);
-        hal_oled_string(10, y, buf);
+        // 3. 多次采样滤波（连续读3次，成功的累加）
+        for (int i = 0; i < FILTER_SAMPLE_COUNT; i++)
+        {
+            float t, h;
+            if (hal_dht11_read(&t, &h) == 0)
+            {
+                // 过滤极端异常值（DHT11 温度范围 0~50℃，湿度 20~90%）
+                if (t >= 0 && t <= 50 && h >= 20 && h <= 90)
+                {
+                    temp_sum += t;
+                    humi_sum += h;
+                    success_cnt++;
+                }
+            }
+        }
+
+        // 4. 采样成功：计算平均值，更新缓存
+        if (success_cnt > 0)
+        {
+            valid_temp = temp_sum / success_cnt;
+            valid_humi = humi_sum / success_cnt;
+            last_dht11_read = now; // 更新最后读取时间
+        }
+        // 采样失败：不更新缓存，保持上一次有效值
     }
-    else
-    {
-        hal_oled_string(20, y, "DHT11 Error!");
-    }
+
+    // 5. 永远显示【稳定的缓存值】，绝不乱跳/报错
+    snprintf(buf, sizeof(buf), "Temp: %.1f C", valid_temp);
+    hal_oled_string(10, y, buf);
+
+    y += 15;
+    snprintf(buf, sizeof(buf), "Humi: %.1f %%", valid_humi);
+    hal_oled_string(10, y, buf);
 }
 
 static void draw_network_weather(void)
@@ -161,7 +200,7 @@ static void draw_network_weather(void)
         // 第一行：显示城市（居中）
         if (strlen(city) > 0)
         {
-            int city_x = (OLED_WIDTH - strlen(city) * 1) / 2;
+            int city_x = (OLED_WIDTH - strlen(city) * 6) / 1; // 修复：字体宽度6px（原1px错误）
             if (city_x < 0)
                 city_x = 0;
             hal_oled_string(city_x, addr_y1, city);
@@ -170,7 +209,7 @@ static void draw_network_weather(void)
         // 第二行：显示省份（居中）
         if (province != NULL && strlen(province) > 0)
         {
-            int prov_x = (OLED_WIDTH - strlen(province) * 1) / 2;
+            int prov_x = (OLED_WIDTH - strlen(province) * 6) / 1; // 修复：字体宽度6px
             if (prov_x < 0)
                 prov_x = 0;
             hal_oled_string(prov_x, addr_y2, province);
