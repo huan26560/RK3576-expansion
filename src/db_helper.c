@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include <mysql/mysql.h>
+#include <xlsxwriter.h>
 #include "db_helper.h"
 
 static MYSQL *db_conn = NULL;
@@ -27,7 +29,6 @@ int db_init(void)
     return 0;
 }
 
-/* 新版：一行存 temp + humi */
 void db_save_dht11(float temp, float humi)
 {
     if (db_conn == NULL) {
@@ -42,7 +43,6 @@ void db_save_dht11(float temp, float humi)
     if (mysql_query(db_conn, sql)) {
         fprintf(stderr, "[DB] INSERT failed: %s\n", mysql_error(db_conn));
 
-        /* 重连一次 */
         mysql_close(db_conn);
         db_conn = NULL;
         if (db_init() == 0) {
@@ -63,32 +63,124 @@ void db_close(void)
         printf("[DB] Connection closed\n");
     }
 }
-#include <xlsxwriter.h>
 
-int db_export_xlsx(const char *filepath, char *msg, int msg_len)
+/* ========== 获取表列表（供UI显示） ========== */
+
+int db_get_table_list(db_table_info_t *out, int max_count)
+{
+    if (db_conn == NULL && db_init() != 0) return 0;
+
+    /* 查询所有用户表（排除系统表） */
+    if (mysql_query(db_conn,
+        "SELECT table_name FROM information_schema.tables "
+        "WHERE table_schema='mydb' AND table_type='BASE TABLE'")) {
+        return 0;
+    }
+
+    MYSQL_RES *res = mysql_store_result(db_conn);
+    if (!res) return 0;
+
+    int i = 0;
+    MYSQL_ROW row;
+    while ((row = mysql_fetch_row(res)) && i < max_count) {
+        const char *name = row[0];
+
+        /* 跳过系统表 */
+        if (strcmp(name, "tables_priv") == 0 ||
+            strcmp(name, "columns_priv") == 0 ||
+            strcmp(name, "db") == 0 ||
+            strcmp(name, "user") == 0) {
+            continue;
+        }
+
+        strncpy(out[i].name, name, sizeof(out[i].name) - 1);
+
+        /* 显示名称：sensor_data → "Sensor Data" */
+        if (strcmp(name, "sensor_data") == 0) {
+            strcpy(out[i].desc, "Sensor Data");
+        } else {
+            strncpy(out[i].desc, name, sizeof(out[i].desc) - 1);
+        }
+
+        /* 查记录数 */
+        char cnt_sql[128];
+        snprintf(cnt_sql, sizeof(cnt_sql), "SELECT COUNT(*) FROM `%s`", name);
+        if (mysql_query(db_conn, cnt_sql) == 0) {
+            MYSQL_RES *cnt_res = mysql_store_result(db_conn);
+            if (cnt_res) {
+                MYSQL_ROW cnt_row = mysql_fetch_row(cnt_res);
+                out[i].count = cnt_row ? atoi(cnt_row[0]) : 0;
+                mysql_free_result(cnt_res);
+            }
+        }
+
+        i++;
+    }
+
+    mysql_free_result(res);
+    return i;
+}
+
+/* ========== 导出指定表为 xlsx ========== */
+
+int db_export_xlsx(const char *tablename, const char *filepath, char *msg, int msg_len)
 {
     if (db_conn == NULL && db_init() != 0) {
         snprintf(msg, msg_len, "DB Error");
         return -1;
     }
 
+    /* 获取表的所有列名 */
+    char cols_sql[256];
+    snprintf(cols_sql, sizeof(cols_sql),
+             "SELECT COLUMN_NAME FROM information_schema.COLUMNS "
+             "WHERE TABLE_SCHEMA='mydb' AND TABLE_NAME='%s' ORDER BY ORDINAL_POSITION",
+             tablename);
+
+    if (mysql_query(db_conn, cols_sql)) {
+        snprintf(msg, msg_len, "Get cols failed");
+        return -1;
+    }
+
+    MYSQL_RES *cols_res = mysql_store_result(db_conn);
+    if (!cols_res) {
+        snprintf(msg, msg_len, "No columns");
+        return -1;
+    }
+
+    char col_names[32][32];
+    int col_count = 0;
+    MYSQL_ROW row;
+    while ((row = mysql_fetch_row(cols_res)) && col_count < 32) {
+        strncpy(col_names[col_count], row[0], 31);
+        col_count++;
+    }
+    mysql_free_result(cols_res);
+
+    if (col_count == 0) {
+        snprintf(msg, msg_len, "Empty table");
+        return -1;
+    }
+
+    /* 创建 xlsx */
     lxw_workbook  *workbook  = workbook_new(filepath);
     if (!workbook) {
         snprintf(msg, msg_len, "File Err");
         return -1;
     }
 
-    lxw_worksheet *worksheet = workbook_add_worksheet(workbook, "Sensor");
+    lxw_worksheet *worksheet = workbook_add_worksheet(workbook, tablename);
 
-    /* 表头 */
-    worksheet_write_string(worksheet, 0, 0, "ID", NULL);
-    worksheet_write_string(worksheet, 0, 1, "Temp", NULL);
-    worksheet_write_string(worksheet, 0, 2, "Humi", NULL);
-    worksheet_write_string(worksheet, 0, 3, "Time", NULL);
+    /* 写表头 */
+    for (int c = 0; c < col_count; c++) {
+        worksheet_write_string(worksheet, 0, c, col_names[c], NULL);
+    }
 
-    if (mysql_query(db_conn,
-        "SELECT id,temp,humi,DATE_FORMAT(ts,'%Y-%m-%d %H:%i:%s') "
-        "FROM sensor_data ORDER BY id")) {
+    /* 查数据 */
+    char data_sql[256];
+    snprintf(data_sql, sizeof(data_sql), "SELECT * FROM `%s`", tablename);
+
+    if (mysql_query(db_conn, data_sql)) {
         snprintf(msg, msg_len, "Query Err");
         workbook_close(workbook);
         return -1;
@@ -101,14 +193,20 @@ int db_export_xlsx(const char *filepath, char *msg, int msg_len)
         return -1;
     }
 
-    int row = 1;
+    int data_row = 1;
     MYSQL_ROW r;
     while ((r = mysql_fetch_row(res))) {
-        worksheet_write_number(worksheet, row, 0, atoi(r[0]), NULL);
-        worksheet_write_number(worksheet, row, 1, atof(r[1]), NULL);
-        worksheet_write_number(worksheet, row, 2, atof(r[2]), NULL);
-        worksheet_write_string(worksheet, row, 3, r[3], NULL);
-        row++;
+        for (int c = 0; c < col_count; c++) {
+            /* 尝试数字，失败写字符串 */
+            char *endptr;
+            double val = strtod(r[c], &endptr);
+            if (*endptr == '\0' && r[c][0] != '\0') {
+                worksheet_write_number(worksheet, data_row, c, val, NULL);
+            } else {
+                worksheet_write_string(worksheet, data_row, c, r[c] ? r[c] : "", NULL);
+            }
+        }
+        data_row++;
     }
 
     mysql_free_result(res);
@@ -118,6 +216,36 @@ int db_export_xlsx(const char *filepath, char *msg, int msg_len)
         return -1;
     }
 
-    snprintf(msg, msg_len, "OK %d rows", row - 1);
+    snprintf(msg, msg_len, "OK %d rows", data_row - 1);
     return 0;
+}
+int db_get_preview(const char *tablename, int offset, db_preview_row_t *out, int max_rows)
+{
+    if (db_conn == NULL && db_init() != 0) return 0;
+
+    char sql[256];
+    snprintf(sql, sizeof(sql),
+             "SELECT id, temp, humi, DATE_FORMAT(ts, '%%m-%%d %%H:%%i') "
+             "FROM `%s` ORDER BY id DESC LIMIT %d OFFSET %d",
+             tablename, max_rows, offset);
+
+    if (mysql_query(db_conn, sql)) {
+        fprintf(stderr, "[DB] Preview query failed: %s\n", mysql_error(db_conn));
+        return 0;
+    }
+
+    MYSQL_RES *res = mysql_store_result(db_conn);
+    if (!res) return 0;
+
+    int i = 0;
+    MYSQL_ROW row;
+    while ((row = mysql_fetch_row(res)) && i < max_rows) {
+        out[i].id = atoi(row[0]);
+        out[i].temp = atof(row[1]);
+        out[i].humi = atof(row[2]);
+        strncpy(out[i].ts, row[3], sizeof(out[i].ts) - 1);
+        i++;
+    }
+    mysql_free_result(res);
+    return i;
 }

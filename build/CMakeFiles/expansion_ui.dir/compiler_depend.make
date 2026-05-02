@@ -31,18 +31,15 @@ CMakeFiles/expansion_ui.dir/src/db_helper.c.o: ../src/db_helper.c \
   /usr/include/aarch64-linux-gnu/bits/types/locale_t.h \
   /usr/include/aarch64-linux-gnu/bits/types/__locale_t.h \
   /usr/include/strings.h \
-  /usr/include/mysql/mysql.h \
-  /usr/lib/gcc/aarch64-linux-gnu/11/include/stdbool.h \
-  /usr/lib/gcc/aarch64-linux-gnu/11/include/stdint.h \
-  /usr/include/stdint.h \
-  /usr/include/aarch64-linux-gnu/bits/wchar.h \
-  /usr/include/aarch64-linux-gnu/bits/stdint-intn.h \
-  /usr/include/aarch64-linux-gnu/bits/stdint-uintn.h \
+  /usr/include/stdlib.h \
+  /usr/include/aarch64-linux-gnu/bits/waitflags.h \
+  /usr/include/aarch64-linux-gnu/bits/waitstatus.h \
   /usr/include/aarch64-linux-gnu/sys/types.h \
   /usr/include/aarch64-linux-gnu/bits/types/clock_t.h \
   /usr/include/aarch64-linux-gnu/bits/types/clockid_t.h \
   /usr/include/aarch64-linux-gnu/bits/types/time_t.h \
   /usr/include/aarch64-linux-gnu/bits/types/timer_t.h \
+  /usr/include/aarch64-linux-gnu/bits/stdint-intn.h \
   /usr/include/endian.h \
   /usr/include/aarch64-linux-gnu/bits/endian.h \
   /usr/include/aarch64-linux-gnu/bits/endianness.h \
@@ -60,6 +57,14 @@ CMakeFiles/expansion_ui.dir/src/db_helper.c.o: ../src/db_helper.c \
   /usr/include/aarch64-linux-gnu/bits/atomic_wide_counter.h \
   /usr/include/aarch64-linux-gnu/bits/struct_mutex.h \
   /usr/include/aarch64-linux-gnu/bits/struct_rwlock.h \
+  /usr/include/alloca.h \
+  /usr/include/aarch64-linux-gnu/bits/stdlib-float.h \
+  /usr/include/mysql/mysql.h \
+  /usr/lib/gcc/aarch64-linux-gnu/11/include/stdbool.h \
+  /usr/lib/gcc/aarch64-linux-gnu/11/include/stdint.h \
+  /usr/include/stdint.h \
+  /usr/include/aarch64-linux-gnu/bits/wchar.h \
+  /usr/include/aarch64-linux-gnu/bits/stdint-uintn.h \
   /usr/include/mysql/field_types.h \
   /usr/include/mysql/my_list.h \
   /usr/include/mysql/mysql_com.h \
@@ -67,16 +72,10 @@ CMakeFiles/expansion_ui.dir/src/db_helper.c.o: ../src/db_helper.c \
   /usr/include/mysql/my_compress.h \
   /usr/include/mysql/udf_registration_types.h \
   /usr/include/mysql/client_plugin.h \
-  /usr/include/stdlib.h \
-  /usr/include/aarch64-linux-gnu/bits/waitflags.h \
-  /usr/include/aarch64-linux-gnu/bits/waitstatus.h \
-  /usr/include/alloca.h \
-  /usr/include/aarch64-linux-gnu/bits/stdlib-float.h \
   /usr/include/mysql/plugin_auth_common.h \
   /usr/include/mysql/mysql_version.h \
   /usr/include/mysql/mysql_time.h \
   /usr/include/mysql/errmsg.h \
-  ../include/db_helper.h \
   /usr/include/xlsxwriter.h \
   /usr/include/xlsxwriter/workbook.h \
   /usr/include/errno.h \
@@ -106,7 +105,8 @@ CMakeFiles/expansion_ui.dir/src/db_helper.c.o: ../src/db_helper.c \
   /usr/include/xlsxwriter/chartsheet.h \
   /usr/include/xlsxwriter/worksheet.h \
   /usr/include/xlsxwriter/format.h \
-  /usr/include/xlsxwriter/utility.h
+  /usr/include/xlsxwriter/utility.h \
+  ../include/db_helper.h
 
 CMakeFiles/expansion_ui.dir/src/hal/hal_dht11.c.o: ../src/hal/hal_dht11.c \
   /usr/include/stdc-predef.h \
@@ -1640,14 +1640,6 @@ CMakeFiles/expansion_ui.dir/src/pages/page_tools.c.o: ../src/pages/page_tools.c 
   /usr/include/aarch64-linux-gnu/bits/types/struct___jmp_buf_tag.h \
   /usr/include/aarch64-linux-gnu/bits/pthread_stack_min-dynamic.h \
   /usr/include/aarch64-linux-gnu/bits/pthread_stack_min.h \
-  ../include/hal/hal_oled.h \
-  ../include/pages/page_interface.h \
-  ../include/menu.h \
-  /usr/lib/gcc/aarch64-linux-gnu/11/include/stdint.h \
-  /usr/include/stdint.h \
-  /usr/include/aarch64-linux-gnu/bits/wchar.h \
-  /usr/include/aarch64-linux-gnu/bits/stdint-uintn.h \
-  ../include/hal/font.h \
   /usr/include/dirent.h \
   /usr/include/aarch64-linux-gnu/bits/dirent.h \
   /usr/include/aarch64-linux-gnu/bits/posix1_lim.h \
@@ -1657,6 +1649,30 @@ CMakeFiles/expansion_ui.dir/src/pages/page_tools.c.o: ../src/pages/page_tools.c 
   /usr/include/aarch64-linux-gnu/sys/stat.h \
   /usr/include/aarch64-linux-gnu/bits/stat.h \
   /usr/include/aarch64-linux-gnu/bits/struct_stat.h \
+  /usr/include/aarch64-linux-gnu/sys/mount.h \
+  /usr/include/aarch64-linux-gnu/sys/ioctl.h \
+  /usr/include/aarch64-linux-gnu/bits/ioctls.h \
+  /usr/include/aarch64-linux-gnu/asm/ioctls.h \
+  /usr/include/asm-generic/ioctls.h \
+  /usr/include/linux/ioctl.h \
+  /usr/include/aarch64-linux-gnu/asm/ioctl.h \
+  /usr/include/asm-generic/ioctl.h \
+  /usr/include/aarch64-linux-gnu/bits/ioctl-types.h \
+  /usr/include/aarch64-linux-gnu/sys/ttydefaults.h \
+  /usr/include/errno.h \
+  /usr/include/aarch64-linux-gnu/bits/errno.h \
+  /usr/include/linux/errno.h \
+  /usr/include/aarch64-linux-gnu/asm/errno.h \
+  /usr/include/asm-generic/errno.h \
+  /usr/include/asm-generic/errno-base.h \
+  ../include/hal/hal_oled.h \
+  ../include/pages/page_interface.h \
+  ../include/menu.h \
+  /usr/lib/gcc/aarch64-linux-gnu/11/include/stdint.h \
+  /usr/include/stdint.h \
+  /usr/include/aarch64-linux-gnu/bits/wchar.h \
+  /usr/include/aarch64-linux-gnu/bits/stdint-uintn.h \
+  ../include/hal/font.h \
   ../include/db_helper.h
 
 CMakeFiles/expansion_ui.dir/src/system_monitor.c.o: ../src/system_monitor.c \
@@ -2040,6 +2056,8 @@ CMakeFiles/expansion_ui.dir/src/thread.c.o: ../src/thread.c \
 
 /usr/include/asm-generic/ioctl.h:
 
+/usr/include/aarch64-linux-gnu/bits/types/__fpos_t.h:
+
 /usr/include/aarch64-linux-gnu/bits/atomic_wide_counter.h:
 
 /usr/include/aarch64-linux-gnu/asm/ioctls.h:
@@ -2053,12 +2071,6 @@ CMakeFiles/expansion_ui.dir/src/thread.c.o: ../src/thread.c \
 /usr/include/linux/ioctl.h:
 
 /usr/include/aarch64-linux-gnu/bits/types/__sigset_t.h:
-
-../include/mqtt_client.h:
-
-/usr/include/aarch64-linux-gnu/bits/types/sig_atomic_t.h:
-
-/usr/include/mysql/mysql_com.h:
 
 /usr/include/netinet/in.h:
 
@@ -2076,7 +2088,13 @@ CMakeFiles/expansion_ui.dir/src/thread.c.o: ../src/thread.c \
 
 /usr/include/xlsxwriter/worksheet.h:
 
+/usr/include/aarch64-linux-gnu/bits/pthread_stack_min-dynamic.h:
+
+/usr/include/aarch64-linux-gnu/bits/struct_rwlock.h:
+
 /usr/include/aarch64-linux-gnu/bits/types/time_t.h:
+
+/usr/include/aarch64-linux-gnu/bits/types/sigset_t.h:
 
 /usr/include/aarch64-linux-gnu/sys/types.h:
 
@@ -2084,27 +2102,27 @@ CMakeFiles/expansion_ui.dir/src/thread.c.o: ../src/thread.c \
 
 /usr/include/xlsxwriter/drawing.h:
 
-/usr/include/aarch64-linux-gnu/bits/types/sigset_t.h:
+/usr/include/aarch64-linux-gnu/curl/easy.h:
 
-/usr/include/aarch64-linux-gnu/bits/types/struct_sigstack.h:
+/usr/include/aarch64-linux-gnu/bits/waitflags.h:
 
-/usr/include/aarch64-linux-gnu/bits/stdint-uintn.h:
+/usr/include/aarch64-linux-gnu/bits/wchar.h:
 
-/usr/include/xlsxwriter/relationships.h:
+/usr/include/errno.h:
 
-/usr/include/aarch64-linux-gnu/bits/pthread_stack_min-dynamic.h:
+../include/mqtt_client.h:
 
-/usr/include/aarch64-linux-gnu/bits/struct_rwlock.h:
+/usr/include/aarch64-linux-gnu/bits/types/sig_atomic_t.h:
 
-/usr/include/linux/limits.h:
+/usr/include/mysql/mysql_com.h:
 
-/usr/include/stdint.h:
+/usr/include/linux/input-event-codes.h:
 
-/usr/include/aarch64-linux-gnu/bits/libc-header-start.h:
+/usr/include/aarch64-linux-gnu/bits/waitstatus.h:
 
-/usr/include/aarch64-linux-gnu/sys/syscall.h:
+/usr/include/linux/input.h:
 
-/usr/include/aarch64-linux-gnu/bits/long-double.h:
+/usr/include/stdlib.h:
 
 /usr/include/mysql/mysql.h:
 
@@ -2117,10 +2135,6 @@ CMakeFiles/expansion_ui.dir/src/thread.c.o: ../src/thread.c \
 /usr/include/aarch64-linux-gnu/bits/dirent.h:
 
 /usr/include/mysql/client_plugin.h:
-
-/usr/lib/gcc/aarch64-linux-gnu/11/include/stdbool.h:
-
-/usr/include/aarch64-linux-gnu/bits/types/__fpos_t.h:
 
 /usr/include/aarch64-linux-gnu/gnu/stubs-lp64.h:
 
@@ -2153,6 +2167,16 @@ CMakeFiles/expansion_ui.dir/src/thread.c.o: ../src/thread.c \
 /usr/include/aarch64-linux-gnu/bits/stdint-intn.h:
 
 /usr/include/aarch64-linux-gnu/gnu/stubs.h:
+
+/usr/include/aarch64-linux-gnu/bits/libc-header-start.h:
+
+/usr/include/aarch64-linux-gnu/sys/syscall.h:
+
+/usr/include/aarch64-linux-gnu/bits/long-double.h:
+
+/usr/include/linux/limits.h:
+
+/usr/include/stdint.h:
 
 ../include/hal/hal_gpio.h:
 
@@ -2196,9 +2220,15 @@ CMakeFiles/expansion_ui.dir/src/thread.c.o: ../src/thread.c \
 
 /usr/include/xlsxwriter/styles.h:
 
-/usr/include/mysql/my_list.h:
+/usr/include/aarch64-linux-gnu/curl/system.h:
+
+/usr/include/alloca.h:
+
+/usr/include/aarch64-linux-gnu/bits/time64.h:
 
 /usr/include/aarch64-linux-gnu/bits/stdlib-float.h:
+
+/usr/include/mysql/my_list.h:
 
 /usr/include/aarch64-linux-gnu/bits/time.h:
 
@@ -2222,10 +2252,6 @@ CMakeFiles/expansion_ui.dir/src/thread.c.o: ../src/thread.c \
 
 /usr/include/stdc-predef.h:
 
-/usr/include/time.h:
-
-/usr/lib/gcc/aarch64-linux-gnu/11/include/stdint.h:
-
 /usr/include/aarch64-linux-gnu/bits/typesizes.h:
 
 /usr/include/aarch64-linux-gnu/bits/stdio_lim.h:
@@ -2235,14 +2261,6 @@ CMakeFiles/expansion_ui.dir/src/thread.c.o: ../src/thread.c \
 ../src/pages/page_dashboard.c:
 
 /usr/include/aarch64-linux-gnu/bits/types/struct_FILE.h:
-
-/usr/include/aarch64-linux-gnu/bits/wchar.h:
-
-/usr/include/aarch64-linux-gnu/curl/easy.h:
-
-/usr/include/aarch64-linux-gnu/bits/waitflags.h:
-
-/usr/include/errno.h:
 
 /usr/include/mosquitto.h:
 
@@ -2259,6 +2277,18 @@ CMakeFiles/expansion_ui.dir/src/thread.c.o: ../src/thread.c \
 /usr/include/mysql/plugin_auth_common.h:
 
 /usr/include/aarch64-linux-gnu/bits/types/__mbstate_t.h:
+
+/usr/lib/gcc/aarch64-linux-gnu/11/include/stdbool.h:
+
+/usr/include/time.h:
+
+/usr/lib/gcc/aarch64-linux-gnu/11/include/stdint.h:
+
+/usr/include/aarch64-linux-gnu/bits/types/struct_sigstack.h:
+
+/usr/include/aarch64-linux-gnu/bits/stdint-uintn.h:
+
+/usr/include/xlsxwriter/relationships.h:
 
 /usr/include/mysql/field_types.h:
 
@@ -2277,20 +2307,6 @@ CMakeFiles/expansion_ui.dir/src/thread.c.o: ../src/thread.c \
 /usr/include/mysql/my_compress.h:
 
 /usr/include/mysql/udf_registration_types.h:
-
-/usr/include/linux/input.h:
-
-/usr/include/stdlib.h:
-
-/usr/include/linux/input-event-codes.h:
-
-/usr/include/aarch64-linux-gnu/bits/waitstatus.h:
-
-/usr/include/aarch64-linux-gnu/curl/system.h:
-
-/usr/include/aarch64-linux-gnu/bits/time64.h:
-
-/usr/include/alloca.h:
 
 ../src/pages/page_system.c:
 
@@ -2317,10 +2333,6 @@ CMakeFiles/expansion_ui.dir/src/thread.c.o: ../src/thread.c \
 /usr/include/aarch64-linux-gnu/bits/types/__fpos64_t.h:
 
 /usr/include/aarch64-linux-gnu/bits/fcntl-linux.h:
-
-../include/db_helper.h:
-
-/usr/include/aarch64-linux-gnu/bits/stat.h:
 
 /usr/include/aarch64-linux-gnu/asm/errno.h:
 
@@ -2361,6 +2373,12 @@ CMakeFiles/expansion_ui.dir/src/thread.c.o: ../src/thread.c \
 /usr/include/xlsxwriter/utility.h:
 
 /usr/include/xlsxwriter/xmlwriter.h:
+
+../include/db_helper.h:
+
+/usr/include/aarch64-linux-gnu/sys/mount.h:
+
+/usr/include/aarch64-linux-gnu/bits/stat.h:
 
 /usr/include/aarch64-linux-gnu/bits/procfs-extra.h:
 
