@@ -6,7 +6,7 @@
 #include <hal_system.h>
 #include <time.h>
 
-#define SCREENSAVER_TIMEOUT_MS 300000 
+#define SCREENSAVER_TIMEOUT_MS 600000 
 #define TIME_STR_LEN 6
 
 static int screensaver_active = 0;

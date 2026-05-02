@@ -7,6 +7,9 @@
 #include "page_interface.h"
 #include "menu.h"
 #include "font.h"
+#include <dirent.h>
+#include <sys/stat.h>
+#include "db_helper.h"
 
 #define OLED_WIDTH    128
 #define CHAR_WIDTH    6
@@ -32,6 +35,51 @@ static menu_item_t *confirm_node = NULL;
 
 extern menu_item_t *menu_current;
 
+
+static int find_usb_mountpoint(char *out, int out_len)
+{
+    const char *check_dirs[] = {"/media", "/mnt", "/run/media", NULL};
+
+    for (int i = 0; check_dirs[i]; i++) {
+        DIR *d = opendir(check_dirs[i]);
+        if (!d) continue;
+
+        struct dirent *entry;
+        while ((entry = readdir(d))) {
+            if (entry->d_name[0] == '.') continue;
+
+            char full[300];
+            snprintf(full, sizeof(full), "%s/%s", check_dirs[i], entry->d_name);
+
+            struct stat st;
+            if (stat(full, &st) == 0 && S_ISDIR(st.st_mode)) {
+                if (access(full, W_OK) == 0) {
+                    /* 确认是挂载点（排除系统目录） */
+                    FILE *fp = fopen("/proc/mounts", "r");
+                    if (fp) {
+                        char line[512];
+                        int is_mounted = 0;
+                        while (fgets(line, sizeof(line), fp)) {
+                            if (strstr(line, full)) {
+                                is_mounted = 1;
+                                break;
+                            }
+                        }
+                        fclose(fp);
+                        if (is_mounted) {
+                            strncpy(out, full, out_len - 1);
+                            out[out_len - 1] = '\0';
+                            closedir(d);
+                            return 0;
+                        }
+                    }
+                }
+            }
+        }
+        closedir(d);
+    }
+    return -1;
+}
 static void execute_shutdown(void)
 {
     hal_oled_clear();

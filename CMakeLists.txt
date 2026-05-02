@@ -35,6 +35,8 @@ set(SOURCES
     /home/cat/expansion/src/hal/hal_dht11.c
     /home/cat/expansion/src/thread.c
     /home/cat/expansion/src/mqtt_client.c
+    /home/cat/expansion/src/db_helper.c
+
     /home/cat/expansion/src/hal/hal_gpio.c
     /home/cat/expansion/src/hal/hal_oled.c
     /home/cat/expansion/src/hal/hal_system.c
@@ -60,4 +62,20 @@ target_link_libraries(expansion_ui PRIVATE
     gpiod
     ${CURL_LIBRARIES}
     ${CJSON_LIBRARIES}
+    ${MYSQL_LIBRARIES}
+    xlsxwriter          
 )
+# 3. 查找 MySQL 客户端库
+find_package(PkgConfig QUIET)
+if(PkgConfig_FOUND)
+    pkg_check_modules(MYSQL QUIET mysqlclient)
+endif()
+
+# 若pkg-config找不到，手动查找
+if(NOT MYSQL_FOUND)
+    find_path(MYSQL_INCLUDE_DIRS NAMES mysql/mysql.h mysql.h PATHS /usr/include/mysql /usr/local/include/mysql REQUIRED)
+    find_library(MYSQL_LIBRARIES NAMES mysqlclient PATHS /usr/lib/aarch64-linux-gnu /usr/lib/x86_64-linux-gnu /usr/local/lib REQUIRED)
+endif()
+
+# 添加 MySQL 头文件目录
+include_directories(${MYSQL_INCLUDE_DIRS})

@@ -129,6 +129,30 @@ expansion_ui/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/build
 .PHONY : expansion_ui/fast
 
+src/db_helper.o: src/db_helper.c.o
+.PHONY : src/db_helper.o
+
+# target to build an object file
+src/db_helper.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/db_helper.c.o
+.PHONY : src/db_helper.c.o
+
+src/db_helper.i: src/db_helper.c.i
+.PHONY : src/db_helper.i
+
+# target to preprocess a source file
+src/db_helper.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/db_helper.c.i
+.PHONY : src/db_helper.c.i
+
+src/db_helper.s: src/db_helper.c.s
+.PHONY : src/db_helper.s
+
+# target to generate assembly for a file
+src/db_helper.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/db_helper.c.s
+.PHONY : src/db_helper.c.s
+
 src/hal/hal_dht11.o: src/hal/hal_dht11.c.o
 .PHONY : src/hal/hal_dht11.o
 
@@ -594,6 +618,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... expansion_ui"
+	@echo "... src/db_helper.o"
+	@echo "... src/db_helper.i"
+	@echo "... src/db_helper.s"
 	@echo "... src/hal/hal_dht11.o"
 	@echo "... src/hal/hal_dht11.i"
 	@echo "... src/hal/hal_dht11.s"

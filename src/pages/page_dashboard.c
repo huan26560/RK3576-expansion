@@ -105,9 +105,8 @@ static void draw_local(void)
     int wifi_dbm = hal_wifi_signal();
     if (wifi_dbm > 0)
         wifi_dbm = -wifi_dbm;
-    int wifi_percent = dbm_to_percent(wifi_dbm);
-
-    snprintf(buf, sizeof(buf), "WiFi:%d%%", wifi_percent);
+    
+    snprintf(buf, sizeof(buf), "WiFi:%ddBm", wifi_dbm);
     hal_oled_string(0, y, buf);
 
     const char *mqtt_status = mqtt_is_connected() ? "MQTT:ON" : "MQTT:OFF";

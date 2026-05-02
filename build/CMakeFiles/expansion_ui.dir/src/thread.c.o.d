@@ -121,4 +121,5 @@ CMakeFiles/expansion_ui.dir/src/thread.c.o: \
  /home/cat/expansion/include/network_monitor.h \
  /home/cat/expansion/include/menu.h \
  /home/cat/expansion/include/pages/page_interface.h \
- /home/cat/expansion/include/hal/hal_oled.h
+ /home/cat/expansion/include/hal/hal_oled.h \
+ /home/cat/expansion/include/db_helper.h

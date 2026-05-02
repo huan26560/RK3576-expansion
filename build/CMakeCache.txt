@@ -239,6 +239,9 @@ expansion_ui_SOURCE_DIR:STATIC=/home/cat/expansion
 pkgcfg_lib_CJSON_cjson:FILEPATH=/usr/lib/aarch64-linux-gnu/libcjson.so
 
 //Path to a library.
+pkgcfg_lib_MYSQL_mysqlclient:FILEPATH=/usr/lib/aarch64-linux-gnu/libmysqlclient.so
+
+//Path to a library.
 pkgcfg_lib_PC_CURL_curl:FILEPATH=/usr/lib/aarch64-linux-gnu/libcurl.so
 
 
@@ -434,6 +437,41 @@ CURL_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 CURL_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
 //Details about finding CURL
 FIND_PACKAGE_MESSAGE_DETAILS_CURL:INTERNAL=[/usr/lib/aarch64-linux-gnu/libcurl.so][/usr/include/aarch64-linux-gnu][c ][v7.81.0()]
+MYSQL_CFLAGS:INTERNAL=-I/usr/include/mysql
+MYSQL_CFLAGS_I:INTERNAL=
+MYSQL_CFLAGS_OTHER:INTERNAL=
+MYSQL_FOUND:INTERNAL=1
+MYSQL_INCLUDEDIR:INTERNAL=/usr/include/mysql
+MYSQL_INCLUDE_DIRS:INTERNAL=/usr/include/mysql
+MYSQL_LDFLAGS:INTERNAL=-L/usr/lib/aarch64-linux-gnu;-lmysqlclient
+MYSQL_LDFLAGS_OTHER:INTERNAL=
+MYSQL_LIBDIR:INTERNAL=/usr/lib/aarch64-linux-gnu
+MYSQL_LIBRARIES:INTERNAL=mysqlclient
+MYSQL_LIBRARY_DIRS:INTERNAL=/usr/lib/aarch64-linux-gnu
+MYSQL_LIBS:INTERNAL=
+MYSQL_LIBS_L:INTERNAL=
+MYSQL_LIBS_OTHER:INTERNAL=
+MYSQL_LIBS_PATHS:INTERNAL=
+MYSQL_MODULE_NAME:INTERNAL=mysqlclient
+MYSQL_PREFIX:INTERNAL=/usr
+MYSQL_STATIC_CFLAGS:INTERNAL=-I/usr/include/mysql
+MYSQL_STATIC_CFLAGS_I:INTERNAL=
+MYSQL_STATIC_CFLAGS_OTHER:INTERNAL=
+MYSQL_STATIC_INCLUDE_DIRS:INTERNAL=/usr/include/mysql
+MYSQL_STATIC_LDFLAGS:INTERNAL=-L/usr/lib/aarch64-linux-gnu;-lmysqlclient;-lzstd;-lresolv;-lm;-lssl;-lcrypto;-ldl;-pthread
+MYSQL_STATIC_LDFLAGS_OTHER:INTERNAL=-pthread
+MYSQL_STATIC_LIBDIR:INTERNAL=
+MYSQL_STATIC_LIBRARIES:INTERNAL=mysqlclient;zstd;resolv;m;ssl;crypto;dl
+MYSQL_STATIC_LIBRARY_DIRS:INTERNAL=/usr/lib/aarch64-linux-gnu
+MYSQL_STATIC_LIBS:INTERNAL=
+MYSQL_STATIC_LIBS_L:INTERNAL=
+MYSQL_STATIC_LIBS_OTHER:INTERNAL=
+MYSQL_STATIC_LIBS_PATHS:INTERNAL=
+MYSQL_VERSION:INTERNAL=21.2.45
+MYSQL_mysqlclient_INCLUDEDIR:INTERNAL=
+MYSQL_mysqlclient_LIBDIR:INTERNAL=
+MYSQL_mysqlclient_PREFIX:INTERNAL=
+MYSQL_mysqlclient_VERSION:INTERNAL=
 PC_CURL_CFLAGS:INTERNAL=-I/usr/include/aarch64-linux-gnu
 PC_CURL_CFLAGS_I:INTERNAL=
 PC_CURL_CFLAGS_OTHER:INTERNAL=
@@ -474,11 +512,15 @@ PKG_CONFIG_ARGN-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PKG_CONFIG_EXECUTABLE
 PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
 __pkg_config_arguments_CJSON:INTERNAL=QUIET;libcjson
+__pkg_config_arguments_MYSQL:INTERNAL=QUIET;mysqlclient
 __pkg_config_arguments_PC_CURL:INTERNAL=QUIET;libcurl
 __pkg_config_checked_CJSON:INTERNAL=1
+__pkg_config_checked_MYSQL:INTERNAL=1
 __pkg_config_checked_PC_CURL:INTERNAL=1
 //ADVANCED property for variable: pkgcfg_lib_CJSON_cjson
 pkgcfg_lib_CJSON_cjson-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: pkgcfg_lib_MYSQL_mysqlclient
+pkgcfg_lib_MYSQL_mysqlclient-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: pkgcfg_lib_PC_CURL_curl
 pkgcfg_lib_PC_CURL_curl-ADVANCED:INTERNAL=1
 prefix_result:INTERNAL=AsynchDNS;GSS-API;HSTS;HTTP2;HTTPS-proxy;IDN;IPv6;Kerberos;Largefile;NTLM;NTLM_WB;PSL;SPNEGO;SSL;TLS-SRP;UnixSockets;alt-svc;brotli;libz;zstd
