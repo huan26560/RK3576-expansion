@@ -177,6 +177,30 @@ src/hal/hal_dht11.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/hal/hal_dht11.c.s
 .PHONY : src/hal/hal_dht11.c.s
 
+src/hal/hal_echo.o: src/hal/hal_echo.c.o
+.PHONY : src/hal/hal_echo.o
+
+# target to build an object file
+src/hal/hal_echo.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/hal/hal_echo.c.o
+.PHONY : src/hal/hal_echo.c.o
+
+src/hal/hal_echo.i: src/hal/hal_echo.c.i
+.PHONY : src/hal/hal_echo.i
+
+# target to preprocess a source file
+src/hal/hal_echo.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/hal/hal_echo.c.i
+.PHONY : src/hal/hal_echo.c.i
+
+src/hal/hal_echo.s: src/hal/hal_echo.c.s
+.PHONY : src/hal/hal_echo.s
+
+# target to generate assembly for a file
+src/hal/hal_echo.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/hal/hal_echo.c.s
+.PHONY : src/hal/hal_echo.c.s
+
 src/hal/hal_gpio.o: src/hal/hal_gpio.c.o
 .PHONY : src/hal/hal_gpio.o
 
@@ -624,6 +648,9 @@ help:
 	@echo "... src/hal/hal_dht11.o"
 	@echo "... src/hal/hal_dht11.i"
 	@echo "... src/hal/hal_dht11.s"
+	@echo "... src/hal/hal_echo.o"
+	@echo "... src/hal/hal_echo.i"
+	@echo "... src/hal/hal_echo.s"
 	@echo "... src/hal/hal_gpio.o"
 	@echo "... src/hal/hal_gpio.i"
 	@echo "... src/hal/hal_gpio.s"

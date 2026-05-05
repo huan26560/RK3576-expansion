@@ -46,6 +46,11 @@
 },
 {
   "directory": "/home/cat/expansion/build",
+  "command": "/usr/bin/aarch64-linux-gnu-gcc  -I/home/cat/expansion/include -I/home/cat/expansion/include/hal -I/home/cat/expansion/include/pages -I/usr/include/cjson -I/usr/include/mysql -g -std=gnu11 -o CMakeFiles/expansion_ui.dir/src/hal/hal_echo.c.o -c /home/cat/expansion/src/hal/hal_echo.c",
+  "file": "/home/cat/expansion/src/hal/hal_echo.c"
+},
+{
+  "directory": "/home/cat/expansion/build",
   "command": "/usr/bin/aarch64-linux-gnu-gcc  -I/home/cat/expansion/include -I/home/cat/expansion/include/hal -I/home/cat/expansion/include/pages -I/usr/include/cjson -I/usr/include/mysql -g -std=gnu11 -o CMakeFiles/expansion_ui.dir/src/pages/page_dashboard.c.o -c /home/cat/expansion/src/pages/page_dashboard.c",
   "file": "/home/cat/expansion/src/pages/page_dashboard.c"
 },

@@ -7,6 +7,7 @@
 #include "hal_oled.h"
 #include "hal_gpio.h"
 #include "hal_system.h"
+#include "hal_echo.h"
 #include "mqtt_client.h"
 #include "menu.h"
 #include "thread.h"
@@ -97,6 +98,7 @@ static void cleanup_resources(void)
     mqtt_client_cleanup();
     hal_gpio_cleanup();
     hal_system_cleanup();
+    hal_hcsr04_cleanup();
 
     printf("系统已安全退出\n");
 }

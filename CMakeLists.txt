@@ -40,6 +40,7 @@ set(SOURCES
     /home/cat/expansion/src/hal/hal_gpio.c
     /home/cat/expansion/src/hal/hal_oled.c
     /home/cat/expansion/src/hal/hal_system.c
+    /home/cat/expansion/src/hal/hal_echo.c
     /home/cat/expansion/src/pages/page_dashboard.c
     /home/cat/expansion/src/pages/page_tools.c
     /home/cat/expansion/src/pages/page_system.c

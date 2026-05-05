@@ -195,10 +195,24 @@ CMakeFiles/expansion_ui.dir/src/hal/hal_system.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/expansion_ui.dir/src/hal/hal_system.c.s"
 	/usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/cat/expansion/src/hal/hal_system.c -o CMakeFiles/expansion_ui.dir/src/hal/hal_system.c.s
 
+CMakeFiles/expansion_ui.dir/src/hal/hal_echo.c.o: CMakeFiles/expansion_ui.dir/flags.make
+CMakeFiles/expansion_ui.dir/src/hal/hal_echo.c.o: ../src/hal/hal_echo.c
+CMakeFiles/expansion_ui.dir/src/hal/hal_echo.c.o: CMakeFiles/expansion_ui.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cat/expansion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/expansion_ui.dir/src/hal/hal_echo.c.o"
+	/usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/expansion_ui.dir/src/hal/hal_echo.c.o -MF CMakeFiles/expansion_ui.dir/src/hal/hal_echo.c.o.d -o CMakeFiles/expansion_ui.dir/src/hal/hal_echo.c.o -c /home/cat/expansion/src/hal/hal_echo.c
+
+CMakeFiles/expansion_ui.dir/src/hal/hal_echo.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/expansion_ui.dir/src/hal/hal_echo.c.i"
+	/usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/cat/expansion/src/hal/hal_echo.c > CMakeFiles/expansion_ui.dir/src/hal/hal_echo.c.i
+
+CMakeFiles/expansion_ui.dir/src/hal/hal_echo.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/expansion_ui.dir/src/hal/hal_echo.c.s"
+	/usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/cat/expansion/src/hal/hal_echo.c -o CMakeFiles/expansion_ui.dir/src/hal/hal_echo.c.s
+
 CMakeFiles/expansion_ui.dir/src/pages/page_dashboard.c.o: CMakeFiles/expansion_ui.dir/flags.make
 CMakeFiles/expansion_ui.dir/src/pages/page_dashboard.c.o: ../src/pages/page_dashboard.c
 CMakeFiles/expansion_ui.dir/src/pages/page_dashboard.c.o: CMakeFiles/expansion_ui.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cat/expansion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/expansion_ui.dir/src/pages/page_dashboard.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cat/expansion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object CMakeFiles/expansion_ui.dir/src/pages/page_dashboard.c.o"
 	/usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/expansion_ui.dir/src/pages/page_dashboard.c.o -MF CMakeFiles/expansion_ui.dir/src/pages/page_dashboard.c.o.d -o CMakeFiles/expansion_ui.dir/src/pages/page_dashboard.c.o -c /home/cat/expansion/src/pages/page_dashboard.c
 
 CMakeFiles/expansion_ui.dir/src/pages/page_dashboard.c.i: cmake_force
@@ -212,7 +226,7 @@ CMakeFiles/expansion_ui.dir/src/pages/page_dashboard.c.s: cmake_force
 CMakeFiles/expansion_ui.dir/src/pages/page_tools.c.o: CMakeFiles/expansion_ui.dir/flags.make
 CMakeFiles/expansion_ui.dir/src/pages/page_tools.c.o: ../src/pages/page_tools.c
 CMakeFiles/expansion_ui.dir/src/pages/page_tools.c.o: CMakeFiles/expansion_ui.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cat/expansion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object CMakeFiles/expansion_ui.dir/src/pages/page_tools.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cat/expansion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object CMakeFiles/expansion_ui.dir/src/pages/page_tools.c.o"
 	/usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/expansion_ui.dir/src/pages/page_tools.c.o -MF CMakeFiles/expansion_ui.dir/src/pages/page_tools.c.o.d -o CMakeFiles/expansion_ui.dir/src/pages/page_tools.c.o -c /home/cat/expansion/src/pages/page_tools.c
 
 CMakeFiles/expansion_ui.dir/src/pages/page_tools.c.i: cmake_force
@@ -226,7 +240,7 @@ CMakeFiles/expansion_ui.dir/src/pages/page_tools.c.s: cmake_force
 CMakeFiles/expansion_ui.dir/src/pages/page_system.c.o: CMakeFiles/expansion_ui.dir/flags.make
 CMakeFiles/expansion_ui.dir/src/pages/page_system.c.o: ../src/pages/page_system.c
 CMakeFiles/expansion_ui.dir/src/pages/page_system.c.o: CMakeFiles/expansion_ui.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cat/expansion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object CMakeFiles/expansion_ui.dir/src/pages/page_system.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cat/expansion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object CMakeFiles/expansion_ui.dir/src/pages/page_system.c.o"
 	/usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/expansion_ui.dir/src/pages/page_system.c.o -MF CMakeFiles/expansion_ui.dir/src/pages/page_system.c.o.d -o CMakeFiles/expansion_ui.dir/src/pages/page_system.c.o -c /home/cat/expansion/src/pages/page_system.c
 
 CMakeFiles/expansion_ui.dir/src/pages/page_system.c.i: cmake_force
@@ -240,7 +254,7 @@ CMakeFiles/expansion_ui.dir/src/pages/page_system.c.s: cmake_force
 CMakeFiles/expansion_ui.dir/src/pages/page_interface.c.o: CMakeFiles/expansion_ui.dir/flags.make
 CMakeFiles/expansion_ui.dir/src/pages/page_interface.c.o: ../src/pages/page_interface.c
 CMakeFiles/expansion_ui.dir/src/pages/page_interface.c.o: CMakeFiles/expansion_ui.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cat/expansion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object CMakeFiles/expansion_ui.dir/src/pages/page_interface.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cat/expansion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object CMakeFiles/expansion_ui.dir/src/pages/page_interface.c.o"
 	/usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/expansion_ui.dir/src/pages/page_interface.c.o -MF CMakeFiles/expansion_ui.dir/src/pages/page_interface.c.o.d -o CMakeFiles/expansion_ui.dir/src/pages/page_interface.c.o -c /home/cat/expansion/src/pages/page_interface.c
 
 CMakeFiles/expansion_ui.dir/src/pages/page_interface.c.i: cmake_force
@@ -254,7 +268,7 @@ CMakeFiles/expansion_ui.dir/src/pages/page_interface.c.s: cmake_force
 CMakeFiles/expansion_ui.dir/src/pages/page_env.c.o: CMakeFiles/expansion_ui.dir/flags.make
 CMakeFiles/expansion_ui.dir/src/pages/page_env.c.o: ../src/pages/page_env.c
 CMakeFiles/expansion_ui.dir/src/pages/page_env.c.o: CMakeFiles/expansion_ui.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cat/expansion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object CMakeFiles/expansion_ui.dir/src/pages/page_env.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cat/expansion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building C object CMakeFiles/expansion_ui.dir/src/pages/page_env.c.o"
 	/usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/expansion_ui.dir/src/pages/page_env.c.o -MF CMakeFiles/expansion_ui.dir/src/pages/page_env.c.o.d -o CMakeFiles/expansion_ui.dir/src/pages/page_env.c.o -c /home/cat/expansion/src/pages/page_env.c
 
 CMakeFiles/expansion_ui.dir/src/pages/page_env.c.i: cmake_force
@@ -268,7 +282,7 @@ CMakeFiles/expansion_ui.dir/src/pages/page_env.c.s: cmake_force
 CMakeFiles/expansion_ui.dir/src/pages/page_docker.c.o: CMakeFiles/expansion_ui.dir/flags.make
 CMakeFiles/expansion_ui.dir/src/pages/page_docker.c.o: ../src/pages/page_docker.c
 CMakeFiles/expansion_ui.dir/src/pages/page_docker.c.o: CMakeFiles/expansion_ui.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cat/expansion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building C object CMakeFiles/expansion_ui.dir/src/pages/page_docker.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cat/expansion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building C object CMakeFiles/expansion_ui.dir/src/pages/page_docker.c.o"
 	/usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/expansion_ui.dir/src/pages/page_docker.c.o -MF CMakeFiles/expansion_ui.dir/src/pages/page_docker.c.o.d -o CMakeFiles/expansion_ui.dir/src/pages/page_docker.c.o -c /home/cat/expansion/src/pages/page_docker.c
 
 CMakeFiles/expansion_ui.dir/src/pages/page_docker.c.i: cmake_force
@@ -282,7 +296,7 @@ CMakeFiles/expansion_ui.dir/src/pages/page_docker.c.s: cmake_force
 CMakeFiles/expansion_ui.dir/src/pages/page_network.c.o: CMakeFiles/expansion_ui.dir/flags.make
 CMakeFiles/expansion_ui.dir/src/pages/page_network.c.o: ../src/pages/page_network.c
 CMakeFiles/expansion_ui.dir/src/pages/page_network.c.o: CMakeFiles/expansion_ui.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cat/expansion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building C object CMakeFiles/expansion_ui.dir/src/pages/page_network.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cat/expansion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building C object CMakeFiles/expansion_ui.dir/src/pages/page_network.c.o"
 	/usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/expansion_ui.dir/src/pages/page_network.c.o -MF CMakeFiles/expansion_ui.dir/src/pages/page_network.c.o.d -o CMakeFiles/expansion_ui.dir/src/pages/page_network.c.o -c /home/cat/expansion/src/pages/page_network.c
 
 CMakeFiles/expansion_ui.dir/src/pages/page_network.c.i: cmake_force
@@ -296,7 +310,7 @@ CMakeFiles/expansion_ui.dir/src/pages/page_network.c.s: cmake_force
 CMakeFiles/expansion_ui.dir/src/pages/page_terminal.c.o: CMakeFiles/expansion_ui.dir/flags.make
 CMakeFiles/expansion_ui.dir/src/pages/page_terminal.c.o: ../src/pages/page_terminal.c
 CMakeFiles/expansion_ui.dir/src/pages/page_terminal.c.o: CMakeFiles/expansion_ui.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cat/expansion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building C object CMakeFiles/expansion_ui.dir/src/pages/page_terminal.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cat/expansion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building C object CMakeFiles/expansion_ui.dir/src/pages/page_terminal.c.o"
 	/usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/expansion_ui.dir/src/pages/page_terminal.c.o -MF CMakeFiles/expansion_ui.dir/src/pages/page_terminal.c.o.d -o CMakeFiles/expansion_ui.dir/src/pages/page_terminal.c.o -c /home/cat/expansion/src/pages/page_terminal.c
 
 CMakeFiles/expansion_ui.dir/src/pages/page_terminal.c.i: cmake_force
@@ -310,7 +324,7 @@ CMakeFiles/expansion_ui.dir/src/pages/page_terminal.c.s: cmake_force
 CMakeFiles/expansion_ui.dir/src/pages/page_screensaver.c.o: CMakeFiles/expansion_ui.dir/flags.make
 CMakeFiles/expansion_ui.dir/src/pages/page_screensaver.c.o: ../src/pages/page_screensaver.c
 CMakeFiles/expansion_ui.dir/src/pages/page_screensaver.c.o: CMakeFiles/expansion_ui.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cat/expansion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building C object CMakeFiles/expansion_ui.dir/src/pages/page_screensaver.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cat/expansion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building C object CMakeFiles/expansion_ui.dir/src/pages/page_screensaver.c.o"
 	/usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/expansion_ui.dir/src/pages/page_screensaver.c.o -MF CMakeFiles/expansion_ui.dir/src/pages/page_screensaver.c.o.d -o CMakeFiles/expansion_ui.dir/src/pages/page_screensaver.c.o -c /home/cat/expansion/src/pages/page_screensaver.c
 
 CMakeFiles/expansion_ui.dir/src/pages/page_screensaver.c.i: cmake_force
@@ -324,7 +338,7 @@ CMakeFiles/expansion_ui.dir/src/pages/page_screensaver.c.s: cmake_force
 CMakeFiles/expansion_ui.dir/src/network_monitor.c.o: CMakeFiles/expansion_ui.dir/flags.make
 CMakeFiles/expansion_ui.dir/src/network_monitor.c.o: ../src/network_monitor.c
 CMakeFiles/expansion_ui.dir/src/network_monitor.c.o: CMakeFiles/expansion_ui.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cat/expansion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building C object CMakeFiles/expansion_ui.dir/src/network_monitor.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cat/expansion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building C object CMakeFiles/expansion_ui.dir/src/network_monitor.c.o"
 	/usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/expansion_ui.dir/src/network_monitor.c.o -MF CMakeFiles/expansion_ui.dir/src/network_monitor.c.o.d -o CMakeFiles/expansion_ui.dir/src/network_monitor.c.o -c /home/cat/expansion/src/network_monitor.c
 
 CMakeFiles/expansion_ui.dir/src/network_monitor.c.i: cmake_force
@@ -338,7 +352,7 @@ CMakeFiles/expansion_ui.dir/src/network_monitor.c.s: cmake_force
 CMakeFiles/expansion_ui.dir/src/system_monitor.c.o: CMakeFiles/expansion_ui.dir/flags.make
 CMakeFiles/expansion_ui.dir/src/system_monitor.c.o: ../src/system_monitor.c
 CMakeFiles/expansion_ui.dir/src/system_monitor.c.o: CMakeFiles/expansion_ui.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cat/expansion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building C object CMakeFiles/expansion_ui.dir/src/system_monitor.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cat/expansion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building C object CMakeFiles/expansion_ui.dir/src/system_monitor.c.o"
 	/usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/expansion_ui.dir/src/system_monitor.c.o -MF CMakeFiles/expansion_ui.dir/src/system_monitor.c.o.d -o CMakeFiles/expansion_ui.dir/src/system_monitor.c.o -c /home/cat/expansion/src/system_monitor.c
 
 CMakeFiles/expansion_ui.dir/src/system_monitor.c.i: cmake_force
@@ -360,6 +374,7 @@ expansion_ui_OBJECTS = \
 "CMakeFiles/expansion_ui.dir/src/hal/hal_gpio.c.o" \
 "CMakeFiles/expansion_ui.dir/src/hal/hal_oled.c.o" \
 "CMakeFiles/expansion_ui.dir/src/hal/hal_system.c.o" \
+"CMakeFiles/expansion_ui.dir/src/hal/hal_echo.c.o" \
 "CMakeFiles/expansion_ui.dir/src/pages/page_dashboard.c.o" \
 "CMakeFiles/expansion_ui.dir/src/pages/page_tools.c.o" \
 "CMakeFiles/expansion_ui.dir/src/pages/page_system.c.o" \
@@ -384,6 +399,7 @@ expansion_ui: CMakeFiles/expansion_ui.dir/src/db_helper.c.o
 expansion_ui: CMakeFiles/expansion_ui.dir/src/hal/hal_gpio.c.o
 expansion_ui: CMakeFiles/expansion_ui.dir/src/hal/hal_oled.c.o
 expansion_ui: CMakeFiles/expansion_ui.dir/src/hal/hal_system.c.o
+expansion_ui: CMakeFiles/expansion_ui.dir/src/hal/hal_echo.c.o
 expansion_ui: CMakeFiles/expansion_ui.dir/src/pages/page_dashboard.c.o
 expansion_ui: CMakeFiles/expansion_ui.dir/src/pages/page_tools.c.o
 expansion_ui: CMakeFiles/expansion_ui.dir/src/pages/page_system.c.o
@@ -398,7 +414,7 @@ expansion_ui: CMakeFiles/expansion_ui.dir/src/system_monitor.c.o
 expansion_ui: CMakeFiles/expansion_ui.dir/build.make
 expansion_ui: /usr/lib/aarch64-linux-gnu/libcurl.so
 expansion_ui: CMakeFiles/expansion_ui.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/cat/expansion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Linking C executable expansion_ui"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/cat/expansion/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Linking C executable expansion_ui"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/expansion_ui.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

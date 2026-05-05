@@ -3,6 +3,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/expansion_ui.dir/src/db_helper.c.o.d"
   "CMakeFiles/expansion_ui.dir/src/hal/hal_dht11.c.o"
   "CMakeFiles/expansion_ui.dir/src/hal/hal_dht11.c.o.d"
+  "CMakeFiles/expansion_ui.dir/src/hal/hal_echo.c.o"
+  "CMakeFiles/expansion_ui.dir/src/hal/hal_echo.c.o.d"
   "CMakeFiles/expansion_ui.dir/src/hal/hal_gpio.c.o"
   "CMakeFiles/expansion_ui.dir/src/hal/hal_gpio.c.o.d"
   "CMakeFiles/expansion_ui.dir/src/hal/hal_oled.c.o"

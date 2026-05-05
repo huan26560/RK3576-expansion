@@ -113,6 +113,7 @@ CMakeFiles/expansion_ui.dir/src/main.c.o: /home/cat/expansion/src/main.c \
  /usr/include/aarch64-linux-gnu/sys/ttydefaults.h \
  /usr/include/linux/input-event-codes.h \
  /home/cat/expansion/include/hal/hal_system.h \
+ /home/cat/expansion/include/hal/hal_echo.h \
  /home/cat/expansion/include/mqtt_client.h \
  /home/cat/expansion/include/menu.h \
  /usr/lib/gcc/aarch64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \

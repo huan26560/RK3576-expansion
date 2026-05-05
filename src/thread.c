@@ -24,6 +24,7 @@
 #include "menu.h"
 #include "hal_oled.h"
 #include "db_helper.h" // 新增
+#include "hal_echo.h"
 /* ==================== 全局配置 & 常量定义 ==================== */
 // 天气API配置
 #define DEFAULT_LATITUDE "34.62"
@@ -390,7 +391,11 @@ void *data_publish_thread(void *arg)
                 last_db_save = now;
             }
         }
-
+        float distance = 0.0f;
+        if (hal_hcsr04_read_distance(&distance) == 0)
+        {
+            mqtt_safe_publish("sensor/echo", "Distance:%.2fcm", distance);
+        }
         // 2. 发布系统监控数据
         system_state_t sys_state;
         system_monitor_get_state(&sys_state);

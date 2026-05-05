@@ -5,34 +5,22 @@
 #include "hal_dht11.h"
 
 #define DEV_NAME "/dev/dht11"
-// 仅加1次重试（避免过度修改）+ 缓存
-#define READ_RETRY_CNT 1
-#define RETRY_DELAY_MS 50
 
-// 卡尔曼滤波参数（可根据实际传感器噪声调整）
-#define KF_Q_TEMP  0.01f   // 温度过程噪声
-#define KF_R_TEMP  5.0f     // 温度测量噪声
-#define KF_Q_HUM   0.01f    // 湿度过程噪声
-#define KF_R_HUM   3.0f     // 湿度测量噪声
+// ---------- 平滑度由这两个常数决定（0<值<1, 越小越平滑）----------
+#define KALMAN_GAIN_TEMP 0.08f // 温度增益，例如0.08表示每次只相信新值8%
+#define KALMAN_GAIN_HUM 0.08f  // 湿度增益
 
-// 缓存上次有效数据（滤波后的值）
+// 缓存上次有效数据（滤波值）
 static float last_temp = 0.0f;
 static float last_hum = 0.0f;
-static int has_valid = 0;   // 是否已有有效滤波估计
-
-// 卡尔曼滤波器状态
-static float kf_x_temp = 25.0f;   // 初始猜测
-static float kf_P_temp = 100.0f;  // 初始方差（大一些，快速收敛）
-static float kf_x_hum  = 50.0f;
-static float kf_P_hum  = 100.0f;
-static int kf_initialized = 0;    // 是否已用测量值初始化
+static int has_valid = 0; // 是否已获得过有效值
 
 int hal_dht11_read(float *temp, float *hum)
 {
     static int first_run = 1;
-    static int dev_exists = 1; // 标记设备是否存在
+    static int dev_exists = 1;
 
-    // 首次运行：检查设备文件是否存在，只检查1次
+    // 首次运行检查设备
     if (first_run)
     {
         first_run = 0;
@@ -54,7 +42,6 @@ int hal_dht11_read(float *temp, float *hum)
         }
     }
 
-    // 设备不存在：返回缓存值
     if (!dev_exists)
     {
         *temp = last_temp;
@@ -62,7 +49,6 @@ int hal_dht11_read(float *temp, float *hum)
         return 0;
     }
 
-    // 打开设备
     int fd = open(DEV_NAME, O_RDWR);
     if (fd < 0)
     {
@@ -77,62 +63,31 @@ int hal_dht11_read(float *temp, float *hum)
 
     if (ret > 0)
     {
-        // 原始测量值（带校准偏移）
+        // 原始测量值（你的校准公式）
         float meas_temp = data[2] + data[3] * 0.1f - 3.0f;
-        float meas_hum  = data[0] + data[1] * 0.1f;
+        float meas_hum = data[0] + data[1] * 0.1f + 7.0f;
 
         // 合法范围过滤
         if (meas_temp >= 0 && meas_temp <= 50 && meas_hum >= 20 && meas_hum <= 90)
         {
-            // --- 卡尔曼滤波更新（温度） ---
-            if (!kf_initialized) {
-                // 首次有效测量直接作为初始状态
-                kf_x_temp = meas_temp;
-                kf_P_temp = 1.0f;    // 初始方差可以适当设置
-                kf_x_hum  = meas_hum;
-                kf_P_hum  = 1.0f;
-                kf_initialized = 1;
-            } else {
-                // 预测步骤：增加过程噪声
-                kf_P_temp += KF_Q_TEMP;
-                kf_P_hum  += KF_Q_HUM;
-
-                // 更新步骤（温度）
-                float K_temp = kf_P_temp / (kf_P_temp + KF_R_TEMP);
-                kf_x_temp = kf_x_temp + K_temp * (meas_temp - kf_x_temp);
-                kf_P_temp = (1.0f - K_temp) * kf_P_temp;  // P更新
-
-                // 更新步骤（湿度）
-                float K_hum = kf_P_hum / (kf_P_hum + KF_R_HUM);
-                kf_x_hum = kf_x_hum + K_hum * (meas_hum - kf_x_hum);
-                kf_P_hum = (1.0f - K_hum) * kf_P_hum;
+            if (!has_valid)
+            {
+                // 第一次直接使用测量值
+                last_temp = meas_temp;
+                last_hum = meas_hum;
+                has_valid = 1;
             }
-
-            // 用滤波值更新缓存
-            last_temp = kf_x_temp;
-            last_hum  = kf_x_hum;
-            has_valid = 1;
-        }
-        else
-        {
-            // 测量值不合法：仅进行预测（增加过程噪声），状态不变
-            if (kf_initialized) {
-                kf_P_temp += KF_Q_TEMP;
-                kf_P_hum  += KF_Q_HUM;
-                // 防止长期无有效值时方差无限增大（可选）
-                if (kf_P_temp > 100.0f) kf_P_temp = 100.0f;
-                if (kf_P_hum  > 100.0f) kf_P_hum  = 100.0f;
+            else
+            {
+                // 稳态卡尔曼更新（固定增益，绝对平滑）
+                last_temp = last_temp + KALMAN_GAIN_TEMP * (meas_temp - last_temp);
+                last_hum = last_hum + KALMAN_GAIN_HUM * (meas_hum - last_hum);
             }
-            // 缓存值保持上次有效滤波值（last_temp/last_hum 不变）
         }
-
-        // 输出值始终从滤波缓存中取
-        *temp = last_temp;
-        *hum  = last_hum;
-        return 0;
+        // 测量值不合法 → 保持上次值不变
     }
+    // 读取失败 → 保持上次值不变
 
-    // 读取失败：返回上一次缓存
     *temp = last_temp;
     *hum = last_hum;
     return 0;
