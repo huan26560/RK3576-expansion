@@ -670,6 +670,7 @@ CMakeFiles/expansion_ui.dir/src/main.c.o: ../src/main.c \
   /usr/include/aarch64-linux-gnu/sys/ttydefaults.h \
   /usr/include/linux/input-event-codes.h \
   ../include/hal/hal_system.h \
+  ../include/hal/hal_echo.h \
   ../include/mqtt_client.h \
   ../include/menu.h \
   /usr/lib/gcc/aarch64-linux-gnu/11/include/stdint.h \

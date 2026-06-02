@@ -385,17 +385,17 @@ void *data_publish_thread(void *arg)
             /* 新增：每分钟存一次数据库 */
             static time_t last_db_save = 0;
             time_t now = time(NULL);
-            if (now - last_db_save >= 60)
+            if (now - last_db_save >= 60*30)
             {
                 db_save_dht11(temp, hum); // 一行同时存
                 last_db_save = now;
             }
         }
-        float distance = 0.0f;
-        if (hal_hcsr04_read_distance(&distance) == 0)
-        {
-            mqtt_safe_publish("sensor/echo", "Distance:%.2fcm", distance);
-        }
+        // float distance = 0.0f;
+        // if (hal_hcsr04_read_distance(&distance) == 0)
+        // {
+        //     mqtt_safe_publish("sensor/echo", "Distance:%.2fcm", distance);
+        // }
         // 2. 发布系统监控数据
         system_state_t sys_state;
         system_monitor_get_state(&sys_state);

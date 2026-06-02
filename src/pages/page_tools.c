@@ -17,7 +17,7 @@
 #define CHAR_WIDTH    6
 #define EXPORT_LIST_MAX 8
 #define PREVIEW_ROWS    4
-#define USB_MOUNT_POINT "/mnt/usb"  // 固定挂载点，避免混乱
+#define USB_MOUNT_POINT "/mnt/usb"
 
 typedef enum {
     SYSTEM_MODE_BALANCED = 0,
@@ -27,13 +27,14 @@ typedef enum {
 static system_mode_t current_system_mode = SYSTEM_MODE_BALANCED;
 static char confirm_action[32] = {0};
 
-static int tools_list_selected = 0;
+static int tools_list_selected = 0;      // 当前选中的索引（全局，0~4）
+static int tools_list_offset = 0;        // 当前页面第一个显示的索引
 static int mode_list_selected = 0;
 
-static menu_item_t *tools_root = NULL;
 static menu_item_t *tools_list_node = NULL;
 static menu_item_t *shutdown_node = NULL;
 static menu_item_t *reboot_node = NULL;
+static menu_item_t *restart_ui_node = NULL;
 static menu_item_t *mode_node = NULL;
 static menu_item_t *confirm_node = NULL;
 static menu_item_t *export_node = NULL;
@@ -75,13 +76,78 @@ static void execute_reboot(void)
     system("reboot");
 }
 
+static void execute_restart_ui(void)
+{
+    hal_oled_clear();
+    hal_oled_string(20, 30, "Restarting UI...");
+    hal_oled_refresh();
+    system("sudo systemctl restart expansion-ui");
+}
+
+/************************** 辅助函数：设置 devfreq 设备的 governor **************************/
+static void set_devfreq_governor(const char *dev_name, const char *governor)
+{
+    char path[300];
+    snprintf(path, sizeof(path), "/sys/class/devfreq/%s/governor", dev_name);
+    if (access(path, W_OK) == 0) {
+        FILE *fp = fopen(path, "w");
+        if (fp) {
+            fprintf(fp, "%s", governor);
+            fclose(fp);
+        }
+        return;
+    }
+    DIR *dir = opendir("/sys/class/devfreq");
+    if (!dir) return;
+    struct dirent *entry;
+    while ((entry = readdir(dir)) != NULL) {
+        if (strstr(entry->d_name, dev_name) != NULL) {
+            snprintf(path, sizeof(path), "/sys/class/devfreq/%s/governor", entry->d_name);
+            FILE *fp = fopen(path, "w");
+            if (fp) {
+                fprintf(fp, "%s", governor);
+                fclose(fp);
+            }
+            break;
+        }
+    }
+    closedir(dir);
+}
+
 static void set_system_mode(system_mode_t mode)
 {
     current_system_mode = mode;
     const char *governor = (mode == SYSTEM_MODE_PERFORMANCE) ? "performance" : "powersave";
+    
     char cmd[128];
     snprintf(cmd, sizeof(cmd), "echo %s | tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor > /dev/null 2>&1", governor);
     system(cmd);
+    
+    set_devfreq_governor("gpu", governor);
+    set_devfreq_governor("mali", governor);
+    set_devfreq_governor("npu", governor);
+    set_devfreq_governor("vpu", governor);
+    set_devfreq_governor("dmc", governor);
+    set_devfreq_governor("ddr", governor);
+    set_devfreq_governor("dram", governor);
+    
+    const char *alt_paths[] = {
+        "/sys/class/misc/mali/device/devfreq/ff9a0000.gpu/governor",
+        "/sys/kernel/gpu/governor",
+        "/sys/class/misc/mali/governor",
+        NULL
+    };
+    if (mode == SYSTEM_MODE_PERFORMANCE) {
+        for (int i = 0; alt_paths[i]; i++) {
+            if (access(alt_paths[i], W_OK) == 0) {
+                FILE *fp = fopen(alt_paths[i], "w");
+                if (fp) {
+                    fprintf(fp, "performance");
+                    fclose(fp);
+                }
+            }
+        }
+    }
 }
 
 /************************** 导出弹窗 **************************/
@@ -90,7 +156,6 @@ static void page_export_popup_draw(void)
     hal_oled_clear();
     hal_oled_string(0, 0, popup_title);
     hal_oled_line(0, 10, 127, 10);
-
     if (popup_line1[0]) hal_oled_string(0, 20, popup_line1);
     if (popup_line2[0]) hal_oled_string(0, 34, popup_line2);
     if (popup_line3[0]) hal_oled_string(0, 48, popup_line3);
@@ -125,6 +190,7 @@ static void page_tools_confirm_handle_event(event_t ev)
         case EV_ENTER:
             if (!strcmp(confirm_action, "Shutdown")) execute_shutdown();
             else if (!strcmp(confirm_action, "Reboot")) execute_reboot();
+            else if (!strcmp(confirm_action, "Restart UI")) execute_restart_ui();
             break;
         case EV_BACK:
             menu_back();
@@ -177,53 +243,61 @@ static void page_tools_reboot_handle_event(event_t ev)
     }
 }
 
-/************************** USB 检测与挂载（核心修复） **************************/
-// 安全卸载函数
+static void page_restart_ui_draw(void)
+{
+    hal_oled_clear();
+    hal_oled_string(0, 0, "Restart UI");
+    hal_oled_line(0, 10, 127, 10);
+    hal_oled_string(10, 30, "Restart UI service?");
+    hal_oled_refresh();
+}
+
+static void page_restart_ui_handle_event(event_t ev)
+{
+    switch (ev) {
+        case EV_ENTER:
+            strcpy(confirm_action, "Restart UI");
+            menu_current = confirm_node;
+            break;
+        case EV_BACK:
+            menu_back();
+            break;
+    }
+}
+
+/************************** USB 检测与挂载 **************************/
 static void safe_umount(const char *path)
 {
     if (access(path, F_OK) == 0) {
-        // 先尝试正常卸载
         if (umount(path) != 0) {
-            // 强制卸载（处理繁忙情况）
             umount2(path, MNT_FORCE);
         }
     }
 }
 
-/************************** USB检测与挂载 兼容 sdb1/sdc1 **************************/
-/************************** USB检测与挂载（复刻你的手动命令，100%成功） **************************/
 static int find_usb_mountpoint(char *out, int out_len)
 {
-    // 1. 先检查 /mnt/usb 已经被你手动挂载好了（直接用）
     if (access("/mnt/usb", W_OK) == 0) {
         strncpy(out, "/mnt/usb", out_len - 1);
         out[out_len - 1] = '\0';
         return 0;
     }
-
-    // 2. 创建挂载目录（和你手动操作一致）
     system("sudo mkdir -p /mnt/usb");
-
-    // 3. 直接执行你手动成功的命令：mount /dev/sdb1 /mnt/usb
     system("sudo mount /dev/sdb1 /mnt/usb 2>/dev/null");
-    // 验证是否挂载成功
     if (access("/mnt/usb", W_OK) == 0) {
         strncpy(out, "/mnt/usb", out_len - 1);
         out[out_len - 1] = '\0';
         return 0;
     }
-
-    // 4. 备用：如果sdb1不行，试sdc1（兼容你的U盘切换）
     system("sudo mount /dev/sdc1 /mnt/usb 2>/dev/null");
     if (access("/mnt/usb", W_OK) == 0) {
         strncpy(out, "/mnt/usb", out_len - 1);
         out[out_len - 1] = '\0';
         return 0;
     }
-
-    // 都失败，返回错误
     return -1;
 }
+
 /************************** 导出列表 **************************/
 static void page_export_list_draw(void)
 {
@@ -340,7 +414,6 @@ static void page_export_preview_handle_event(event_t ev)
             char msg[64] = {0};
             int to_usb = 0;
 
-            // 显示导出中弹窗
             strcpy(popup_title, "Exporting...");
             strcpy(popup_line1, desc);
             strcpy(popup_line2, "Please wait...");
@@ -348,7 +421,6 @@ static void page_export_preview_handle_event(event_t ev)
             menu_current = export_popup_node;
             hal_oled_refresh();
 
-            // 执行导出
             int mount_ret = find_usb_mountpoint(usb_path, sizeof(usb_path));
             if (mount_ret == 0) {
                 snprintf(dest, sizeof(dest), "%s/%s.xlsx", usb_path, name);
@@ -357,14 +429,12 @@ static void page_export_preview_handle_event(event_t ev)
                 snprintf(dest, sizeof(dest), "/mnt/msata/%s.xlsx", name);
             }
 
-            // 核心修复：导出后同步文件系统，确保数据写入U盘
             int ret = db_export_xlsx(name, dest, msg, sizeof(msg));
             if (ret == 0 && to_usb) {
-                system("sync");  // 强制写入磁盘
-                system("sync");  // 双重保险
+                system("sync");
+                system("sync");
             }
 
-            // 更新结果弹窗
             if (ret == 0 && to_usb) {
                 strcpy(popup_title, "Export Done");
                 snprintf(popup_line1, sizeof(popup_line1), "%s", desc);
@@ -383,15 +453,12 @@ static void page_export_preview_handle_event(event_t ev)
             }
             hal_oled_refresh();
 
-            // 等待2秒
             usleep(2000000);
 
-            // 自动卸载USB（避免数据丢失）
             if (to_usb) {
                 safe_umount(usb_path);
             }
 
-            // 自动返回列表
             export_view_mode = 0;
             export_first_enter = 1;
             menu_back();
@@ -464,33 +531,56 @@ static void page_mode_list_handle_event(event_t ev)
     }
 }
 
-/************************** 工具列表 **************************/
+/************************** 工具列表（滚动菜单，一页显示4项） **************************/
 static void page_tools_list_draw(void)
 {
     hal_oled_clear();
     hal_oled_string(0, 0, "System Tools");
     hal_oled_line(0, 10, 127, 10);
-    const char *items[] = {"Shutdown", "Reboot", "Mode Settings", "Export Data"};
+
+    const char *items[] = {"Shutdown", "Reboot", "Restart UI", "Mode Settings", "Export Data"};
+    const int total_items = 5;
+    const int items_per_page = 4;
+
+    // 调整 offset 使选中项可见
+    if (tools_list_selected < tools_list_offset) {
+        tools_list_offset = tools_list_selected;
+    } else if (tools_list_selected >= tools_list_offset + items_per_page) {
+        tools_list_offset = tools_list_selected - items_per_page + 1;
+    }
+
     int y = 18;
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < items_per_page && (tools_list_offset + i) < total_items; i++) {
+        int idx = tools_list_offset + i;
         char line[32];
-        snprintf(line, sizeof(line), "%s %s", i == tools_list_selected ? ">" : " ", items[i]);
+        snprintf(line, sizeof(line), "%s %s", (idx == tools_list_selected) ? ">" : " ", items[idx]);
         hal_oled_string(0, y, line);
         y += 10;
     }
+
+    // 显示滚动提示箭头
+    if (tools_list_offset > 0) {
+        hal_oled_string(120, 18, "^");
+    }
+    if (tools_list_offset + items_per_page < total_items) {
+        hal_oled_string(120, 18 + (items_per_page - 1) * 10, "v");
+    }
+
+
     hal_oled_refresh();
 }
 
 static void page_tools_list_handle_event(event_t ev)
 {
+    const int total_items = 5;
     switch (ev) {
         case EV_UP:
             tools_list_selected--;
-            if (tools_list_selected < 0) tools_list_selected = 3;
+            if (tools_list_selected < 0) tools_list_selected = total_items - 1;
             break;
         case EV_DOWN:
             tools_list_selected++;
-            if (tools_list_selected > 3) tools_list_selected = 0;
+            if (tools_list_selected >= total_items) tools_list_selected = 0;
             break;
         case EV_ENTER:
             menu_current = tools_list_node->children[tools_list_selected];
@@ -501,41 +591,17 @@ static void page_tools_list_handle_event(event_t ev)
     }
 }
 
-/************************** 工具根页面 **************************/
-static void page_tools_root_draw(void)
-{
-    hal_oled_clear();
-    hal_oled_string(0, 0, "System Tools");
-    hal_oled_line(0, 10, 127, 10);
-    char mode_str[32];
-    snprintf(mode_str, sizeof(mode_str), "Mode: %s",
-        current_system_mode == SYSTEM_MODE_PERFORMANCE ? "Performance" : "Balanced");
-    hal_oled_string(0, 25, mode_str);
-    hal_oled_string(0, 45, "Press ENTER for tools");
-    hal_oled_refresh();
-}
-
-static void page_tools_root_handle_event(event_t ev)
-{
-    if (ev == EV_ENTER) {
-        menu_current = tools_list_node;
-        tools_list_selected = 0;
-    } else if (ev == EV_BACK) {
-        menu_back();
-    }
-}
-
-/************************** 初始化 **************************/
+/************************** 初始化与菜单创建 **************************/
 void page_tools_init(void)
 {
     static int init = 0;
     if (init) return;
 
     page_register("Confirm Action", page_tools_confirm_draw, page_tools_confirm_handle_event);
-    page_register("Tools", page_tools_root_draw, page_tools_root_handle_event);
     page_register("Tools List", page_tools_list_draw, page_tools_list_handle_event);
     page_register("Shutdown", page_tools_shutdown_draw, page_tools_shutdown_handle_event);
     page_register("Reboot", page_tools_reboot_draw, page_tools_reboot_handle_event);
+    page_register("Restart UI", page_restart_ui_draw, page_restart_ui_handle_event);
     page_register("Mode Settings", page_mode_list_draw, page_mode_list_handle_event);
     page_register("Export Data", page_tools_export_draw, page_tools_export_handle_event);
     page_register("Export Popup", page_export_popup_draw, page_export_popup_handle_event);
@@ -546,24 +612,24 @@ void page_tools_init(void)
 menu_item_t* page_tools_create_menu(void)
 {
     page_tools_init();
-    if (!tools_root) {
+    if (!tools_list_node) {
         extern const unsigned char icon_tools_28x28[];
 
-        tools_root = menu_create("Tools", page_tools_root_draw, icon_tools_28x28);
-        tools_list_node = menu_create("Tools List", page_tools_list_draw, NULL);
+        tools_list_node = menu_create("Tools", page_tools_list_draw, icon_tools_28x28);
         shutdown_node = menu_create("Shutdown", page_tools_shutdown_draw, NULL);
         reboot_node = menu_create("Reboot", page_tools_reboot_draw, NULL);
+        restart_ui_node = menu_create("Restart UI", page_restart_ui_draw, NULL);
         mode_node = menu_create("Mode Settings", page_mode_list_draw, NULL);
         confirm_node = menu_create("Confirm Action", page_tools_confirm_draw, NULL);
         export_node = menu_create("Export Data", page_tools_export_draw, NULL);
         export_popup_node = menu_create("Export Popup", page_export_popup_draw, NULL);
 
-        menu_add_child(tools_root, tools_list_node);
         menu_add_child(tools_list_node, shutdown_node);
         menu_add_child(tools_list_node, reboot_node);
+        menu_add_child(tools_list_node, restart_ui_node);
         menu_add_child(tools_list_node, mode_node);
         menu_add_child(tools_list_node, export_node);
         menu_add_child(export_node, export_popup_node);
     }
-    return tools_root;
+    return tools_list_node;
 }
