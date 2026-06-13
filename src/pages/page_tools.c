@@ -566,7 +566,7 @@ static void page_tools_list_draw(void)
         hal_oled_string(120, 18 + (items_per_page - 1) * 10, "v");
     }
 
-
+    
     hal_oled_refresh();
 }
 
@@ -598,7 +598,7 @@ void page_tools_init(void)
     if (init) return;
 
     page_register("Confirm Action", page_tools_confirm_draw, page_tools_confirm_handle_event);
-    page_register("Tools List", page_tools_list_draw, page_tools_list_handle_event);
+    page_register("Tools", page_tools_list_draw, page_tools_list_handle_event);
     page_register("Shutdown", page_tools_shutdown_draw, page_tools_shutdown_handle_event);
     page_register("Reboot", page_tools_reboot_draw, page_tools_reboot_handle_event);
     page_register("Restart UI", page_restart_ui_draw, page_restart_ui_handle_event);
