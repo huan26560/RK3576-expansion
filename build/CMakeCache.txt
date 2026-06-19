@@ -20,6 +20,9 @@ CMAKE_ADDR2LINE:FILEPATH=/usr/bin/aarch64-linux-gnu-addr2line
 //Path to a program.
 CMAKE_AR:FILEPATH=/usr/bin/aarch64-linux-gnu-ar
 
+//Parallel build level
+CMAKE_BUILD_PARALLEL_LEVEL:STRING=16
+
 //No help, variable specified on the command line.
 CMAKE_BUILD_TYPE:STRING=Debug
 
@@ -111,8 +114,8 @@ CMAKE_INSTALL_PREFIX:PATH=/usr/local
 //Path to a program.
 CMAKE_LINKER:FILEPATH=/usr/bin/aarch64-linux-gnu-ld
 
-//Path to a program.
-CMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/gmake
+//make program
+CMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/gmake -j16 -j16
 
 //Flags used by the linker during the creation of modules during
 // all build types.

@@ -129,173 +129,581 @@ expansion_ui/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/build
 .PHONY : expansion_ui/fast
 
-src/db_helper.o: src/db_helper.c.o
-.PHONY : src/db_helper.o
+src/c/db_helper.o: src/c/db_helper.c.o
+.PHONY : src/c/db_helper.o
 
 # target to build an object file
-src/db_helper.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/db_helper.c.o
-.PHONY : src/db_helper.c.o
+src/c/db_helper.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/db_helper.c.o
+.PHONY : src/c/db_helper.c.o
 
-src/db_helper.i: src/db_helper.c.i
-.PHONY : src/db_helper.i
+src/c/db_helper.i: src/c/db_helper.c.i
+.PHONY : src/c/db_helper.i
 
 # target to preprocess a source file
-src/db_helper.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/db_helper.c.i
-.PHONY : src/db_helper.c.i
+src/c/db_helper.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/db_helper.c.i
+.PHONY : src/c/db_helper.c.i
 
-src/db_helper.s: src/db_helper.c.s
-.PHONY : src/db_helper.s
+src/c/db_helper.s: src/c/db_helper.c.s
+.PHONY : src/c/db_helper.s
 
 # target to generate assembly for a file
-src/db_helper.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/db_helper.c.s
-.PHONY : src/db_helper.c.s
+src/c/db_helper.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/db_helper.c.s
+.PHONY : src/c/db_helper.c.s
 
-src/email_report.o: src/email_report.c.o
-.PHONY : src/email_report.o
+src/c/email_report.o: src/c/email_report.c.o
+.PHONY : src/c/email_report.o
 
 # target to build an object file
-src/email_report.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/email_report.c.o
-.PHONY : src/email_report.c.o
+src/c/email_report.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/email_report.c.o
+.PHONY : src/c/email_report.c.o
 
-src/email_report.i: src/email_report.c.i
-.PHONY : src/email_report.i
+src/c/email_report.i: src/c/email_report.c.i
+.PHONY : src/c/email_report.i
 
 # target to preprocess a source file
-src/email_report.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/email_report.c.i
-.PHONY : src/email_report.c.i
+src/c/email_report.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/email_report.c.i
+.PHONY : src/c/email_report.c.i
 
-src/email_report.s: src/email_report.c.s
-.PHONY : src/email_report.s
+src/c/email_report.s: src/c/email_report.c.s
+.PHONY : src/c/email_report.s
 
 # target to generate assembly for a file
-src/email_report.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/email_report.c.s
-.PHONY : src/email_report.c.s
+src/c/email_report.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/email_report.c.s
+.PHONY : src/c/email_report.c.s
 
-src/hal/hal_dht11.o: src/hal/hal_dht11.c.o
-.PHONY : src/hal/hal_dht11.o
+src/c/hal/hal_dht11.o: src/c/hal/hal_dht11.c.o
+.PHONY : src/c/hal/hal_dht11.o
 
 # target to build an object file
-src/hal/hal_dht11.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/hal/hal_dht11.c.o
-.PHONY : src/hal/hal_dht11.c.o
+src/c/hal/hal_dht11.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/hal/hal_dht11.c.o
+.PHONY : src/c/hal/hal_dht11.c.o
 
-src/hal/hal_dht11.i: src/hal/hal_dht11.c.i
-.PHONY : src/hal/hal_dht11.i
+src/c/hal/hal_dht11.i: src/c/hal/hal_dht11.c.i
+.PHONY : src/c/hal/hal_dht11.i
 
 # target to preprocess a source file
-src/hal/hal_dht11.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/hal/hal_dht11.c.i
-.PHONY : src/hal/hal_dht11.c.i
+src/c/hal/hal_dht11.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/hal/hal_dht11.c.i
+.PHONY : src/c/hal/hal_dht11.c.i
 
-src/hal/hal_dht11.s: src/hal/hal_dht11.c.s
-.PHONY : src/hal/hal_dht11.s
+src/c/hal/hal_dht11.s: src/c/hal/hal_dht11.c.s
+.PHONY : src/c/hal/hal_dht11.s
 
 # target to generate assembly for a file
-src/hal/hal_dht11.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/hal/hal_dht11.c.s
-.PHONY : src/hal/hal_dht11.c.s
+src/c/hal/hal_dht11.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/hal/hal_dht11.c.s
+.PHONY : src/c/hal/hal_dht11.c.s
 
-src/hal/hal_echo.o: src/hal/hal_echo.c.o
-.PHONY : src/hal/hal_echo.o
+src/c/hal/hal_echo.o: src/c/hal/hal_echo.c.o
+.PHONY : src/c/hal/hal_echo.o
 
 # target to build an object file
-src/hal/hal_echo.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/hal/hal_echo.c.o
-.PHONY : src/hal/hal_echo.c.o
+src/c/hal/hal_echo.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/hal/hal_echo.c.o
+.PHONY : src/c/hal/hal_echo.c.o
 
-src/hal/hal_echo.i: src/hal/hal_echo.c.i
-.PHONY : src/hal/hal_echo.i
+src/c/hal/hal_echo.i: src/c/hal/hal_echo.c.i
+.PHONY : src/c/hal/hal_echo.i
 
 # target to preprocess a source file
-src/hal/hal_echo.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/hal/hal_echo.c.i
-.PHONY : src/hal/hal_echo.c.i
+src/c/hal/hal_echo.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/hal/hal_echo.c.i
+.PHONY : src/c/hal/hal_echo.c.i
 
-src/hal/hal_echo.s: src/hal/hal_echo.c.s
-.PHONY : src/hal/hal_echo.s
+src/c/hal/hal_echo.s: src/c/hal/hal_echo.c.s
+.PHONY : src/c/hal/hal_echo.s
 
 # target to generate assembly for a file
-src/hal/hal_echo.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/hal/hal_echo.c.s
-.PHONY : src/hal/hal_echo.c.s
+src/c/hal/hal_echo.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/hal/hal_echo.c.s
+.PHONY : src/c/hal/hal_echo.c.s
 
-src/hal/hal_gpio.o: src/hal/hal_gpio.c.o
-.PHONY : src/hal/hal_gpio.o
+src/c/hal/hal_gpio.o: src/c/hal/hal_gpio.c.o
+.PHONY : src/c/hal/hal_gpio.o
 
 # target to build an object file
-src/hal/hal_gpio.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/hal/hal_gpio.c.o
-.PHONY : src/hal/hal_gpio.c.o
+src/c/hal/hal_gpio.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/hal/hal_gpio.c.o
+.PHONY : src/c/hal/hal_gpio.c.o
 
-src/hal/hal_gpio.i: src/hal/hal_gpio.c.i
-.PHONY : src/hal/hal_gpio.i
+src/c/hal/hal_gpio.i: src/c/hal/hal_gpio.c.i
+.PHONY : src/c/hal/hal_gpio.i
 
 # target to preprocess a source file
-src/hal/hal_gpio.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/hal/hal_gpio.c.i
-.PHONY : src/hal/hal_gpio.c.i
+src/c/hal/hal_gpio.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/hal/hal_gpio.c.i
+.PHONY : src/c/hal/hal_gpio.c.i
 
-src/hal/hal_gpio.s: src/hal/hal_gpio.c.s
-.PHONY : src/hal/hal_gpio.s
+src/c/hal/hal_gpio.s: src/c/hal/hal_gpio.c.s
+.PHONY : src/c/hal/hal_gpio.s
 
 # target to generate assembly for a file
-src/hal/hal_gpio.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/hal/hal_gpio.c.s
-.PHONY : src/hal/hal_gpio.c.s
+src/c/hal/hal_gpio.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/hal/hal_gpio.c.s
+.PHONY : src/c/hal/hal_gpio.c.s
 
-src/hal/hal_oled.o: src/hal/hal_oled.c.o
-.PHONY : src/hal/hal_oled.o
+src/c/hal/hal_oled.o: src/c/hal/hal_oled.c.o
+.PHONY : src/c/hal/hal_oled.o
 
 # target to build an object file
-src/hal/hal_oled.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/hal/hal_oled.c.o
-.PHONY : src/hal/hal_oled.c.o
+src/c/hal/hal_oled.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/hal/hal_oled.c.o
+.PHONY : src/c/hal/hal_oled.c.o
 
-src/hal/hal_oled.i: src/hal/hal_oled.c.i
-.PHONY : src/hal/hal_oled.i
+src/c/hal/hal_oled.i: src/c/hal/hal_oled.c.i
+.PHONY : src/c/hal/hal_oled.i
 
 # target to preprocess a source file
-src/hal/hal_oled.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/hal/hal_oled.c.i
-.PHONY : src/hal/hal_oled.c.i
+src/c/hal/hal_oled.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/hal/hal_oled.c.i
+.PHONY : src/c/hal/hal_oled.c.i
 
-src/hal/hal_oled.s: src/hal/hal_oled.c.s
-.PHONY : src/hal/hal_oled.s
+src/c/hal/hal_oled.s: src/c/hal/hal_oled.c.s
+.PHONY : src/c/hal/hal_oled.s
 
 # target to generate assembly for a file
-src/hal/hal_oled.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/hal/hal_oled.c.s
-.PHONY : src/hal/hal_oled.c.s
+src/c/hal/hal_oled.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/hal/hal_oled.c.s
+.PHONY : src/c/hal/hal_oled.c.s
 
-src/hal/hal_system.o: src/hal/hal_system.c.o
-.PHONY : src/hal/hal_system.o
+src/c/hal/hal_system.o: src/c/hal/hal_system.c.o
+.PHONY : src/c/hal/hal_system.o
 
 # target to build an object file
-src/hal/hal_system.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/hal/hal_system.c.o
-.PHONY : src/hal/hal_system.c.o
+src/c/hal/hal_system.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/hal/hal_system.c.o
+.PHONY : src/c/hal/hal_system.c.o
 
-src/hal/hal_system.i: src/hal/hal_system.c.i
-.PHONY : src/hal/hal_system.i
+src/c/hal/hal_system.i: src/c/hal/hal_system.c.i
+.PHONY : src/c/hal/hal_system.i
 
 # target to preprocess a source file
-src/hal/hal_system.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/hal/hal_system.c.i
-.PHONY : src/hal/hal_system.c.i
+src/c/hal/hal_system.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/hal/hal_system.c.i
+.PHONY : src/c/hal/hal_system.c.i
 
-src/hal/hal_system.s: src/hal/hal_system.c.s
-.PHONY : src/hal/hal_system.s
+src/c/hal/hal_system.s: src/c/hal/hal_system.c.s
+.PHONY : src/c/hal/hal_system.s
 
 # target to generate assembly for a file
-src/hal/hal_system.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/hal/hal_system.c.s
-.PHONY : src/hal/hal_system.c.s
+src/c/hal/hal_system.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/hal/hal_system.c.s
+.PHONY : src/c/hal/hal_system.c.s
+
+src/c/menu.o: src/c/menu.c.o
+.PHONY : src/c/menu.o
+
+# target to build an object file
+src/c/menu.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/menu.c.o
+.PHONY : src/c/menu.c.o
+
+src/c/menu.i: src/c/menu.c.i
+.PHONY : src/c/menu.i
+
+# target to preprocess a source file
+src/c/menu.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/menu.c.i
+.PHONY : src/c/menu.c.i
+
+src/c/menu.s: src/c/menu.c.s
+.PHONY : src/c/menu.s
+
+# target to generate assembly for a file
+src/c/menu.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/menu.c.s
+.PHONY : src/c/menu.c.s
+
+src/c/mqtt_client.o: src/c/mqtt_client.c.o
+.PHONY : src/c/mqtt_client.o
+
+# target to build an object file
+src/c/mqtt_client.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/mqtt_client.c.o
+.PHONY : src/c/mqtt_client.c.o
+
+src/c/mqtt_client.i: src/c/mqtt_client.c.i
+.PHONY : src/c/mqtt_client.i
+
+# target to preprocess a source file
+src/c/mqtt_client.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/mqtt_client.c.i
+.PHONY : src/c/mqtt_client.c.i
+
+src/c/mqtt_client.s: src/c/mqtt_client.c.s
+.PHONY : src/c/mqtt_client.s
+
+# target to generate assembly for a file
+src/c/mqtt_client.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/mqtt_client.c.s
+.PHONY : src/c/mqtt_client.c.s
+
+src/c/network_monitor.o: src/c/network_monitor.c.o
+.PHONY : src/c/network_monitor.o
+
+# target to build an object file
+src/c/network_monitor.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/network_monitor.c.o
+.PHONY : src/c/network_monitor.c.o
+
+src/c/network_monitor.i: src/c/network_monitor.c.i
+.PHONY : src/c/network_monitor.i
+
+# target to preprocess a source file
+src/c/network_monitor.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/network_monitor.c.i
+.PHONY : src/c/network_monitor.c.i
+
+src/c/network_monitor.s: src/c/network_monitor.c.s
+.PHONY : src/c/network_monitor.s
+
+# target to generate assembly for a file
+src/c/network_monitor.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/network_monitor.c.s
+.PHONY : src/c/network_monitor.c.s
+
+src/c/pages/page_advanced_analysis.o: src/c/pages/page_advanced_analysis.c.o
+.PHONY : src/c/pages/page_advanced_analysis.o
+
+# target to build an object file
+src/c/pages/page_advanced_analysis.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/pages/page_advanced_analysis.c.o
+.PHONY : src/c/pages/page_advanced_analysis.c.o
+
+src/c/pages/page_advanced_analysis.i: src/c/pages/page_advanced_analysis.c.i
+.PHONY : src/c/pages/page_advanced_analysis.i
+
+# target to preprocess a source file
+src/c/pages/page_advanced_analysis.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/pages/page_advanced_analysis.c.i
+.PHONY : src/c/pages/page_advanced_analysis.c.i
+
+src/c/pages/page_advanced_analysis.s: src/c/pages/page_advanced_analysis.c.s
+.PHONY : src/c/pages/page_advanced_analysis.s
+
+# target to generate assembly for a file
+src/c/pages/page_advanced_analysis.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/pages/page_advanced_analysis.c.s
+.PHONY : src/c/pages/page_advanced_analysis.c.s
+
+src/c/pages/page_dashboard.o: src/c/pages/page_dashboard.c.o
+.PHONY : src/c/pages/page_dashboard.o
+
+# target to build an object file
+src/c/pages/page_dashboard.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/pages/page_dashboard.c.o
+.PHONY : src/c/pages/page_dashboard.c.o
+
+src/c/pages/page_dashboard.i: src/c/pages/page_dashboard.c.i
+.PHONY : src/c/pages/page_dashboard.i
+
+# target to preprocess a source file
+src/c/pages/page_dashboard.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/pages/page_dashboard.c.i
+.PHONY : src/c/pages/page_dashboard.c.i
+
+src/c/pages/page_dashboard.s: src/c/pages/page_dashboard.c.s
+.PHONY : src/c/pages/page_dashboard.s
+
+# target to generate assembly for a file
+src/c/pages/page_dashboard.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/pages/page_dashboard.c.s
+.PHONY : src/c/pages/page_dashboard.c.s
+
+src/c/pages/page_docker.o: src/c/pages/page_docker.c.o
+.PHONY : src/c/pages/page_docker.o
+
+# target to build an object file
+src/c/pages/page_docker.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/pages/page_docker.c.o
+.PHONY : src/c/pages/page_docker.c.o
+
+src/c/pages/page_docker.i: src/c/pages/page_docker.c.i
+.PHONY : src/c/pages/page_docker.i
+
+# target to preprocess a source file
+src/c/pages/page_docker.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/pages/page_docker.c.i
+.PHONY : src/c/pages/page_docker.c.i
+
+src/c/pages/page_docker.s: src/c/pages/page_docker.c.s
+.PHONY : src/c/pages/page_docker.s
+
+# target to generate assembly for a file
+src/c/pages/page_docker.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/pages/page_docker.c.s
+.PHONY : src/c/pages/page_docker.c.s
+
+src/c/pages/page_env.o: src/c/pages/page_env.c.o
+.PHONY : src/c/pages/page_env.o
+
+# target to build an object file
+src/c/pages/page_env.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/pages/page_env.c.o
+.PHONY : src/c/pages/page_env.c.o
+
+src/c/pages/page_env.i: src/c/pages/page_env.c.i
+.PHONY : src/c/pages/page_env.i
+
+# target to preprocess a source file
+src/c/pages/page_env.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/pages/page_env.c.i
+.PHONY : src/c/pages/page_env.c.i
+
+src/c/pages/page_env.s: src/c/pages/page_env.c.s
+.PHONY : src/c/pages/page_env.s
+
+# target to generate assembly for a file
+src/c/pages/page_env.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/pages/page_env.c.s
+.PHONY : src/c/pages/page_env.c.s
+
+src/c/pages/page_interface.o: src/c/pages/page_interface.c.o
+.PHONY : src/c/pages/page_interface.o
+
+# target to build an object file
+src/c/pages/page_interface.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/pages/page_interface.c.o
+.PHONY : src/c/pages/page_interface.c.o
+
+src/c/pages/page_interface.i: src/c/pages/page_interface.c.i
+.PHONY : src/c/pages/page_interface.i
+
+# target to preprocess a source file
+src/c/pages/page_interface.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/pages/page_interface.c.i
+.PHONY : src/c/pages/page_interface.c.i
+
+src/c/pages/page_interface.s: src/c/pages/page_interface.c.s
+.PHONY : src/c/pages/page_interface.s
+
+# target to generate assembly for a file
+src/c/pages/page_interface.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/pages/page_interface.c.s
+.PHONY : src/c/pages/page_interface.c.s
+
+src/c/pages/page_network.o: src/c/pages/page_network.c.o
+.PHONY : src/c/pages/page_network.o
+
+# target to build an object file
+src/c/pages/page_network.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/pages/page_network.c.o
+.PHONY : src/c/pages/page_network.c.o
+
+src/c/pages/page_network.i: src/c/pages/page_network.c.i
+.PHONY : src/c/pages/page_network.i
+
+# target to preprocess a source file
+src/c/pages/page_network.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/pages/page_network.c.i
+.PHONY : src/c/pages/page_network.c.i
+
+src/c/pages/page_network.s: src/c/pages/page_network.c.s
+.PHONY : src/c/pages/page_network.s
+
+# target to generate assembly for a file
+src/c/pages/page_network.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/pages/page_network.c.s
+.PHONY : src/c/pages/page_network.c.s
+
+src/c/pages/page_screensaver.o: src/c/pages/page_screensaver.c.o
+.PHONY : src/c/pages/page_screensaver.o
+
+# target to build an object file
+src/c/pages/page_screensaver.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/pages/page_screensaver.c.o
+.PHONY : src/c/pages/page_screensaver.c.o
+
+src/c/pages/page_screensaver.i: src/c/pages/page_screensaver.c.i
+.PHONY : src/c/pages/page_screensaver.i
+
+# target to preprocess a source file
+src/c/pages/page_screensaver.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/pages/page_screensaver.c.i
+.PHONY : src/c/pages/page_screensaver.c.i
+
+src/c/pages/page_screensaver.s: src/c/pages/page_screensaver.c.s
+.PHONY : src/c/pages/page_screensaver.s
+
+# target to generate assembly for a file
+src/c/pages/page_screensaver.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/pages/page_screensaver.c.s
+.PHONY : src/c/pages/page_screensaver.c.s
+
+src/c/pages/page_system.o: src/c/pages/page_system.c.o
+.PHONY : src/c/pages/page_system.o
+
+# target to build an object file
+src/c/pages/page_system.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/pages/page_system.c.o
+.PHONY : src/c/pages/page_system.c.o
+
+src/c/pages/page_system.i: src/c/pages/page_system.c.i
+.PHONY : src/c/pages/page_system.i
+
+# target to preprocess a source file
+src/c/pages/page_system.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/pages/page_system.c.i
+.PHONY : src/c/pages/page_system.c.i
+
+src/c/pages/page_system.s: src/c/pages/page_system.c.s
+.PHONY : src/c/pages/page_system.s
+
+# target to generate assembly for a file
+src/c/pages/page_system.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/pages/page_system.c.s
+.PHONY : src/c/pages/page_system.c.s
+
+src/c/pages/page_terminal.o: src/c/pages/page_terminal.c.o
+.PHONY : src/c/pages/page_terminal.o
+
+# target to build an object file
+src/c/pages/page_terminal.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/pages/page_terminal.c.o
+.PHONY : src/c/pages/page_terminal.c.o
+
+src/c/pages/page_terminal.i: src/c/pages/page_terminal.c.i
+.PHONY : src/c/pages/page_terminal.i
+
+# target to preprocess a source file
+src/c/pages/page_terminal.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/pages/page_terminal.c.i
+.PHONY : src/c/pages/page_terminal.c.i
+
+src/c/pages/page_terminal.s: src/c/pages/page_terminal.c.s
+.PHONY : src/c/pages/page_terminal.s
+
+# target to generate assembly for a file
+src/c/pages/page_terminal.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/pages/page_terminal.c.s
+.PHONY : src/c/pages/page_terminal.c.s
+
+src/c/pages/page_tools.o: src/c/pages/page_tools.c.o
+.PHONY : src/c/pages/page_tools.o
+
+# target to build an object file
+src/c/pages/page_tools.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/pages/page_tools.c.o
+.PHONY : src/c/pages/page_tools.c.o
+
+src/c/pages/page_tools.i: src/c/pages/page_tools.c.i
+.PHONY : src/c/pages/page_tools.i
+
+# target to preprocess a source file
+src/c/pages/page_tools.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/pages/page_tools.c.i
+.PHONY : src/c/pages/page_tools.c.i
+
+src/c/pages/page_tools.s: src/c/pages/page_tools.c.s
+.PHONY : src/c/pages/page_tools.s
+
+# target to generate assembly for a file
+src/c/pages/page_tools.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/pages/page_tools.c.s
+.PHONY : src/c/pages/page_tools.c.s
+
+src/c/system_monitor.o: src/c/system_monitor.c.o
+.PHONY : src/c/system_monitor.o
+
+# target to build an object file
+src/c/system_monitor.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/system_monitor.c.o
+.PHONY : src/c/system_monitor.c.o
+
+src/c/system_monitor.i: src/c/system_monitor.c.i
+.PHONY : src/c/system_monitor.i
+
+# target to preprocess a source file
+src/c/system_monitor.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/system_monitor.c.i
+.PHONY : src/c/system_monitor.c.i
+
+src/c/system_monitor.s: src/c/system_monitor.c.s
+.PHONY : src/c/system_monitor.s
+
+# target to generate assembly for a file
+src/c/system_monitor.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/system_monitor.c.s
+.PHONY : src/c/system_monitor.c.s
+
+src/c/thread.o: src/c/thread.c.o
+.PHONY : src/c/thread.o
+
+# target to build an object file
+src/c/thread.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/thread.c.o
+.PHONY : src/c/thread.c.o
+
+src/c/thread.i: src/c/thread.c.i
+.PHONY : src/c/thread.i
+
+# target to preprocess a source file
+src/c/thread.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/thread.c.i
+.PHONY : src/c/thread.c.i
+
+src/c/thread.s: src/c/thread.c.s
+.PHONY : src/c/thread.s
+
+# target to generate assembly for a file
+src/c/thread.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/c/thread.c.s
+.PHONY : src/c/thread.c.s
+
+src/cpp/advanced_analysis.o: src/cpp/advanced_analysis.cpp.o
+.PHONY : src/cpp/advanced_analysis.o
+
+# target to build an object file
+src/cpp/advanced_analysis.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/cpp/advanced_analysis.cpp.o
+.PHONY : src/cpp/advanced_analysis.cpp.o
+
+src/cpp/advanced_analysis.i: src/cpp/advanced_analysis.cpp.i
+.PHONY : src/cpp/advanced_analysis.i
+
+# target to preprocess a source file
+src/cpp/advanced_analysis.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/cpp/advanced_analysis.cpp.i
+.PHONY : src/cpp/advanced_analysis.cpp.i
+
+src/cpp/advanced_analysis.s: src/cpp/advanced_analysis.cpp.s
+.PHONY : src/cpp/advanced_analysis.s
+
+# target to generate assembly for a file
+src/cpp/advanced_analysis.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/cpp/advanced_analysis.cpp.s
+.PHONY : src/cpp/advanced_analysis.cpp.s
+
+src/cpp/hello.o: src/cpp/hello.cpp.o
+.PHONY : src/cpp/hello.o
+
+# target to build an object file
+src/cpp/hello.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/cpp/hello.cpp.o
+.PHONY : src/cpp/hello.cpp.o
+
+src/cpp/hello.i: src/cpp/hello.cpp.i
+.PHONY : src/cpp/hello.i
+
+# target to preprocess a source file
+src/cpp/hello.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/cpp/hello.cpp.i
+.PHONY : src/cpp/hello.cpp.i
+
+src/cpp/hello.s: src/cpp/hello.cpp.s
+.PHONY : src/cpp/hello.s
+
+# target to generate assembly for a file
+src/cpp/hello.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/cpp/hello.cpp.s
+.PHONY : src/cpp/hello.cpp.s
 
 src/main.o: src/main.c.o
 .PHONY : src/main.o
@@ -321,342 +729,6 @@ src/main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/main.c.s
 .PHONY : src/main.c.s
 
-src/menu.o: src/menu.c.o
-.PHONY : src/menu.o
-
-# target to build an object file
-src/menu.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/menu.c.o
-.PHONY : src/menu.c.o
-
-src/menu.i: src/menu.c.i
-.PHONY : src/menu.i
-
-# target to preprocess a source file
-src/menu.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/menu.c.i
-.PHONY : src/menu.c.i
-
-src/menu.s: src/menu.c.s
-.PHONY : src/menu.s
-
-# target to generate assembly for a file
-src/menu.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/menu.c.s
-.PHONY : src/menu.c.s
-
-src/mqtt_client.o: src/mqtt_client.c.o
-.PHONY : src/mqtt_client.o
-
-# target to build an object file
-src/mqtt_client.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/mqtt_client.c.o
-.PHONY : src/mqtt_client.c.o
-
-src/mqtt_client.i: src/mqtt_client.c.i
-.PHONY : src/mqtt_client.i
-
-# target to preprocess a source file
-src/mqtt_client.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/mqtt_client.c.i
-.PHONY : src/mqtt_client.c.i
-
-src/mqtt_client.s: src/mqtt_client.c.s
-.PHONY : src/mqtt_client.s
-
-# target to generate assembly for a file
-src/mqtt_client.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/mqtt_client.c.s
-.PHONY : src/mqtt_client.c.s
-
-src/network_monitor.o: src/network_monitor.c.o
-.PHONY : src/network_monitor.o
-
-# target to build an object file
-src/network_monitor.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/network_monitor.c.o
-.PHONY : src/network_monitor.c.o
-
-src/network_monitor.i: src/network_monitor.c.i
-.PHONY : src/network_monitor.i
-
-# target to preprocess a source file
-src/network_monitor.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/network_monitor.c.i
-.PHONY : src/network_monitor.c.i
-
-src/network_monitor.s: src/network_monitor.c.s
-.PHONY : src/network_monitor.s
-
-# target to generate assembly for a file
-src/network_monitor.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/network_monitor.c.s
-.PHONY : src/network_monitor.c.s
-
-src/pages/page_dashboard.o: src/pages/page_dashboard.c.o
-.PHONY : src/pages/page_dashboard.o
-
-# target to build an object file
-src/pages/page_dashboard.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/pages/page_dashboard.c.o
-.PHONY : src/pages/page_dashboard.c.o
-
-src/pages/page_dashboard.i: src/pages/page_dashboard.c.i
-.PHONY : src/pages/page_dashboard.i
-
-# target to preprocess a source file
-src/pages/page_dashboard.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/pages/page_dashboard.c.i
-.PHONY : src/pages/page_dashboard.c.i
-
-src/pages/page_dashboard.s: src/pages/page_dashboard.c.s
-.PHONY : src/pages/page_dashboard.s
-
-# target to generate assembly for a file
-src/pages/page_dashboard.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/pages/page_dashboard.c.s
-.PHONY : src/pages/page_dashboard.c.s
-
-src/pages/page_docker.o: src/pages/page_docker.c.o
-.PHONY : src/pages/page_docker.o
-
-# target to build an object file
-src/pages/page_docker.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/pages/page_docker.c.o
-.PHONY : src/pages/page_docker.c.o
-
-src/pages/page_docker.i: src/pages/page_docker.c.i
-.PHONY : src/pages/page_docker.i
-
-# target to preprocess a source file
-src/pages/page_docker.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/pages/page_docker.c.i
-.PHONY : src/pages/page_docker.c.i
-
-src/pages/page_docker.s: src/pages/page_docker.c.s
-.PHONY : src/pages/page_docker.s
-
-# target to generate assembly for a file
-src/pages/page_docker.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/pages/page_docker.c.s
-.PHONY : src/pages/page_docker.c.s
-
-src/pages/page_env.o: src/pages/page_env.c.o
-.PHONY : src/pages/page_env.o
-
-# target to build an object file
-src/pages/page_env.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/pages/page_env.c.o
-.PHONY : src/pages/page_env.c.o
-
-src/pages/page_env.i: src/pages/page_env.c.i
-.PHONY : src/pages/page_env.i
-
-# target to preprocess a source file
-src/pages/page_env.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/pages/page_env.c.i
-.PHONY : src/pages/page_env.c.i
-
-src/pages/page_env.s: src/pages/page_env.c.s
-.PHONY : src/pages/page_env.s
-
-# target to generate assembly for a file
-src/pages/page_env.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/pages/page_env.c.s
-.PHONY : src/pages/page_env.c.s
-
-src/pages/page_interface.o: src/pages/page_interface.c.o
-.PHONY : src/pages/page_interface.o
-
-# target to build an object file
-src/pages/page_interface.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/pages/page_interface.c.o
-.PHONY : src/pages/page_interface.c.o
-
-src/pages/page_interface.i: src/pages/page_interface.c.i
-.PHONY : src/pages/page_interface.i
-
-# target to preprocess a source file
-src/pages/page_interface.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/pages/page_interface.c.i
-.PHONY : src/pages/page_interface.c.i
-
-src/pages/page_interface.s: src/pages/page_interface.c.s
-.PHONY : src/pages/page_interface.s
-
-# target to generate assembly for a file
-src/pages/page_interface.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/pages/page_interface.c.s
-.PHONY : src/pages/page_interface.c.s
-
-src/pages/page_network.o: src/pages/page_network.c.o
-.PHONY : src/pages/page_network.o
-
-# target to build an object file
-src/pages/page_network.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/pages/page_network.c.o
-.PHONY : src/pages/page_network.c.o
-
-src/pages/page_network.i: src/pages/page_network.c.i
-.PHONY : src/pages/page_network.i
-
-# target to preprocess a source file
-src/pages/page_network.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/pages/page_network.c.i
-.PHONY : src/pages/page_network.c.i
-
-src/pages/page_network.s: src/pages/page_network.c.s
-.PHONY : src/pages/page_network.s
-
-# target to generate assembly for a file
-src/pages/page_network.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/pages/page_network.c.s
-.PHONY : src/pages/page_network.c.s
-
-src/pages/page_screensaver.o: src/pages/page_screensaver.c.o
-.PHONY : src/pages/page_screensaver.o
-
-# target to build an object file
-src/pages/page_screensaver.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/pages/page_screensaver.c.o
-.PHONY : src/pages/page_screensaver.c.o
-
-src/pages/page_screensaver.i: src/pages/page_screensaver.c.i
-.PHONY : src/pages/page_screensaver.i
-
-# target to preprocess a source file
-src/pages/page_screensaver.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/pages/page_screensaver.c.i
-.PHONY : src/pages/page_screensaver.c.i
-
-src/pages/page_screensaver.s: src/pages/page_screensaver.c.s
-.PHONY : src/pages/page_screensaver.s
-
-# target to generate assembly for a file
-src/pages/page_screensaver.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/pages/page_screensaver.c.s
-.PHONY : src/pages/page_screensaver.c.s
-
-src/pages/page_system.o: src/pages/page_system.c.o
-.PHONY : src/pages/page_system.o
-
-# target to build an object file
-src/pages/page_system.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/pages/page_system.c.o
-.PHONY : src/pages/page_system.c.o
-
-src/pages/page_system.i: src/pages/page_system.c.i
-.PHONY : src/pages/page_system.i
-
-# target to preprocess a source file
-src/pages/page_system.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/pages/page_system.c.i
-.PHONY : src/pages/page_system.c.i
-
-src/pages/page_system.s: src/pages/page_system.c.s
-.PHONY : src/pages/page_system.s
-
-# target to generate assembly for a file
-src/pages/page_system.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/pages/page_system.c.s
-.PHONY : src/pages/page_system.c.s
-
-src/pages/page_terminal.o: src/pages/page_terminal.c.o
-.PHONY : src/pages/page_terminal.o
-
-# target to build an object file
-src/pages/page_terminal.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/pages/page_terminal.c.o
-.PHONY : src/pages/page_terminal.c.o
-
-src/pages/page_terminal.i: src/pages/page_terminal.c.i
-.PHONY : src/pages/page_terminal.i
-
-# target to preprocess a source file
-src/pages/page_terminal.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/pages/page_terminal.c.i
-.PHONY : src/pages/page_terminal.c.i
-
-src/pages/page_terminal.s: src/pages/page_terminal.c.s
-.PHONY : src/pages/page_terminal.s
-
-# target to generate assembly for a file
-src/pages/page_terminal.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/pages/page_terminal.c.s
-.PHONY : src/pages/page_terminal.c.s
-
-src/pages/page_tools.o: src/pages/page_tools.c.o
-.PHONY : src/pages/page_tools.o
-
-# target to build an object file
-src/pages/page_tools.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/pages/page_tools.c.o
-.PHONY : src/pages/page_tools.c.o
-
-src/pages/page_tools.i: src/pages/page_tools.c.i
-.PHONY : src/pages/page_tools.i
-
-# target to preprocess a source file
-src/pages/page_tools.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/pages/page_tools.c.i
-.PHONY : src/pages/page_tools.c.i
-
-src/pages/page_tools.s: src/pages/page_tools.c.s
-.PHONY : src/pages/page_tools.s
-
-# target to generate assembly for a file
-src/pages/page_tools.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/pages/page_tools.c.s
-.PHONY : src/pages/page_tools.c.s
-
-src/system_monitor.o: src/system_monitor.c.o
-.PHONY : src/system_monitor.o
-
-# target to build an object file
-src/system_monitor.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/system_monitor.c.o
-.PHONY : src/system_monitor.c.o
-
-src/system_monitor.i: src/system_monitor.c.i
-.PHONY : src/system_monitor.i
-
-# target to preprocess a source file
-src/system_monitor.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/system_monitor.c.i
-.PHONY : src/system_monitor.c.i
-
-src/system_monitor.s: src/system_monitor.c.s
-.PHONY : src/system_monitor.s
-
-# target to generate assembly for a file
-src/system_monitor.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/system_monitor.c.s
-.PHONY : src/system_monitor.c.s
-
-src/thread.o: src/thread.c.o
-.PHONY : src/thread.o
-
-# target to build an object file
-src/thread.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/thread.c.o
-.PHONY : src/thread.c.o
-
-src/thread.i: src/thread.c.i
-.PHONY : src/thread.i
-
-# target to preprocess a source file
-src/thread.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/thread.c.i
-.PHONY : src/thread.c.i
-
-src/thread.s: src/thread.c.s
-.PHONY : src/thread.s
-
-# target to generate assembly for a file
-src/thread.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/thread.c.s
-.PHONY : src/thread.c.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -666,72 +738,81 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... expansion_ui"
-	@echo "... src/db_helper.o"
-	@echo "... src/db_helper.i"
-	@echo "... src/db_helper.s"
-	@echo "... src/email_report.o"
-	@echo "... src/email_report.i"
-	@echo "... src/email_report.s"
-	@echo "... src/hal/hal_dht11.o"
-	@echo "... src/hal/hal_dht11.i"
-	@echo "... src/hal/hal_dht11.s"
-	@echo "... src/hal/hal_echo.o"
-	@echo "... src/hal/hal_echo.i"
-	@echo "... src/hal/hal_echo.s"
-	@echo "... src/hal/hal_gpio.o"
-	@echo "... src/hal/hal_gpio.i"
-	@echo "... src/hal/hal_gpio.s"
-	@echo "... src/hal/hal_oled.o"
-	@echo "... src/hal/hal_oled.i"
-	@echo "... src/hal/hal_oled.s"
-	@echo "... src/hal/hal_system.o"
-	@echo "... src/hal/hal_system.i"
-	@echo "... src/hal/hal_system.s"
+	@echo "... src/c/db_helper.o"
+	@echo "... src/c/db_helper.i"
+	@echo "... src/c/db_helper.s"
+	@echo "... src/c/email_report.o"
+	@echo "... src/c/email_report.i"
+	@echo "... src/c/email_report.s"
+	@echo "... src/c/hal/hal_dht11.o"
+	@echo "... src/c/hal/hal_dht11.i"
+	@echo "... src/c/hal/hal_dht11.s"
+	@echo "... src/c/hal/hal_echo.o"
+	@echo "... src/c/hal/hal_echo.i"
+	@echo "... src/c/hal/hal_echo.s"
+	@echo "... src/c/hal/hal_gpio.o"
+	@echo "... src/c/hal/hal_gpio.i"
+	@echo "... src/c/hal/hal_gpio.s"
+	@echo "... src/c/hal/hal_oled.o"
+	@echo "... src/c/hal/hal_oled.i"
+	@echo "... src/c/hal/hal_oled.s"
+	@echo "... src/c/hal/hal_system.o"
+	@echo "... src/c/hal/hal_system.i"
+	@echo "... src/c/hal/hal_system.s"
+	@echo "... src/c/menu.o"
+	@echo "... src/c/menu.i"
+	@echo "... src/c/menu.s"
+	@echo "... src/c/mqtt_client.o"
+	@echo "... src/c/mqtt_client.i"
+	@echo "... src/c/mqtt_client.s"
+	@echo "... src/c/network_monitor.o"
+	@echo "... src/c/network_monitor.i"
+	@echo "... src/c/network_monitor.s"
+	@echo "... src/c/pages/page_advanced_analysis.o"
+	@echo "... src/c/pages/page_advanced_analysis.i"
+	@echo "... src/c/pages/page_advanced_analysis.s"
+	@echo "... src/c/pages/page_dashboard.o"
+	@echo "... src/c/pages/page_dashboard.i"
+	@echo "... src/c/pages/page_dashboard.s"
+	@echo "... src/c/pages/page_docker.o"
+	@echo "... src/c/pages/page_docker.i"
+	@echo "... src/c/pages/page_docker.s"
+	@echo "... src/c/pages/page_env.o"
+	@echo "... src/c/pages/page_env.i"
+	@echo "... src/c/pages/page_env.s"
+	@echo "... src/c/pages/page_interface.o"
+	@echo "... src/c/pages/page_interface.i"
+	@echo "... src/c/pages/page_interface.s"
+	@echo "... src/c/pages/page_network.o"
+	@echo "... src/c/pages/page_network.i"
+	@echo "... src/c/pages/page_network.s"
+	@echo "... src/c/pages/page_screensaver.o"
+	@echo "... src/c/pages/page_screensaver.i"
+	@echo "... src/c/pages/page_screensaver.s"
+	@echo "... src/c/pages/page_system.o"
+	@echo "... src/c/pages/page_system.i"
+	@echo "... src/c/pages/page_system.s"
+	@echo "... src/c/pages/page_terminal.o"
+	@echo "... src/c/pages/page_terminal.i"
+	@echo "... src/c/pages/page_terminal.s"
+	@echo "... src/c/pages/page_tools.o"
+	@echo "... src/c/pages/page_tools.i"
+	@echo "... src/c/pages/page_tools.s"
+	@echo "... src/c/system_monitor.o"
+	@echo "... src/c/system_monitor.i"
+	@echo "... src/c/system_monitor.s"
+	@echo "... src/c/thread.o"
+	@echo "... src/c/thread.i"
+	@echo "... src/c/thread.s"
+	@echo "... src/cpp/advanced_analysis.o"
+	@echo "... src/cpp/advanced_analysis.i"
+	@echo "... src/cpp/advanced_analysis.s"
+	@echo "... src/cpp/hello.o"
+	@echo "... src/cpp/hello.i"
+	@echo "... src/cpp/hello.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... src/menu.o"
-	@echo "... src/menu.i"
-	@echo "... src/menu.s"
-	@echo "... src/mqtt_client.o"
-	@echo "... src/mqtt_client.i"
-	@echo "... src/mqtt_client.s"
-	@echo "... src/network_monitor.o"
-	@echo "... src/network_monitor.i"
-	@echo "... src/network_monitor.s"
-	@echo "... src/pages/page_dashboard.o"
-	@echo "... src/pages/page_dashboard.i"
-	@echo "... src/pages/page_dashboard.s"
-	@echo "... src/pages/page_docker.o"
-	@echo "... src/pages/page_docker.i"
-	@echo "... src/pages/page_docker.s"
-	@echo "... src/pages/page_env.o"
-	@echo "... src/pages/page_env.i"
-	@echo "... src/pages/page_env.s"
-	@echo "... src/pages/page_interface.o"
-	@echo "... src/pages/page_interface.i"
-	@echo "... src/pages/page_interface.s"
-	@echo "... src/pages/page_network.o"
-	@echo "... src/pages/page_network.i"
-	@echo "... src/pages/page_network.s"
-	@echo "... src/pages/page_screensaver.o"
-	@echo "... src/pages/page_screensaver.i"
-	@echo "... src/pages/page_screensaver.s"
-	@echo "... src/pages/page_system.o"
-	@echo "... src/pages/page_system.i"
-	@echo "... src/pages/page_system.s"
-	@echo "... src/pages/page_terminal.o"
-	@echo "... src/pages/page_terminal.i"
-	@echo "... src/pages/page_terminal.s"
-	@echo "... src/pages/page_tools.o"
-	@echo "... src/pages/page_tools.i"
-	@echo "... src/pages/page_tools.s"
-	@echo "... src/system_monitor.o"
-	@echo "... src/system_monitor.i"
-	@echo "... src/system_monitor.s"
-	@echo "... src/thread.o"
-	@echo "... src/thread.i"
-	@echo "... src/thread.s"
 .PHONY : help
 
 

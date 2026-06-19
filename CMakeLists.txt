@@ -1,66 +1,78 @@
-# 在文件最开头添加
+# ====================== 链接器优化 ======================
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fuse-ld=mold")
 set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -fuse-ld=mold")
+
 cmake_minimum_required(VERSION 3.10)
-# 明确指定C语言项目，避免编译器兼容问题
-project(expansion_ui C)
+project(expansion_ui C CXX)
+
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# ====================== 优化：兼容式依赖查找，避免pkg-config报错 ======================
-# 1. 查找curl库（HTTP请求必需，强依赖）
+# ====================== 默认并行编译 ======================
+set(CMAKE_BUILD_PARALLEL_LEVEL 16 CACHE STRING "Parallel build level" FORCE)
+
+# ====================== 查找依赖 ======================
+# 1. curl
 find_package(CURL REQUIRED)
 
-# 2. 兼容式查找cJSON库：优先用pkg-config，失败则直接查找库文件
+# 2. cJSON
 find_package(PkgConfig QUIET)
 if(PkgConfig_FOUND)
     pkg_check_modules(CJSON QUIET libcjson)
 endif()
-
-# 若pkg-config查找失败，直接手动查找cJSON头文件和库
 if(NOT CJSON_FOUND)
     find_path(CJSON_INCLUDE_DIRS NAMES cjson/cJSON.h REQUIRED)
     find_library(CJSON_LIBRARIES NAMES cjson libcjson REQUIRED)
 endif()
 
-# 原有头文件目录（完全保留，无任何修改）
-include_directories(/home/cat/expansion/include)
-include_directories(/home/cat/expansion/include/hal)
-include_directories(/home/cat/expansion/include/pages)
-# 新增：依赖库头文件目录
-include_directories(${CURL_INCLUDE_DIRS})
-include_directories(${CJSON_INCLUDE_DIRS})
+# 3. MySQL
+if(PkgConfig_FOUND)
+    pkg_check_modules(MYSQL QUIET mysqlclient)
+endif()
+if(NOT MYSQL_FOUND)
+    find_path(MYSQL_INCLUDE_DIRS NAMES mysql/mysql.h mysql.h 
+        PATHS /usr/include/mysql /usr/local/include/mysql REQUIRED)
+    find_library(MYSQL_LIBRARIES NAMES mysqlclient 
+        PATHS /usr/lib/aarch64-linux-gnu /usr/lib/x86_64-linux-gnu /usr/local/lib REQUIRED)
+endif()
 
-# 原有源文件列表（完全保留，无任何修改）
-set(SOURCES
-    /home/cat/expansion/src/main.c
-    /home/cat/expansion/src/menu.c
-    /home/cat/expansion/src/hal/hal_dht11.c
-    /home/cat/expansion/src/thread.c
-    /home/cat/expansion/src/mqtt_client.c
-    /home/cat/expansion/src/db_helper.c
-/home/cat/expansion/src/email_report.c
-
-    /home/cat/expansion/src/hal/hal_gpio.c
-    /home/cat/expansion/src/hal/hal_oled.c
-    /home/cat/expansion/src/hal/hal_system.c
-    /home/cat/expansion/src/hal/hal_echo.c
-    /home/cat/expansion/src/pages/page_dashboard.c
-    /home/cat/expansion/src/pages/page_tools.c
-    /home/cat/expansion/src/pages/page_system.c
-    /home/cat/expansion/src/pages/page_interface.c
-    /home/cat/expansion/src/pages/page_env.c
-    /home/cat/expansion/src/pages/page_docker.c
-    /home/cat/expansion/src/pages/page_network.c
-    /home/cat/expansion/src/pages/page_terminal.c
-    /home/cat/expansion/src/pages/page_screensaver.c
-    /home/cat/expansion/src/network_monitor.c
-    /home/cat/expansion/src/system_monitor.c
+# ====================== 头文件路径 ======================
+include_directories(
+    ${CMAKE_SOURCE_DIR}/include
+    ${CMAKE_SOURCE_DIR}/include/c          # 核心头文件在这里（db_helper.h, menu.h...）
+    ${CMAKE_SOURCE_DIR}/include/c/hal      # HAL 头文件（hal_dht11.h...）
+    ${CMAKE_SOURCE_DIR}/include/c/pages    # 页面头文件（page_tools.h...）
+    ${CMAKE_SOURCE_DIR}/include/cpp        # C++ 头文件
+    ${CURL_INCLUDE_DIRS}
+    ${CJSON_INCLUDE_DIRS}
+    ${MYSQL_INCLUDE_DIRS}
 )
 
+# ====================== 自动收集源文件 ======================
+# C 源文件
+file(GLOB_RECURSE C_SOURCES
+    "${CMAKE_SOURCE_DIR}/src/*.c"
+    "${CMAKE_SOURCE_DIR}/src/hal/*.c"
+    "${CMAKE_SOURCE_DIR}/src/pages/*.c"
+)
+
+# C++ 源文件
+file(GLOB_RECURSE CPP_SOURCES
+    "${CMAKE_SOURCE_DIR}/src/cpp/*.cpp"
+)
+
+# 合并所有源文件
+set(SOURCES
+    ${C_SOURCES}
+    ${CPP_SOURCES}
+)
+
+# ====================== 可执行文件 ======================
 add_executable(expansion_ui ${SOURCES})
 
-# 原有链接库完全保留，新增curl和cJSON链接
+# ====================== 链接库 ======================
 target_link_libraries(expansion_ui PRIVATE 
     mosquitto 
     pthread 
@@ -71,17 +83,5 @@ target_link_libraries(expansion_ui PRIVATE
     xlsxwriter   
     m       
 )
-# 3. 查找 MySQL 客户端库
-find_package(PkgConfig QUIET)
-if(PkgConfig_FOUND)
-    pkg_check_modules(MYSQL QUIET mysqlclient)
-endif()
 
-# 若pkg-config找不到，手动查找
-if(NOT MYSQL_FOUND)
-    find_path(MYSQL_INCLUDE_DIRS NAMES mysql/mysql.h mysql.h PATHS /usr/include/mysql /usr/local/include/mysql REQUIRED)
-    find_library(MYSQL_LIBRARIES NAMES mysqlclient PATHS /usr/lib/aarch64-linux-gnu /usr/lib/x86_64-linux-gnu /usr/local/lib REQUIRED)
-endif()
-
-# 添加 MySQL 头文件目录
-include_directories(${MYSQL_INCLUDE_DIRS})
+# 如果使用 mold 链接器失败，可以注释掉开头两行

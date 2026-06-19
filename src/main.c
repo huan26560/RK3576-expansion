@@ -11,7 +11,7 @@
 #include "mqtt_client.h"
 #include "menu.h"
 #include "thread.h"
-
+#include "c_api_wrapper.h"
 // 定义常量
 #define DISPLAY_REFRESH_RATE_HZ 60
 #define DISPLAY_DELAY_US (1000000 / DISPLAY_REFRESH_RATE_HZ)
@@ -130,6 +130,7 @@ int main(void)
 
     // 6. 主循环
     printf("进入主循环...\n");
+    hello_from_cpp();
     while (running)
     {
         menu_render();

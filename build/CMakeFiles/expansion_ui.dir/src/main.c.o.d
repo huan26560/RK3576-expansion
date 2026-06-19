@@ -101,8 +101,8 @@ CMakeFiles/expansion_ui.dir/src/main.c.o: /home/cat/expansion/src/main.c \
  /usr/include/aarch64-linux-gnu/bits/pthread_stack_min-dynamic.h \
  /usr/include/aarch64-linux-gnu/bits/pthread_stack_min.h \
  /usr/lib/gcc/aarch64-linux-gnu/11/include/stdatomic.h \
- /home/cat/expansion/include/hal/hal_oled.h \
- /home/cat/expansion/include/hal/hal_gpio.h /usr/include/linux/input.h \
+ /home/cat/expansion/include/c/hal/hal_oled.h \
+ /home/cat/expansion/include/c/hal/hal_gpio.h /usr/include/linux/input.h \
  /usr/include/aarch64-linux-gnu/sys/ioctl.h \
  /usr/include/aarch64-linux-gnu/bits/ioctls.h \
  /usr/include/aarch64-linux-gnu/asm/ioctls.h \
@@ -112,12 +112,28 @@ CMakeFiles/expansion_ui.dir/src/main.c.o: /home/cat/expansion/src/main.c \
  /usr/include/aarch64-linux-gnu/bits/ioctl-types.h \
  /usr/include/aarch64-linux-gnu/sys/ttydefaults.h \
  /usr/include/linux/input-event-codes.h \
- /home/cat/expansion/include/hal/hal_system.h \
- /home/cat/expansion/include/hal/hal_echo.h \
- /home/cat/expansion/include/mqtt_client.h \
- /home/cat/expansion/include/menu.h \
+ /home/cat/expansion/include/c/hal/hal_system.h \
+ /home/cat/expansion/include/c/hal/hal_echo.h \
+ /home/cat/expansion/include/c/mqtt_client.h \
+ /home/cat/expansion/include/c/menu.h \
  /usr/lib/gcc/aarch64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \
  /usr/include/aarch64-linux-gnu/bits/wchar.h \
  /usr/include/aarch64-linux-gnu/bits/stdint-uintn.h \
- /home/cat/expansion/include/pages/page_interface.h \
- /home/cat/expansion/include/thread.h
+ /home/cat/expansion/include/c/pages/page_interface.h \
+ /home/cat/expansion/include/c/thread.h \
+ /home/cat/expansion/include/c/c_api_wrapper.h /usr/include/stdlib.h \
+ /usr/include/aarch64-linux-gnu/bits/waitflags.h \
+ /usr/include/aarch64-linux-gnu/bits/waitstatus.h /usr/include/alloca.h \
+ /usr/include/aarch64-linux-gnu/bits/stdlib-float.h \
+ /usr/lib/gcc/aarch64-linux-gnu/11/include/stdbool.h \
+ /home/cat/expansion/include/c/db_helper.h \
+ /home/cat/expansion/include/c/email_report.h \
+ /home/cat/expansion/include/c/mqtt_client.h \
+ /home/cat/expansion/include/c/network_monitor.h \
+ /home/cat/expansion/include/c/system_monitor.h /usr/include/threads.h \
+ /home/cat/expansion/include/c/menu.h \
+ /home/cat/expansion/include/c/hal/hal_gpio.h \
+ /home/cat/expansion/include/c/hal/hal_dht11.h \
+ /home/cat/expansion/include/c/hal/hal_oled.h \
+ /home/cat/expansion/include/c/hal/hal_system.h \
+ /home/cat/expansion/include/c/hal/hal_echo.h
