@@ -31,6 +31,11 @@
 },
 {
   "directory": "/home/cat/expansion/build",
+  "command": "/usr/bin/aarch64-linux-gnu-gcc  -I/home/cat/expansion/include -I/home/cat/expansion/include/hal -I/home/cat/expansion/include/pages -I/usr/include/cjson -I/usr/include/mysql -g -std=gnu11 -o CMakeFiles/expansion_ui.dir/src/email_report.c.o -c /home/cat/expansion/src/email_report.c",
+  "file": "/home/cat/expansion/src/email_report.c"
+},
+{
+  "directory": "/home/cat/expansion/build",
   "command": "/usr/bin/aarch64-linux-gnu-gcc  -I/home/cat/expansion/include -I/home/cat/expansion/include/hal -I/home/cat/expansion/include/pages -I/usr/include/cjson -I/usr/include/mysql -g -std=gnu11 -o CMakeFiles/expansion_ui.dir/src/hal/hal_gpio.c.o -c /home/cat/expansion/src/hal/hal_gpio.c",
   "file": "/home/cat/expansion/src/hal/hal_gpio.c"
 },

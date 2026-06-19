@@ -25,6 +25,7 @@
 #include "hal_oled.h"
 #include "db_helper.h" // 新增
 #include "hal_echo.h"
+#include "email_report.h"
 /* ==================== 全局配置 & 常量定义 ==================== */
 // 天气API配置
 #define DEFAULT_LATITUDE "34.62"
@@ -385,7 +386,7 @@ void *data_publish_thread(void *arg)
             /* 新增：每分钟存一次数据库 */
             static time_t last_db_save = 0;
             time_t now = time(NULL);
-            if (now - last_db_save >= 60*30)
+            if (now - last_db_save >= 60 * 30)
             {
                 db_save_dht11(temp, hum); // 一行同时存
                 last_db_save = now;
@@ -457,41 +458,41 @@ void *button_thread(void *arg)
             hal_led_set(1, 0);
             // hal_beep_set(0);
         }
-        usleep(50000); // 10ms检测一次，保证按键响应速度
+        usleep(10000); // 10ms检测一次，保证按键响应速度
     }
 
     printf("[BUTTON] Thread stopped\n");
     return NULL;
 }
 
-// 天气工作线程（保留，优化退出逻辑）
 void *weather_worker_thread(void *arg)
 {
     (void)arg;
     printf("[WEATHER] Thread started\n");
 
-    // 初始化CURL
     curl_global_init(CURL_GLOBAL_ALL);
-
-    // 等待网络就绪
     wait_network_ready();
 
-    // 首次获取定位+天气
+    // 首次获取天气（启动时）
     if (g_threads_running)
     {
         auto_get_location_async();
         get_weather_async();
     }
 
-    // 主循环
+    // 定时器：记录上次执行完整刷新+存储的时间
+    time_t last_update_time = time(NULL); // 从现在开始计时
+
     while (g_threads_running)
     {
+        // ---- 处理外部手动刷新请求（只刷新，不存储） ----
         if (weather_need_refresh)
         {
             if (is_network_ready())
             {
                 auto_get_location_async();
                 get_weather_async();
+                printf("[WEATHER] Manual refresh triggered\n");
             }
             else
             {
@@ -502,10 +503,52 @@ void *weather_worker_thread(void *arg)
             }
             weather_need_refresh = 0;
         }
-        usleep(100000); // 100ms检测一次刷新请求
+
+        // ---- 定时自动刷新+存储（每1小时） ----
+        time_t now = time(NULL);
+        if (now - last_update_time >= 3600)
+        {
+            if (is_network_ready())
+            {
+                // 1. 刷新天气
+                auto_get_location_async();
+                get_weather_async();
+
+                // 2. 立即存储（必须刷新后才存）
+                pthread_mutex_lock(&weather_mutex);
+                if (net_weather.is_valid)
+                {
+                    float temp = net_weather.temp;
+                    float humi = net_weather.humi;
+                    char desc[20], loc[64];
+                    strncpy(desc, net_weather.weather_text, sizeof(desc) - 1);
+                    strncpy(loc, weather_address, sizeof(loc) - 1);
+                    pthread_mutex_unlock(&weather_mutex);
+
+                    db_save_weather(temp, humi, loc, desc);
+                    last_update_time = now; // 更新定时器
+                    printf("[WEATHER] Auto refresh and saved (4h interval)\n");
+                }
+                else
+                {
+                    pthread_mutex_unlock(&weather_mutex);
+                    printf("[WEATHER] Auto refresh got invalid data, skip save\n");
+                    // 数据无效，不更新时间，下次循环再试（避免因临时无效而错过存储）
+                    // 但为了防止频繁重试，可增加退避，简单起见可更新时间
+                    // 这里我们选择更新时间，避免死循环
+                    last_update_time = now;
+                }
+            }
+            else
+            {
+                printf("[WEATHER] Network not ready, auto refresh skipped\n");
+                // 网络未就绪，不更新时间，下次循环再尝试
+            }
+        }
+
+        usleep(100000); // 100ms检测一次
     }
 
-    // 资源清理
     curl_global_cleanup();
     pthread_mutex_destroy(&weather_mutex);
     printf("[WEATHER] Thread stopped\n");
@@ -543,6 +586,10 @@ void threads_init(void)
     db_init();
     // 创建优化后的线程（从6个减少到4个）
     pthread_t mqtt_t, publish_t, btn_t, weather_t;
+    pthread_t email_t;
+    email_report_init("2656086785@qq.com", 8, 0); // 每天早上8点发送
+    // email_send_daily_report();
+    create_thread(&email_t, email_report_thread, "EMAIL");
     create_thread(&mqtt_t, mqtt_thread, "MQTT");
     create_thread(&publish_t, data_publish_thread, "DATA-PUBLISH"); // 合并后的发布线程
     create_thread(&btn_t, button_thread, "BUTTON");

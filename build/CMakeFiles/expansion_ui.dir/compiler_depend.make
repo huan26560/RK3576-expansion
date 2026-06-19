@@ -108,6 +108,128 @@ CMakeFiles/expansion_ui.dir/src/db_helper.c.o: ../src/db_helper.c \
   /usr/include/xlsxwriter/utility.h \
   ../include/db_helper.h
 
+CMakeFiles/expansion_ui.dir/src/email_report.c.o: ../src/email_report.c \
+  /usr/include/stdc-predef.h \
+  /usr/include/stdio.h \
+  /usr/include/aarch64-linux-gnu/bits/libc-header-start.h \
+  /usr/include/features.h \
+  /usr/include/features-time64.h \
+  /usr/include/aarch64-linux-gnu/bits/wordsize.h \
+  /usr/include/aarch64-linux-gnu/bits/timesize.h \
+  /usr/include/aarch64-linux-gnu/sys/cdefs.h \
+  /usr/include/aarch64-linux-gnu/bits/long-double.h \
+  /usr/include/aarch64-linux-gnu/gnu/stubs.h \
+  /usr/include/aarch64-linux-gnu/gnu/stubs-lp64.h \
+  /usr/lib/gcc/aarch64-linux-gnu/11/include/stddef.h \
+  /usr/lib/gcc/aarch64-linux-gnu/11/include/stdarg.h \
+  /usr/include/aarch64-linux-gnu/bits/types.h \
+  /usr/include/aarch64-linux-gnu/bits/typesizes.h \
+  /usr/include/aarch64-linux-gnu/bits/time64.h \
+  /usr/include/aarch64-linux-gnu/bits/types/__fpos_t.h \
+  /usr/include/aarch64-linux-gnu/bits/types/__mbstate_t.h \
+  /usr/include/aarch64-linux-gnu/bits/types/__fpos64_t.h \
+  /usr/include/aarch64-linux-gnu/bits/types/__FILE.h \
+  /usr/include/aarch64-linux-gnu/bits/types/FILE.h \
+  /usr/include/aarch64-linux-gnu/bits/types/struct_FILE.h \
+  /usr/include/aarch64-linux-gnu/bits/stdio_lim.h \
+  /usr/include/aarch64-linux-gnu/bits/floatn.h \
+  /usr/include/aarch64-linux-gnu/bits/floatn-common.h \
+  /usr/include/stdlib.h \
+  /usr/include/aarch64-linux-gnu/bits/waitflags.h \
+  /usr/include/aarch64-linux-gnu/bits/waitstatus.h \
+  /usr/include/aarch64-linux-gnu/sys/types.h \
+  /usr/include/aarch64-linux-gnu/bits/types/clock_t.h \
+  /usr/include/aarch64-linux-gnu/bits/types/clockid_t.h \
+  /usr/include/aarch64-linux-gnu/bits/types/time_t.h \
+  /usr/include/aarch64-linux-gnu/bits/types/timer_t.h \
+  /usr/include/aarch64-linux-gnu/bits/stdint-intn.h \
+  /usr/include/endian.h \
+  /usr/include/aarch64-linux-gnu/bits/endian.h \
+  /usr/include/aarch64-linux-gnu/bits/endianness.h \
+  /usr/include/aarch64-linux-gnu/bits/byteswap.h \
+  /usr/include/aarch64-linux-gnu/bits/uintn-identity.h \
+  /usr/include/aarch64-linux-gnu/sys/select.h \
+  /usr/include/aarch64-linux-gnu/bits/select.h \
+  /usr/include/aarch64-linux-gnu/bits/types/sigset_t.h \
+  /usr/include/aarch64-linux-gnu/bits/types/__sigset_t.h \
+  /usr/include/aarch64-linux-gnu/bits/types/struct_timeval.h \
+  /usr/include/aarch64-linux-gnu/bits/types/struct_timespec.h \
+  /usr/include/aarch64-linux-gnu/bits/pthreadtypes.h \
+  /usr/include/aarch64-linux-gnu/bits/thread-shared-types.h \
+  /usr/include/aarch64-linux-gnu/bits/pthreadtypes-arch.h \
+  /usr/include/aarch64-linux-gnu/bits/atomic_wide_counter.h \
+  /usr/include/aarch64-linux-gnu/bits/struct_mutex.h \
+  /usr/include/aarch64-linux-gnu/bits/struct_rwlock.h \
+  /usr/include/alloca.h \
+  /usr/include/aarch64-linux-gnu/bits/stdlib-float.h \
+  /usr/include/string.h \
+  /usr/include/aarch64-linux-gnu/bits/types/locale_t.h \
+  /usr/include/aarch64-linux-gnu/bits/types/__locale_t.h \
+  /usr/include/strings.h \
+  /usr/include/time.h \
+  /usr/include/aarch64-linux-gnu/bits/time.h \
+  /usr/include/aarch64-linux-gnu/bits/types/struct_tm.h \
+  /usr/include/aarch64-linux-gnu/bits/types/struct_itimerspec.h \
+  /usr/include/math.h \
+  /usr/include/aarch64-linux-gnu/bits/math-vector.h \
+  /usr/include/aarch64-linux-gnu/bits/libm-simd-decl-stubs.h \
+  /usr/include/aarch64-linux-gnu/bits/flt-eval-method.h \
+  /usr/include/aarch64-linux-gnu/bits/fp-logb.h \
+  /usr/include/aarch64-linux-gnu/bits/fp-fast.h \
+  /usr/include/aarch64-linux-gnu/bits/mathcalls-helper-functions.h \
+  /usr/include/aarch64-linux-gnu/bits/mathcalls.h \
+  /usr/include/unistd.h \
+  /usr/include/aarch64-linux-gnu/bits/posix_opt.h \
+  /usr/include/aarch64-linux-gnu/bits/environments.h \
+  /usr/include/aarch64-linux-gnu/bits/confname.h \
+  /usr/include/aarch64-linux-gnu/bits/getopt_posix.h \
+  /usr/include/aarch64-linux-gnu/bits/getopt_core.h \
+  /usr/include/aarch64-linux-gnu/bits/unistd_ext.h \
+  /usr/include/pthread.h \
+  /usr/include/sched.h \
+  /usr/include/aarch64-linux-gnu/bits/sched.h \
+  /usr/include/aarch64-linux-gnu/bits/types/struct_sched_param.h \
+  /usr/include/aarch64-linux-gnu/bits/cpu-set.h \
+  /usr/include/aarch64-linux-gnu/bits/setjmp.h \
+  /usr/include/aarch64-linux-gnu/bits/types/struct___jmp_buf_tag.h \
+  /usr/include/aarch64-linux-gnu/bits/pthread_stack_min-dynamic.h \
+  /usr/include/aarch64-linux-gnu/bits/pthread_stack_min.h \
+  /usr/include/aarch64-linux-gnu/curl/curl.h \
+  /usr/include/aarch64-linux-gnu/curl/curlver.h \
+  /usr/include/aarch64-linux-gnu/curl/system.h \
+  /usr/include/aarch64-linux-gnu/sys/socket.h \
+  /usr/include/aarch64-linux-gnu/bits/types/struct_iovec.h \
+  /usr/include/aarch64-linux-gnu/bits/socket.h \
+  /usr/include/aarch64-linux-gnu/bits/socket_type.h \
+  /usr/include/aarch64-linux-gnu/bits/sockaddr.h \
+  /usr/include/aarch64-linux-gnu/asm/socket.h \
+  /usr/include/asm-generic/socket.h \
+  /usr/include/linux/posix_types.h \
+  /usr/include/linux/stddef.h \
+  /usr/include/aarch64-linux-gnu/asm/posix_types.h \
+  /usr/include/asm-generic/posix_types.h \
+  /usr/include/aarch64-linux-gnu/asm/bitsperlong.h \
+  /usr/include/asm-generic/bitsperlong.h \
+  /usr/include/aarch64-linux-gnu/asm/sockios.h \
+  /usr/include/asm-generic/sockios.h \
+  /usr/include/aarch64-linux-gnu/bits/types/struct_osockaddr.h \
+  /usr/lib/gcc/aarch64-linux-gnu/11/include/limits.h \
+  /usr/lib/gcc/aarch64-linux-gnu/11/include/syslimits.h \
+  /usr/include/limits.h \
+  /usr/include/aarch64-linux-gnu/bits/posix1_lim.h \
+  /usr/include/aarch64-linux-gnu/bits/local_lim.h \
+  /usr/include/linux/limits.h \
+  /usr/include/aarch64-linux-gnu/bits/posix2_lim.h \
+  /usr/include/aarch64-linux-gnu/sys/time.h \
+  /usr/include/aarch64-linux-gnu/curl/easy.h \
+  /usr/include/aarch64-linux-gnu/curl/multi.h \
+  /usr/include/aarch64-linux-gnu/curl/curl.h \
+  /usr/include/aarch64-linux-gnu/curl/urlapi.h \
+  /usr/include/aarch64-linux-gnu/curl/options.h \
+  /usr/include/aarch64-linux-gnu/curl/typecheck-gcc.h \
+  ../include/email_report.h \
+  ../include/db_helper.h
+
 CMakeFiles/expansion_ui.dir/src/hal/hal_dht11.c.o: ../src/hal/hal_dht11.c \
   /usr/include/stdc-predef.h \
   /usr/include/stdio.h \
@@ -1737,6 +1859,14 @@ CMakeFiles/expansion_ui.dir/src/pages/page_tools.c.o: ../src/pages/page_tools.c 
   /usr/include/aarch64-linux-gnu/asm/errno.h \
   /usr/include/asm-generic/errno.h \
   /usr/include/asm-generic/errno-base.h \
+  /usr/include/math.h \
+  /usr/include/aarch64-linux-gnu/bits/math-vector.h \
+  /usr/include/aarch64-linux-gnu/bits/libm-simd-decl-stubs.h \
+  /usr/include/aarch64-linux-gnu/bits/flt-eval-method.h \
+  /usr/include/aarch64-linux-gnu/bits/fp-logb.h \
+  /usr/include/aarch64-linux-gnu/bits/fp-fast.h \
+  /usr/include/aarch64-linux-gnu/bits/mathcalls-helper-functions.h \
+  /usr/include/aarch64-linux-gnu/bits/mathcalls.h \
   ../include/hal/hal_oled.h \
   ../include/pages/page_interface.h \
   ../include/menu.h \
@@ -1745,7 +1875,8 @@ CMakeFiles/expansion_ui.dir/src/pages/page_tools.c.o: ../src/pages/page_tools.c 
   /usr/include/aarch64-linux-gnu/bits/wchar.h \
   /usr/include/aarch64-linux-gnu/bits/stdint-uintn.h \
   ../include/hal/font.h \
-  ../include/db_helper.h
+  ../include/db_helper.h \
+  ../include/mqtt_client.h
 
 CMakeFiles/expansion_ui.dir/src/system_monitor.c.o: ../src/system_monitor.c \
   /usr/include/stdc-predef.h \
@@ -1976,519 +2107,540 @@ CMakeFiles/expansion_ui.dir/src/thread.c.o: ../src/thread.c \
   ../include/pages/page_interface.h \
   ../include/hal/hal_oled.h \
   ../include/db_helper.h \
-  ../include/hal/hal_echo.h
+  ../include/hal/hal_echo.h \
+  ../include/email_report.h
 
 
-/usr/include/threads.h:
-
-/usr/include/aarch64-linux-gnu/curl/options.h:
-
-/usr/include/aarch64-linux-gnu/curl/urlapi.h:
-
-/usr/include/limits.h:
-
-../src/thread.c:
+/usr/include/cjson/cJSON.h:
 
 /usr/include/aarch64-linux-gnu/sys/stat.h:
 
-/usr/include/aarch64-linux-gnu/curl/curlver.h:
+/usr/include/aarch64-linux-gnu/bits/dirent.h:
 
 /usr/include/dirent.h:
 
-../src/pages/page_screensaver.c:
-
-../src/pages/page_env.c:
-
-/usr/include/linux/const.h:
-
-/usr/include/linux/sysinfo.h:
-
-/usr/include/linux/kernel.h:
-
-/usr/include/aarch64-linux-gnu/bits/in.h:
-
-../src/network_monitor.c:
-
-../include/pages/page_screensaver.h:
-
-../src/menu.c:
-
-../include/thread.h:
-
-../include/menu.h:
-
-/usr/include/aarch64-linux-gnu/bits/signal_ext.h:
-
-/usr/include/aarch64-linux-gnu/bits/sigthread.h:
-
-/usr/include/aarch64-linux-gnu/bits/ss_flags.h:
-
-/usr/include/aarch64-linux-gnu/bits/sigstack.h:
-
-/usr/include/aarch64-linux-gnu/bits/procfs-prregset.h:
-
-/usr/include/aarch64-linux-gnu/bits/procfs-id.h:
-
-/usr/include/aarch64-linux-gnu/bits/procfs.h:
-
-/usr/include/aarch64-linux-gnu/sys/procfs.h:
-
-/usr/include/aarch64-linux-gnu/sys/ucontext.h:
-
-/usr/include/aarch64-linux-gnu/bits/types/stack_t.h:
-
-/usr/include/aarch64-linux-gnu/asm/sigcontext.h:
-
-/usr/include/aarch64-linux-gnu/bits/sigaction.h:
-
-/usr/include/aarch64-linux-gnu/bits/sigevent-consts.h:
-
-/usr/include/aarch64-linux-gnu/bits/types/sigevent_t.h:
-
-/usr/include/aarch64-linux-gnu/bits/siginfo-consts.h:
-
-/usr/include/aarch64-linux-gnu/bits/siginfo-arch.h:
-
-/usr/include/aarch64-linux-gnu/bits/signum-generic.h:
-
-/usr/include/signal.h:
-
-/usr/include/net/if.h:
-
-/usr/include/aarch64-linux-gnu/asm/sockios.h:
-
-/usr/include/asm-generic/socket.h:
-
-/usr/include/aarch64-linux-gnu/bits/sockaddr.h:
-
-/usr/include/aarch64-linux-gnu/bits/types/struct_iovec.h:
-
-../include/hal/font.h:
-
-/usr/include/aarch64-linux-gnu/bits/types/struct___jmp_buf_tag.h:
-
-/usr/include/aarch64-linux-gnu/curl/curl.h:
-
-../src/pages/page_network.c:
-
-/usr/include/asm-generic/sockios.h:
+../src/pages/page_tools.c:
 
 /usr/include/aarch64-linux-gnu/bits/cpu-set.h:
 
+/usr/include/aarch64-linux-gnu/curl/curl.h:
+
+/usr/include/asm-generic/sockios.h:
+
 /usr/include/aarch64-linux-gnu/bits/types/struct_sched_param.h:
-
-/usr/include/aarch64-linux-gnu/bits/sched.h:
-
-/usr/include/aarch64-linux-gnu/curl/typecheck-gcc.h:
-
-/usr/include/sched.h:
-
-/usr/include/pthread.h:
-
-/usr/include/asm-generic/unistd.h:
-
-../include/hal/hal_oled.h:
-
-../src/pages/page_tools.c:
-
-/usr/include/linux/i2c-dev.h:
-
-../src/hal/hal_oled.c:
-
-/usr/include/aarch64-linux-gnu/asm/posix_types.h:
-
-../src/pages/page_terminal.c:
-
-/usr/include/linux/stddef.h:
-
-../src/mqtt_client.c:
-
-/usr/include/linux/posix_types.h:
-
-/usr/include/asm-generic/bitsperlong.h:
-
-/usr/include/aarch64-linux-gnu/asm/bitsperlong.h:
-
-/usr/include/aarch64-linux-gnu/asm/types.h:
-
-/usr/include/aarch64-linux-gnu/sys/ttydefaults.h:
-
-/usr/include/aarch64-linux-gnu/sys/user.h:
-
-/usr/include/aarch64-linux-gnu/bits/types/siginfo_t.h:
-
-/usr/include/aarch64-linux-gnu/bits/socket_type.h:
-
-/usr/include/aarch64-linux-gnu/bits/ioctl-types.h:
-
-../src/pages/page_docker.c:
-
-/usr/lib/gcc/aarch64-linux-gnu/11/include/stdatomic.h:
-
-/usr/include/aarch64-linux-gnu/asm/sve_context.h:
-
-/usr/include/asm-generic/ioctl.h:
-
-/usr/lib/gcc/aarch64-linux-gnu/11/include/syslimits.h:
-
-/usr/include/linux/types.h:
-
-/usr/include/linux/ioctl.h:
-
-/usr/include/aarch64-linux-gnu/bits/types/__fpos_t.h:
-
-/usr/include/aarch64-linux-gnu/bits/atomic_wide_counter.h:
-
-/usr/lib/gcc/aarch64-linux-gnu/11/include/limits.h:
-
-/usr/include/aarch64-linux-gnu/asm/ioctl.h:
-
-/usr/include/aarch64-linux-gnu/bits/pthreadtypes.h:
-
-/usr/include/aarch64-linux-gnu/asm/ioctls.h:
-
-/usr/include/aarch64-linux-gnu/bits/types/struct_timeval.h:
-
-/usr/include/aarch64-linux-gnu/bits/types/__sigset_t.h:
-
-/usr/include/netinet/in.h:
-
-/usr/include/aarch64-linux-gnu/bits/types/struct_timespec.h:
-
-/usr/include/aarch64-linux-gnu/bits/signum-arch.h:
-
-/usr/include/aarch64-linux-gnu/sys/select.h:
-
-/usr/include/aarch64-linux-gnu/bits/uintn-identity.h:
-
-/usr/include/mysql/mysql_version.h:
-
-/usr/include/aarch64-linux-gnu/curl/multi.h:
-
-/usr/include/xlsxwriter/worksheet.h:
-
-../src/hal/hal_echo.c:
 
 /usr/include/aarch64-linux-gnu/bits/pthread_stack_min-dynamic.h:
 
 /usr/include/aarch64-linux-gnu/bits/struct_rwlock.h:
 
-/usr/include/aarch64-linux-gnu/bits/types/time_t.h:
+/usr/include/aarch64-linux-gnu/bits/sched.h:
 
-/usr/include/aarch64-linux-gnu/bits/types/sigset_t.h:
+/usr/include/sched.h:
 
-/usr/include/aarch64-linux-gnu/sys/types.h:
+/usr/include/aarch64-linux-gnu/bits/unistd_ext.h:
 
-/usr/include/aarch64-linux-gnu/bits/pthread_stack_min.h:
+/usr/include/aarch64-linux-gnu/bits/byteswap.h:
 
-/usr/include/xlsxwriter/drawing.h:
+/usr/include/aarch64-linux-gnu/bits/getopt_core.h:
 
-/usr/include/aarch64-linux-gnu/curl/easy.h:
+/usr/include/aarch64-linux-gnu/bits/environments.h:
 
-/usr/include/aarch64-linux-gnu/bits/waitflags.h:
+/usr/include/aarch64-linux-gnu/bits/posix_opt.h:
 
-/usr/include/aarch64-linux-gnu/bits/wchar.h:
+/usr/include/xlsxwriter/hash_table.h:
 
-/usr/include/errno.h:
+/usr/include/aarch64-linux-gnu/bits/fcntl.h:
 
-../include/mqtt_client.h:
+/usr/include/aarch64-linux-gnu/bits/types/struct_timespec.h:
 
-/usr/include/aarch64-linux-gnu/bits/types/sig_atomic_t.h:
+/usr/include/xlsxwriter/format.h:
 
-/usr/include/mysql/mysql_com.h:
+/usr/include/netinet/in.h:
 
-/usr/include/linux/input-event-codes.h:
+/usr/include/aarch64-linux-gnu/bits/mathcalls-helper-functions.h:
 
-/usr/include/aarch64-linux-gnu/bits/waitstatus.h:
+/usr/include/aarch64-linux-gnu/bits/libm-simd-decl-stubs.h:
 
-/usr/include/linux/input.h:
+/usr/include/xlsxwriter/xmlwriter.h:
 
-/usr/include/stdlib.h:
+/usr/include/xlsxwriter/utility.h:
 
-/usr/include/mysql/mysql.h:
+/usr/include/xlsxwriter/chart.h:
 
-/usr/include/aarch64-linux-gnu/bits/types/clockid_t.h:
+/usr/include/aarch64-linux-gnu/bits/types/struct_tm.h:
 
-/usr/include/aarch64-linux-gnu/sys/socket.h:
+/usr/include/fcntl.h:
 
-/usr/include/strings.h:
+/usr/include/xlsxwriter/common.h:
 
-/usr/include/aarch64-linux-gnu/bits/dirent.h:
+/usr/include/ctype.h:
 
-/usr/include/mysql/client_plugin.h:
+/usr/include/aarch64-linux-gnu/bits/local_lim.h:
 
-/usr/include/aarch64-linux-gnu/gnu/stubs-lp64.h:
+/usr/include/xlsxwriter/shared_strings.h:
 
-/usr/include/aarch64-linux-gnu/bits/types/sigval_t.h:
+/usr/include/asm-generic/errno-base.h:
 
-/usr/include/aarch64-linux-gnu/bits/thread-shared-types.h:
+/usr/include/aarch64-linux-gnu/sys/mount.h:
 
-../src/pages/page_interface.c:
+/usr/include/aarch64-linux-gnu/bits/wordsize.h:
 
-/usr/include/aarch64-linux-gnu/bits/pthreadtypes-arch.h:
+../src/email_report.c:
 
-/usr/include/asm-generic/ioctls.h:
+../src/hal/hal_system.c:
 
-/usr/include/features.h:
-
-/usr/include/cjson/cJSON.h:
-
-../include/system_monitor.h:
-
-/usr/include/aarch64-linux-gnu/bits/sigstksz.h:
-
-../src/hal/hal_dht11.c:
-
-/usr/include/features-time64.h:
-
-/usr/include/aarch64-linux-gnu/asm/socket.h:
-
-../include/hal/hal_system.h:
-
-/usr/include/aarch64-linux-gnu/bits/stdint-intn.h:
-
-/usr/include/aarch64-linux-gnu/gnu/stubs.h:
-
-/usr/include/aarch64-linux-gnu/bits/libc-header-start.h:
-
-/usr/include/aarch64-linux-gnu/sys/syscall.h:
-
-/usr/include/aarch64-linux-gnu/bits/long-double.h:
-
-/usr/include/linux/limits.h:
-
-/usr/include/stdint.h:
-
-../include/hal/hal_gpio.h:
-
-/usr/include/aarch64-linux-gnu/bits/floatn-common.h:
-
-/usr/lib/gcc/aarch64-linux-gnu/11/include/stdarg.h:
-
-../src/main.c:
-
-/usr/include/aarch64-linux-gnu/bits/types/__locale_t.h:
-
-/usr/include/aarch64-linux-gnu/asm/unistd.h:
-
-/usr/include/asm-generic/int-ll64.h:
-
-/usr/include/aarch64-linux-gnu/bits/types/timer_t.h:
-
-/usr/include/aarch64-linux-gnu/bits/errno.h:
-
-../src/system_monitor.c:
-
-/usr/include/aarch64-linux-gnu/bits/syscall.h:
-
-/usr/lib/gcc/aarch64-linux-gnu/11/include/stddef.h:
-
-/usr/include/stdio.h:
-
-/usr/include/xlsxwriter.h:
-
-/usr/include/string.h:
-
-/usr/include/aarch64-linux-gnu/bits/sigcontext.h:
-
-/usr/include/xlsxwriter/workbook.h:
-
-/usr/include/xlsxwriter/third_party/queue.h:
-
-/usr/include/aarch64-linux-gnu/bits/types/locale_t.h:
-
-/usr/include/aarch64-linux-gnu/bits/types/__sigval_t.h:
-
-/usr/include/xlsxwriter/styles.h:
-
-/usr/include/aarch64-linux-gnu/curl/system.h:
-
-/usr/include/alloca.h:
-
-/usr/include/aarch64-linux-gnu/bits/time64.h:
-
-/usr/include/aarch64-linux-gnu/bits/stdlib-float.h:
-
-/usr/include/mysql/my_list.h:
-
-/usr/include/aarch64-linux-gnu/bits/time.h:
-
-/usr/include/aarch64-linux-gnu/sys/wait.h:
-
-/usr/include/aarch64-linux-gnu/bits/struct_stat.h:
-
-/usr/include/arpa/inet.h:
-
-/usr/include/aarch64-linux-gnu/bits/select.h:
-
-/usr/include/aarch64-linux-gnu/bits/timesize.h:
-
-/usr/include/aarch64-linux-gnu/bits/setjmp.h:
-
-/usr/include/aarch64-linux-gnu/bits/struct_mutex.h:
-
-/usr/include/aarch64-linux-gnu/bits/types.h:
-
-/usr/include/asm-generic/posix_types.h:
-
-/usr/include/stdc-predef.h:
-
-/usr/include/aarch64-linux-gnu/bits/typesizes.h:
-
-/usr/include/aarch64-linux-gnu/bits/stdio_lim.h:
-
-../src/db_helper.c:
-
-../src/pages/page_dashboard.c:
-
-/usr/include/aarch64-linux-gnu/bits/types/struct_FILE.h:
-
-/usr/include/mosquitto.h:
-
-/usr/include/aarch64-linux-gnu/bits/types/__FILE.h:
-
-/usr/include/aarch64-linux-gnu/bits/dirent_ext.h:
-
-../include/network_monitor.h:
-
-../src/hal/hal_gpio.c:
-
-/usr/include/aarch64-linux-gnu/bits/types/FILE.h:
-
-/usr/include/mysql/plugin_auth_common.h:
-
-/usr/include/aarch64-linux-gnu/bits/types/__mbstate_t.h:
-
-/usr/lib/gcc/aarch64-linux-gnu/11/include/stdbool.h:
-
-/usr/include/time.h:
-
-/usr/lib/gcc/aarch64-linux-gnu/11/include/stdint.h:
-
-/usr/include/aarch64-linux-gnu/bits/types/struct_sigstack.h:
-
-/usr/include/aarch64-linux-gnu/bits/stdint-uintn.h:
-
-/usr/include/xlsxwriter/relationships.h:
-
-/usr/include/mysql/field_types.h:
-
-/usr/include/aarch64-linux-gnu/bits/posix2_lim.h:
-
-/usr/include/xlsxwriter/chartsheet.h:
-
-/usr/include/mysql/my_command.h:
-
-/usr/include/mysql/my_compress.h:
-
-/usr/include/mysql/udf_registration_types.h:
-
-../src/pages/page_system.c:
-
-/usr/include/linux/errno.h:
-
-/usr/include/mysql/mysql_time.h:
-
-/usr/include/aarch64-linux-gnu/bits/types/struct_itimerspec.h:
-
-/usr/include/aarch64-linux-gnu/bits/confname.h:
-
-/usr/include/aarch64-linux-gnu/bits/types/clock_t.h:
-
-/usr/include/xlsxwriter/third_party/tree.h:
-
-/usr/include/aarch64-linux-gnu/bits/getopt_posix.h:
-
-../include/pages/page_interface.h:
+/usr/include/unistd.h:
 
 /usr/include/mysql/errmsg.h:
 
-/usr/include/aarch64-linux-gnu/sys/sysinfo.h:
+../include/pages/page_interface.h:
+
+/usr/include/xlsxwriter/third_party/tree.h:
+
+/usr/include/aarch64-linux-gnu/bits/confname.h:
+
+/usr/include/aarch64-linux-gnu/bits/types/struct_itimerspec.h:
+
+/usr/include/mysql/mysql_time.h:
+
+../src/pages/page_system.c:
+
+/usr/include/mysql/udf_registration_types.h:
+
+/usr/include/mysql/my_compress.h:
+
+/usr/include/xlsxwriter/chartsheet.h:
+
+/usr/include/mysql/field_types.h:
+
+/usr/include/aarch64-linux-gnu/bits/types/struct_sigstack.h:
+
+/usr/lib/gcc/aarch64-linux-gnu/11/include/stdbool.h:
+
+/usr/include/aarch64-linux-gnu/bits/types/__mbstate_t.h:
+
+../include/network_monitor.h:
+
+/usr/include/aarch64-linux-gnu/bits/flt-eval-method.h:
+
+/usr/include/mosquitto.h:
+
+/usr/include/threads.h:
 
 /usr/include/aarch64-linux-gnu/bits/types/__fpos64_t.h:
 
 /usr/include/aarch64-linux-gnu/bits/fcntl-linux.h:
 
+/usr/include/aarch64-linux-gnu/sys/sysinfo.h:
+
+/usr/include/aarch64-linux-gnu/bits/types/struct_FILE.h:
+
+../src/pages/page_dashboard.c:
+
+../src/db_helper.c:
+
+/usr/include/aarch64-linux-gnu/bits/stdio_lim.h:
+
+/usr/include/aarch64-linux-gnu/bits/typesizes.h:
+
+/usr/include/stdc-predef.h:
+
+/usr/include/asm-generic/posix_types.h:
+
+/usr/include/aarch64-linux-gnu/bits/types.h:
+
+/usr/include/xlsxwriter/relationships.h:
+
+/usr/include/aarch64-linux-gnu/bits/struct_mutex.h:
+
+/usr/include/aarch64-linux-gnu/bits/timesize.h:
+
+/usr/include/aarch64-linux-gnu/bits/select.h:
+
+/usr/include/arpa/inet.h:
+
+/usr/include/aarch64-linux-gnu/bits/time.h:
+
+/usr/include/mysql/my_list.h:
+
+/usr/include/aarch64-linux-gnu/bits/stdlib-float.h:
+
+/usr/include/aarch64-linux-gnu/bits/time64.h:
+
+/usr/include/aarch64-linux-gnu/curl/system.h:
+
+/usr/include/aarch64-linux-gnu/bits/types/__sigval_t.h:
+
+/usr/include/aarch64-linux-gnu/bits/types/clock_t.h:
+
+/usr/include/aarch64-linux-gnu/bits/types/locale_t.h:
+
+/usr/include/xlsxwriter/third_party/queue.h:
+
+/usr/include/mysql/my_command.h:
+
+/usr/include/xlsxwriter/workbook.h:
+
+/usr/lib/gcc/aarch64-linux-gnu/11/include/stdint.h:
+
+/usr/include/aarch64-linux-gnu/bits/sigcontext.h:
+
+/usr/include/string.h:
+
+/usr/include/xlsxwriter.h:
+
+/usr/include/stdio.h:
+
+/usr/include/aarch64-linux-gnu/bits/errno.h:
+
+../src/hal/hal_gpio.c:
+
+/usr/include/aarch64-linux-gnu/bits/types/timer_t.h:
+
+/usr/include/asm-generic/int-ll64.h:
+
+/usr/include/aarch64-linux-gnu/asm/unistd.h:
+
+/usr/include/aarch64-linux-gnu/bits/types/__locale_t.h:
+
+/usr/lib/gcc/aarch64-linux-gnu/11/include/stdarg.h:
+
+/usr/include/aarch64-linux-gnu/bits/floatn-common.h:
+
+/usr/include/aarch64-linux-gnu/bits/types/FILE.h:
+
+/usr/include/aarch64-linux-gnu/bits/fp-fast.h:
+
+/usr/include/aarch64-linux-gnu/bits/types/sigevent_t.h:
+
+/usr/include/aarch64-linux-gnu/bits/posix1_lim.h:
+
+/usr/include/aarch64-linux-gnu/bits/long-double.h:
+
 /usr/include/aarch64-linux-gnu/asm/errno.h:
 
-/usr/include/aarch64-linux-gnu/bits/types/struct_osockaddr.h:
+/usr/include/aarch64-linux-gnu/sys/syscall.h:
 
-/usr/include/unistd.h:
+/usr/include/aarch64-linux-gnu/bits/libc-header-start.h:
 
-/usr/include/aarch64-linux-gnu/sys/cdefs.h:
+../include/hal/hal_system.h:
 
-/usr/include/aarch64-linux-gnu/bits/ioctls.h:
+/usr/include/features-time64.h:
 
-../src/hal/hal_system.c:
+../src/hal/hal_dht11.c:
 
-/usr/include/asm-generic/errno.h:
+/usr/include/aarch64-linux-gnu/bits/sigstksz.h:
 
-/usr/include/asm-generic/types.h:
+../include/system_monitor.h:
 
-/usr/include/aarch64-linux-gnu/bits/wordsize.h:
+/usr/include/features.h:
 
-/usr/include/asm-generic/errno-base.h:
+../include/email_report.h:
 
-/usr/include/xlsxwriter/shared_strings.h:
+/usr/include/aarch64-linux-gnu/bits/types/sigval_t.h:
 
-/usr/include/aarch64-linux-gnu/bits/local_lim.h:
+../src/main.c:
 
-/usr/include/aarch64-linux-gnu/bits/endianness.h:
+/usr/include/math.h:
 
-/usr/include/ctype.h:
+/usr/include/pthread.h:
 
-/usr/include/xlsxwriter/common.h:
+/usr/include/aarch64-linux-gnu/bits/stdint-intn.h:
 
-/usr/include/fcntl.h:
+/usr/include/aarch64-linux-gnu/bits/fp-logb.h:
 
-/usr/include/aarch64-linux-gnu/bits/types/struct_tm.h:
+/usr/include/mysql/client_plugin.h:
 
-/usr/include/xlsxwriter/chart.h:
+/usr/include/aarch64-linux-gnu/sys/socket.h:
 
-/usr/include/xlsxwriter/utility.h:
+/usr/include/aarch64-linux-gnu/bits/types/clockid_t.h:
 
-/usr/include/xlsxwriter/xmlwriter.h:
+/usr/include/mysql/mysql.h:
 
-../include/db_helper.h:
+/usr/include/stdlib.h:
 
-/usr/include/aarch64-linux-gnu/sys/mount.h:
+/usr/include/linux/input.h:
 
-/usr/include/aarch64-linux-gnu/bits/stat.h:
+../src/thread.c:
 
-/usr/include/aarch64-linux-gnu/bits/procfs-extra.h:
+/usr/include/aarch64-linux-gnu/bits/types/sig_atomic_t.h:
+
+../include/mqtt_client.h:
+
+/usr/include/errno.h:
+
+../include/hal/hal_gpio.h:
+
+/usr/include/aarch64-linux-gnu/bits/wchar.h:
+
+/usr/include/aarch64-linux-gnu/curl/typecheck-gcc.h:
+
+/usr/include/aarch64-linux-gnu/curl/easy.h:
+
+/usr/include/alloca.h:
+
+/usr/include/xlsxwriter/drawing.h:
+
+/usr/include/aarch64-linux-gnu/bits/pthread_stack_min.h:
+
+/usr/include/aarch64-linux-gnu/sys/types.h:
+
+/usr/include/aarch64-linux-gnu/bits/types/sigset_t.h:
+
+/usr/include/aarch64-linux-gnu/bits/types/time_t.h:
+
+/usr/include/stdint.h:
 
 /usr/include/endian.h:
 
 /usr/include/gpiod.h:
 
-/usr/include/aarch64-linux-gnu/bits/posix1_lim.h:
-
-/usr/include/aarch64-linux-gnu/bits/floatn.h:
-
-/usr/include/xlsxwriter/hash_table.h:
-
-/usr/include/xlsxwriter/format.h:
-
-/usr/include/aarch64-linux-gnu/bits/fcntl.h:
-
-/usr/include/aarch64-linux-gnu/bits/posix_opt.h:
-
-/usr/include/aarch64-linux-gnu/bits/environments.h:
-
-/usr/include/aarch64-linux-gnu/bits/getopt_core.h:
-
-/usr/include/aarch64-linux-gnu/bits/byteswap.h:
-
-/usr/include/aarch64-linux-gnu/bits/unistd_ext.h:
-
-../include/hal/hal_dht11.h:
-
-../include/hal/hal_echo.h:
+/usr/include/aarch64-linux-gnu/bits/endian.h:
 
 /usr/include/aarch64-linux-gnu/bits/socket.h:
 
-/usr/include/aarch64-linux-gnu/bits/endian.h:
+/usr/include/aarch64-linux-gnu/curl/multi.h:
+
+/usr/include/asm-generic/errno.h:
+
+/usr/include/mysql/mysql_version.h:
+
+/usr/include/aarch64-linux-gnu/sys/cdefs.h:
+
+/usr/include/aarch64-linux-gnu/bits/ioctls.h:
+
+../src/system_monitor.c:
+
+/usr/include/aarch64-linux-gnu/bits/uintn-identity.h:
+
+/usr/include/mysql/plugin_auth_common.h:
+
+/usr/include/aarch64-linux-gnu/bits/types/struct___jmp_buf_tag.h:
+
+/usr/include/aarch64-linux-gnu/bits/types/__sigset_t.h:
+
+../include/db_helper.h:
+
+/usr/include/aarch64-linux-gnu/bits/types/struct_timeval.h:
+
+/usr/include/aarch64-linux-gnu/bits/pthreadtypes.h:
+
+/usr/lib/gcc/aarch64-linux-gnu/11/include/limits.h:
+
+/usr/include/aarch64-linux-gnu/bits/getopt_posix.h:
+
+/usr/include/aarch64-linux-gnu/asm/ioctl.h:
+
+/usr/include/aarch64-linux-gnu/bits/pthreadtypes-arch.h:
+
+/usr/include/asm-generic/ioctls.h:
+
+../src/pages/page_interface.c:
+
+/usr/include/aarch64-linux-gnu/bits/procfs-extra.h:
+
+/usr/include/aarch64-linux-gnu/bits/atomic_wide_counter.h:
+
+/usr/include/aarch64-linux-gnu/bits/types/__fpos_t.h:
+
+/usr/include/aarch64-linux-gnu/curl/curlver.h:
+
+/usr/include/aarch64-linux-gnu/bits/types/struct_iovec.h:
+
+/usr/include/aarch64-linux-gnu/bits/waitstatus.h:
+
+/usr/include/aarch64-linux-gnu/bits/socket_type.h:
+
+/usr/include/aarch64-linux-gnu/bits/ioctl-types.h:
+
+/usr/include/aarch64-linux-gnu/bits/types/siginfo_t.h:
+
+/usr/include/aarch64-linux-gnu/sys/user.h:
+
+/usr/include/aarch64-linux-gnu/bits/sockaddr.h:
+
+/usr/include/asm-generic/socket.h:
+
+/usr/include/linux/posix_types.h:
+
+../src/mqtt_client.c:
+
+/usr/include/time.h:
+
+../src/pages/page_terminal.c:
+
+/usr/include/aarch64-linux-gnu/bits/setjmp.h:
+
+/usr/include/aarch64-linux-gnu/asm/posix_types.h:
+
+/usr/include/aarch64-linux-gnu/bits/mathcalls.h:
+
+/usr/include/aarch64-linux-gnu/asm/bitsperlong.h:
+
+/usr/include/asm-generic/types.h:
+
+/usr/include/asm-generic/bitsperlong.h:
+
+/usr/include/linux/stddef.h:
+
+/usr/include/aarch64-linux-gnu/asm/sockios.h:
+
+/usr/lib/gcc/aarch64-linux-gnu/11/include/syslimits.h:
+
+/usr/include/linux/ioctl.h:
+
+/usr/include/linux/types.h:
 
 /usr/include/aarch64-linux-gnu/sys/time.h:
 
+/usr/include/limits.h:
+
+/usr/include/aarch64-linux-gnu/bits/waitflags.h:
+
+/usr/include/aarch64-linux-gnu/curl/urlapi.h:
+
+/usr/include/aarch64-linux-gnu/bits/stat.h:
+
+/usr/include/aarch64-linux-gnu/bits/struct_stat.h:
+
+/usr/include/aarch64-linux-gnu/sys/wait.h:
+
+../include/hal/hal_dht11.h:
+
+../src/hal/hal_echo.c:
+
+../include/hal/hal_echo.h:
+
+/usr/include/aarch64-linux-gnu/bits/thread-shared-types.h:
+
 /usr/include/aarch64-linux-gnu/sys/ioctl.h:
+
+/usr/include/aarch64-linux-gnu/asm/ioctls.h:
+
+/usr/include/aarch64-linux-gnu/bits/math-vector.h:
+
+/usr/include/aarch64-linux-gnu/gnu/stubs.h:
+
+/usr/include/asm-generic/ioctl.h:
+
+/usr/include/linux/errno.h:
+
+/usr/include/aarch64-linux-gnu/asm/socket.h:
+
+/usr/include/linux/input-event-codes.h:
+
+/usr/include/aarch64-linux-gnu/asm/sve_context.h:
+
+/usr/lib/gcc/aarch64-linux-gnu/11/include/stdatomic.h:
+
+../src/pages/page_docker.c:
+
+/usr/include/aarch64-linux-gnu/bits/endianness.h:
+
+/usr/include/xlsxwriter/styles.h:
+
+/usr/include/aarch64-linux-gnu/sys/ttydefaults.h:
+
+/usr/include/aarch64-linux-gnu/bits/stdint-uintn.h:
+
+/usr/include/aarch64-linux-gnu/asm/types.h:
+
+/usr/include/aarch64-linux-gnu/bits/posix2_lim.h:
+
+../src/hal/hal_oled.c:
+
+/usr/include/linux/i2c-dev.h:
+
+/usr/include/asm-generic/unistd.h:
+
+../include/hal/font.h:
+
+/usr/include/aarch64-linux-gnu/curl/options.h:
+
+/usr/include/net/if.h:
+
+/usr/include/aarch64-linux-gnu/bits/syscall.h:
+
+/usr/include/strings.h:
+
+/usr/include/signal.h:
+
+/usr/include/aarch64-linux-gnu/bits/signum-generic.h:
+
+/usr/include/aarch64-linux-gnu/bits/dirent_ext.h:
+
+/usr/include/aarch64-linux-gnu/bits/siginfo-arch.h:
+
+/usr/include/linux/limits.h:
+
+/usr/include/aarch64-linux-gnu/bits/siginfo-consts.h:
+
+/usr/include/aarch64-linux-gnu/gnu/stubs-lp64.h:
+
+/usr/include/aarch64-linux-gnu/sys/select.h:
+
+/usr/include/aarch64-linux-gnu/bits/sigevent-consts.h:
+
+/usr/include/aarch64-linux-gnu/bits/sigaction.h:
+
+/usr/include/aarch64-linux-gnu/bits/signum-arch.h:
+
+/usr/include/aarch64-linux-gnu/asm/sigcontext.h:
+
+/usr/include/aarch64-linux-gnu/sys/ucontext.h:
+
+/usr/include/aarch64-linux-gnu/bits/types/stack_t.h:
+
+/usr/include/aarch64-linux-gnu/sys/procfs.h:
+
+/usr/include/aarch64-linux-gnu/bits/procfs.h:
+
+/usr/include/aarch64-linux-gnu/bits/procfs-id.h:
+
+/usr/include/mysql/mysql_com.h:
+
+/usr/include/aarch64-linux-gnu/bits/procfs-prregset.h:
+
+/usr/lib/gcc/aarch64-linux-gnu/11/include/stddef.h:
+
+/usr/include/aarch64-linux-gnu/bits/sigstack.h:
+
+/usr/include/aarch64-linux-gnu/bits/ss_flags.h:
+
+/usr/include/xlsxwriter/worksheet.h:
+
+/usr/include/aarch64-linux-gnu/bits/sigthread.h:
+
+/usr/include/aarch64-linux-gnu/bits/types/__FILE.h:
+
+/usr/include/aarch64-linux-gnu/bits/signal_ext.h:
+
+../include/hal/hal_oled.h:
+
+../include/menu.h:
+
+../include/thread.h:
+
+../src/menu.c:
+
+../include/pages/page_screensaver.h:
+
+../src/network_monitor.c:
+
+../src/pages/page_network.c:
+
+/usr/include/aarch64-linux-gnu/bits/in.h:
+
+/usr/include/aarch64-linux-gnu/bits/types/struct_osockaddr.h:
+
+/usr/include/linux/kernel.h:
+
+/usr/include/aarch64-linux-gnu/bits/floatn.h:
+
+/usr/include/linux/sysinfo.h:
+
+/usr/include/linux/const.h:
+
+../src/pages/page_env.c:
+
+../src/pages/page_screensaver.c:

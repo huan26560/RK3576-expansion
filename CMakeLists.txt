@@ -1,3 +1,6 @@
+# 在文件最开头添加
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fuse-ld=mold")
+set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -fuse-ld=mold")
 cmake_minimum_required(VERSION 3.10)
 # 明确指定C语言项目，避免编译器兼容问题
 project(expansion_ui C)
@@ -36,6 +39,7 @@ set(SOURCES
     /home/cat/expansion/src/thread.c
     /home/cat/expansion/src/mqtt_client.c
     /home/cat/expansion/src/db_helper.c
+/home/cat/expansion/src/email_report.c
 
     /home/cat/expansion/src/hal/hal_gpio.c
     /home/cat/expansion/src/hal/hal_oled.c
@@ -64,7 +68,8 @@ target_link_libraries(expansion_ui PRIVATE
     ${CURL_LIBRARIES}
     ${CJSON_LIBRARIES}
     ${MYSQL_LIBRARIES}
-    xlsxwriter          
+    xlsxwriter   
+    m       
 )
 # 3. 查找 MySQL 客户端库
 find_package(PkgConfig QUIET)

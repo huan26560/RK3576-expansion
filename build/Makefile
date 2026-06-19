@@ -153,6 +153,30 @@ src/db_helper.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/db_helper.c.s
 .PHONY : src/db_helper.c.s
 
+src/email_report.o: src/email_report.c.o
+.PHONY : src/email_report.o
+
+# target to build an object file
+src/email_report.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/email_report.c.o
+.PHONY : src/email_report.c.o
+
+src/email_report.i: src/email_report.c.i
+.PHONY : src/email_report.i
+
+# target to preprocess a source file
+src/email_report.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/email_report.c.i
+.PHONY : src/email_report.c.i
+
+src/email_report.s: src/email_report.c.s
+.PHONY : src/email_report.s
+
+# target to generate assembly for a file
+src/email_report.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/expansion_ui.dir/build.make CMakeFiles/expansion_ui.dir/src/email_report.c.s
+.PHONY : src/email_report.c.s
+
 src/hal/hal_dht11.o: src/hal/hal_dht11.c.o
 .PHONY : src/hal/hal_dht11.o
 
@@ -645,6 +669,9 @@ help:
 	@echo "... src/db_helper.o"
 	@echo "... src/db_helper.i"
 	@echo "... src/db_helper.s"
+	@echo "... src/email_report.o"
+	@echo "... src/email_report.i"
+	@echo "... src/email_report.s"
 	@echo "... src/hal/hal_dht11.o"
 	@echo "... src/hal/hal_dht11.i"
 	@echo "... src/hal/hal_dht11.s"

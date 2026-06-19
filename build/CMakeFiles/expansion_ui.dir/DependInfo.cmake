@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/cat/expansion/src/db_helper.c" "CMakeFiles/expansion_ui.dir/src/db_helper.c.o" "gcc" "CMakeFiles/expansion_ui.dir/src/db_helper.c.o.d"
+  "/home/cat/expansion/src/email_report.c" "CMakeFiles/expansion_ui.dir/src/email_report.c.o" "gcc" "CMakeFiles/expansion_ui.dir/src/email_report.c.o.d"
   "/home/cat/expansion/src/hal/hal_dht11.c" "CMakeFiles/expansion_ui.dir/src/hal/hal_dht11.c.o" "gcc" "CMakeFiles/expansion_ui.dir/src/hal/hal_dht11.c.o.d"
   "/home/cat/expansion/src/hal/hal_echo.c" "CMakeFiles/expansion_ui.dir/src/hal/hal_echo.c.o" "gcc" "CMakeFiles/expansion_ui.dir/src/hal/hal_echo.c.o.d"
   "/home/cat/expansion/src/hal/hal_gpio.c" "CMakeFiles/expansion_ui.dir/src/hal/hal_gpio.c.o" "gcc" "CMakeFiles/expansion_ui.dir/src/hal/hal_gpio.c.o.d"

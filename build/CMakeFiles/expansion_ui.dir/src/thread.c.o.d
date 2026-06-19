@@ -123,4 +123,5 @@ CMakeFiles/expansion_ui.dir/src/thread.c.o: \
  /home/cat/expansion/include/pages/page_interface.h \
  /home/cat/expansion/include/hal/hal_oled.h \
  /home/cat/expansion/include/db_helper.h \
- /home/cat/expansion/include/hal/hal_echo.h
+ /home/cat/expansion/include/hal/hal_echo.h \
+ /home/cat/expansion/include/email_report.h
