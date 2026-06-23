@@ -2150,4 +2150,98 @@ MQTT: 连接成功
 [WEATHER] Network not ready, auto refresh skipped
 [WEATHER] Network not ready, auto refresh skipped
 [WEATHER] Network not ready, auto refresh skipped
-[WE
+[WEATHER] Network not ready, auto refresh skipped
+[WEATHER] Network not ready, auto refresh skipped
+[WEATHER] Network not ready, auto refresh skipped
+[WEATHER] Network not ready, auto refresh skipped
+[WEATHER] Network not ready, auto refresh skipped
+[WEATHER] Network not ready, auto refresh skipped
+[WEATHER] Network not ready, auto refresh skipped
+[WEATHER] Network not ready, auto refresh skipped
+[WEATHER] Network not ready, auto refresh skipped
+[WEATHER] Network not ready, auto refresh skipped
+[WEATHER] Network not ready, auto refresh skipped
+[WEATHER] Network not ready, auto refresh skipped
+[WEATHER] Network not ready, auto refresh skipped
+[WEATHER] Network not ready, auto refresh skipped
+[WEATHER] Network not ready, auto refresh skipped
+[WEATHER] Network not ready, auto refresh skipped
+[WEATHER] Network not ready, auto refresh skipped
+[WEATHER] Network not ready, auto refresh skipped
+[WEATHER] Network not ready, auto refresh skipped
+[WEATHER] Network not ready, auto refresh skipped
+[WEATHER] Network not ready, auto refresh skipped
+[LOCATION] Async done: lat=34.67, lon=112.44, addr=Luoyang, Henan
+[WEATHER] Async done: 27.4C, 61.0%, valid=1
+[DB] Weather saved temp=27.4 humi=61.0 loc=Luoyang, Henan
+[WEATHER] Auto refresh and saved (4h interval)
+[DB] Saved temp=29.5, humi=61.0
+[DB] Saved temp=29.8, humi=60.0
+[LOCATION] Async done: lat=34.67, lon=112.44, addr=Luoyang, Henan
+[WEATHER] Async done: 27.3C, 62.0%, valid=1
+[DB] Weather saved temp=27.3 humi=62.0 loc=Luoyang, Henan
+[WEATHER] Auto refresh and saved (4h interval)
+[DB] Saved temp=29.9, humi=60.0
+[DB] Saved temp=29.8, humi=60.0
+[LOCATION] Async done: lat=34.67, lon=112.44, addr=Luoyang, Henan
+[WEATHER] Async done: 26.9C, 66.0%, valid=1
+[DB] Weather saved temp=26.9 humi=66.0 loc=Luoyang, Henan
+[WEATHER] Auto refresh and saved (4h interval)
+[DB] Saved temp=30.0, humi=60.0
+[DB] Saved temp=30.0, humi=60.0
+[LOCATION] Async done: lat=34.67, lon=112.44, addr=Luoyang, Henan
+[WEATHER] Async done: 25.7C, 74.0%, valid=1
+[DB] Weather saved temp=25.7 humi=74.0 loc=Luoyang, Henan
+[WEATHER] Auto refresh and saved (4h interval)
+[DB] Saved temp=30.0, humi=60.0
+[DB] Saved temp=30.0, humi=60.0
+[LOCATION] Async done: lat=34.67, lon=112.44, addr=Luoyang, Henan
+[WEATHER] Async done: 24.2C, 78.0%, valid=1
+[DB] Weather saved temp=24.2 humi=78.0 loc=Luoyang, Henan
+[WEATHER] Auto refresh and saved (4h interval)
+[DB] Saved temp=30.0, humi=60.0
+[WEATHER] Trigger async refresh
+[WEATHER] Trigger async refresh
+[WEATHER] Trigger async refresh
+[WEATHER] Trigger async refresh
+[WEATHER] Trigger async refresh
+[LOCATION] Async done: lat=34.67, lon=112.44, addr=Luoyang, Henan
+[WEATHER] Trigger async refresh
+[WEATHER] Trigger async refresh
+[WEATHER] Trigger async refresh
+[WEATHER] Trigger async refresh
+[WEATHER] Trigger async refresh
+[WEATHER] Trigger async refresh
+[WEATHER] Trigger async refresh
+[WEATHER] Async done: 23.6C, 77.0%, valid=1
+[WEATHER] Manual refresh triggered
+[WEATHER] Trigger async refresh
+[WEATHER] Trigger async refresh
+[LOCATION] Async done: lat=34.67, lon=112.44, addr=Luoyang, Henan
+[WEATHER] Async done: 23.6C, 77.0%, valid=1
+[WEATHER] Manual refresh triggered
+DEBUG: Data count=252694, days range=0.00 to 30.55
+DEBUG: Temp trend=0.6790 C/day, Humi trend=-1.8014 %/day
+[WEATHER] Trigger async refresh
+[WEATHER] Trigger async refresh
+[WEATHER] Trigger async refresh
+[WEATHER] Trigger async refresh
+[WEATHER] Trigger async refresh
+[LOCATION] Async done: lat=34.67, lon=112.44, addr=Luoyang, Henan
+[WEATHER] Trigger async refresh
+[WEATHER] Trigger async refresh
+[WEATHER] Trigger async refresh
+[WEATHER] Trigger async refresh
+[WEATHER] Trigger async refresh
+[WEATHER] Trigger async refresh
+[WEATHER] Trigger async refresh
+[WEATHER] Trigger async refresh
+[WEATHER] Trigger async refresh
+[WEATHER] Trigger async refresh
+[WEATHER] Async done: 23.6C, 77.0%, valid=1
+[WEATHER] Manual refresh triggered
+[DB] Saved temp=29.8, humi=63.0
+[LOCATION] Async done: lat=34.67, lon=112.44, addr=Luoyang, Henan
+[WEATHER] Async done: 23.4C, 77.0%, valid=1
+[DB] Weather saved temp=23.4 humi=77.0 loc=Luoyang, Henan
+[WEATHER] Auto 
